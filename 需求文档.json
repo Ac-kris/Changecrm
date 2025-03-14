@@ -1,0 +1,140 @@
+{
+  "modules": [
+    {
+      "module": "文书管理",
+      "pages": [
+        {
+          "page": "文书列表",
+          "components": [
+            {
+              "type": "表格",
+              "columns": [
+                { "name": "文书ID", "type": "string", "sortable": true },
+                { "name": "客户姓名", "type": "string", "sortable": true },
+                { "name": "销售人员", "type": "string", "sortable": true },
+                { "name": "文书状态", "type": "enum", "options": ["待建档", "体检管理中", "医生评估中", "制备方案洽谈", "已成单/未成单"] },
+                { "name": "操作", "type": "button", "text": "查看文书" }
+              ],
+              "pagination": true,
+              "sorting": true
+            },
+            {
+              "type": "搜索栏",
+              "fields": ["客户姓名", "手机号码", "销售人员"]
+            },
+            {
+              "type": "筛选器",
+              "options": [
+                { "name": "销售人员", "type": "select", "dataSource": "销售人员列表" },
+                { "name": "文书状态", "type": "select", "options": ["待建档", "体检管理中"] }
+              ]
+            }
+          ]
+        },
+        {
+          "page": "文书详情",
+          "components": [
+            {
+              "type": "进度条",
+              "steps": ["待建档", "体检管理中", "医生评估中", "制备方案洽谈", "已成单/未成单"]
+            },
+            {
+              "type": "选项卡",
+              "tabs": [
+                {
+                  "name": "客户档案",
+                  "components": [
+                    { "type": "表单", "fields": [
+                      { "name": "姓名", "type": "text", "maxLength": 50 },
+                      { "name": "性别", "type": "radio", "options": ["男", "女"] },
+                      { "name": "手机号码", "type": "tel", "pattern": "^1[3-9]\\d{9}$" },
+                      { "name": "BMI", "type": "readonly", "calculation": "体重/(身高/100)^2" }
+                    ]},
+                    { "type": "附件上传", "accept": ["doc", "pdf", "jpg"], "maxSize": "10MB" }
+                  ]
+                },
+                {
+                  "name": "自查表",
+                  "components": [
+                    { "type": "对接小程序", "matchField": "手机号码" }
+                  ]
+                },
+                {
+                  "name": "体检管理",
+                  "components": [
+                    { "type": "表格", "columns": ["体检项目", "类型", "价格"] },
+                    { "type": "按钮", "text": "一键补检" }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "悬浮操作栏",
+              "actions": [
+                { "text": "保存", "type": "button" },
+                { "text": "提交到下一阶段", "type": "button" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "客户管理",
+      "pages": [
+        {
+          "page": "客户列表",
+          "components": [
+            {
+              "type": "表格",
+              "columns": [
+                { "name": "客户编号", "type": "string" },
+                { "name": "客户姓名", "type": "link", "href": "/customer/{id}" },
+                { "name": "服务项目", "type": "custom", "format": "{项目}-{剂量}-{针数}" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "订单管理",
+      "components": [
+        {
+          "type": "状态机",
+          "states": ["待支付", "支付审核中", "已支付"],
+          "transitions": [
+            { "from": "待支付", "to": "支付审核中", "action": "提交支付" },
+            { "from": "支付审核中", "to": "已支付", "action": "审核通过" }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "权限管理",
+      "components": [
+        {
+          "type": "权限树",
+          "structure": {
+            "文书管理": {
+              "客户档案": ["查看", "编辑"],
+              "自查表": ["查看"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "module": "飞书对接",
+      "integrations": [
+        {
+          "type": "通知",
+          "triggers": [
+            { "event": "新增报告", "recipients": ["销售", "客服"] },
+            { "event": "方案超时", "frequency": "每日8点", "duration": "2周" }
+          ]
+        }
+      ]
+    }
+  ]
+}

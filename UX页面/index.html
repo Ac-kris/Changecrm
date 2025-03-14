@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>细胞应用业务销售管理系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 引入Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="system-title text-center mb-4">
+                        <h5>细胞应用业务销售管理系统</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">
+                                <i class="bi bi-house-door"></i> 首页
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="document-management/document-list.html">
+                                <i class="bi bi-file-earmark-text"></i> 文书管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customer-management/customer-list.html">
+                                <i class="bi bi-people"></i> 客户管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="order-management/order-list.html">
+                                <i class="bi bi-cart"></i> 订单管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="project-management/project-list.html">
+                                <i class="bi bi-kanban"></i> 项目管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="permission-management/permission-list.html">
+                                <i class="bi bi-shield-lock"></i> 权限管理
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">系统概览</h1>
+                    <div class="user-info">
+                        <span class="me-2">欢迎，管理员</span>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-box-arrow-right"></i> 退出
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 系统概览卡片 -->
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">文书总数</h5>
+                                <p class="card-text display-4">128</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">较上月增长 12%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">待处理文书</h5>
+                                <p class="card-text display-4">24</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">较昨日减少 3 件</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">本月新增客户</h5>
+                                <p class="card-text display-4">42</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">较上月增长 8%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">本月成单率</h5>
+                                <p class="card-text display-4">68%</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">较上月提升 5%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 最近活动列表 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-clock-history"></i> 最近活动
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary rounded-pill me-2">文书</span>
+                                    张三创建了新文书 <a href="#">#DOC20250312001</a>
+                                </div>
+                                <span class="text-muted">10分钟前</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-success rounded-pill me-2">订单</span>
+                                    李四的订单 <a href="#">#ORD20250312005</a> 已支付
+                                </div>
+                                <span class="text-muted">30分钟前</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-info rounded-pill me-2">体检</span>
+                                    王五的体检报告 <a href="#">#REP20250312003</a> 已上传
+                                </div>
+                                <span class="text-muted">1小时前</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-warning rounded-pill me-2">提醒</span>
+                                    赵六的方案需要在3天内完成
+                                </div>
+                                <span class="text-muted">2小时前</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-secondary rounded-pill me-2">系统</span>
+                                    系统维护更新完成
+                                </div>
+                                <span class="text-muted">昨天</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
