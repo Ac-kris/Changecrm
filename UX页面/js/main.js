@@ -157,7 +157,7 @@ function initStatusBadges() {
             badge.classList.add('bg-primary');
         } else if (text === '医生评估中') {
             badge.classList.add('bg-info');
-        } else if (text === '制备方案洽谈') {
+        } else if (text === '干预方案洽谈') {
             badge.classList.add('bg-warning', 'text-dark');
         } else if (text === '已成单') {
             badge.classList.add('bg-success');

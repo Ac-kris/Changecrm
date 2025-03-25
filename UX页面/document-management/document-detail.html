@@ -41,7 +41,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="project-management/project-list.html">
+                            <a class="nav-link" href="../project-management/project-list.html">
                                 <i class="bi bi-kanban"></i> 项目管理
                             </a>
                         </li>
@@ -92,7 +92,7 @@
                         <div class="progress-step-icon">
                             <i class="bi bi-chat-dots"></i>
                         </div>
-                        <div class="progress-step-label">制备方案洽谈</div>
+                        <div class="progress-step-label">干预方案洽谈</div>
                     </div>
                     <div class="progress-step">
                         <div class="progress-step-icon">
@@ -120,7 +120,7 @@
                         <button class="nav-link" id="evaluation-tab" data-bs-toggle="tab" data-bs-target="#evaluation" type="button" role="tab" aria-controls="evaluation" aria-selected="false">医生评估</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">制备方案</button>
+                        <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">干预方案</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing" type="button" role="tab" aria-controls="pricing" aria-selected="false">方案报价</button>
@@ -1015,13 +1015,15 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead class="table-light">
+                                    <table class="table table-hover">
+                                        <thead>
                                             <tr>
-                                                <th width="5%" class="text-center">#</th>
-                                                <th width="50%">项目</th>
+                                                <th width="5%"></th>
+                                                <th>检查项目</th>
                                                 <th width="15%">价格</th>
-                                                <th width="30%">送检结果</th>
+                                                <th width="10%" class="text-center">体检类型</th>
+                                                <th width="10%" class="text-center">状态</th>
+                                                <th width="10%" class="text-center">操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1036,7 +1038,15 @@
                                                 </td>
                                                 <td>¥120</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1050,7 +1060,15 @@
                                                 </td>
                                                 <td>¥180</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1064,7 +1082,15 @@
                                                 </td>
                                                 <td>¥150</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1078,7 +1104,15 @@
                                                 </td>
                                                 <td>¥200</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1092,7 +1126,15 @@
                                                 </td>
                                                 <td>¥160</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1106,7 +1148,15 @@
                                                 </td>
                                                 <td>¥220</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1120,7 +1170,15 @@
                                                 </td>
                                                 <td>¥190</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1134,7 +1192,15 @@
                                                 </td>
                                                 <td>¥100</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1148,7 +1214,15 @@
                                                 </td>
                                                 <td>¥250</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1162,14 +1236,22 @@
                                                 </td>
                                                 <td>¥300</td>
                                                 <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
                                                     <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="mt-3 text-end">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary" id="addSupplementaryItem">
                                         <i class="bi bi-plus"></i> 添加补检项目
                                     </button>
                                 </div>
@@ -1295,6 +1377,24 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- 选择医生 -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <i class="bi bi-person-badge"></i> 选择医生
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="doctorSelect" class="form-label">选择医生</label>
+                                    <select class="form-select" id="doctorSelect">
+                                        <option selected disabled>请选择医生...</option>
+                                        <option value="1">张医生 (内科)</option>
+                                        <option value="2">李医生 (外科)</option>
+                                        <option value="3">王医生 (妇科)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- 医生评估 -->
@@ -1329,12 +1429,12 @@
                         </div>
                     </div>
 
-                    <!-- 制备方案 -->
+                    <!-- 干预方案 -->
                     <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
-                        <!-- 制备方案信息 -->
+                        <!-- 干预方案信息 -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="bi bi-clipboard-check"></i> 制备方案信息
+                                <i class="bi bi-clipboard-check"></i> 干预方案信息
                             </div>
                             <div class="card-body">
                                 <form>
@@ -1577,10 +1677,6 @@
                                         </tfoot>
                                     </table>
                                 </div>
-                                <div class="alert alert-info mt-3">
-                                    <i class="bi bi-info-circle"></i> <strong>温馨提示：</strong>
-                                    因个体化差异，在使用后，我们建议您实时跟踪检测项目，详见检测项目列表，我们将给患者提供并与您进行阶段性比对评估。
-                                </div>
                                 <div class="d-flex justify-content-end mt-4">
                                     <button type="button" class="btn btn-primary me-2">
                                         <i class="bi bi-check-circle"></i> 确认方案
@@ -1732,5 +1828,144 @@
     <!-- JavaScript 依赖 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/main.js"></script>
+    
+    <!-- 补检项目功能 -->
+    <script>
+        // 模拟项目数据
+        const projectData = [
+            { id: 1, name: "基因检测A型", price: 1200, spec: "8亿" },
+            { id: 2, name: "基因检测B型", price: 1500, spec: "10亿" },
+            { id: 3, name: "细胞活力检测", price: 800, spec: "基础版" },
+            { id: 4, name: "免疫系统评估", price: 2000, spec: "全面版" },
+            { id: 5, name: "代谢功能检测", price: 1800, spec: "专业版" },
+            { id: 6, name: "微量元素检测", price: 600, spec: "8亿" },
+            { id: 7, name: "激素水平检测", price: 1200, spec: "全套" },
+            { id: 8, name: "肠道菌群分析", price: 1600, spec: "10亿" }
+        ];
+
+        // 格式化数字显示
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // 确保DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取添加补检项目按钮
+            const addButton = document.getElementById('addSupplementaryItem');
+            
+            if (addButton) {
+                // 添加补检项目按钮点击事件
+                addButton.addEventListener('click', function() {
+                    // 找到补检项目表格 - 使用更兼容的选择器
+                    const supplementaryCard = addButton.closest('.card');
+                    const supplementaryTable = supplementaryCard.querySelector('table tbody');
+                    
+                    if (!supplementaryTable) {
+                        console.error('找不到补检项目表格');
+                        return;
+                    }
+                    
+                    // 创建新行
+                    const newRow = document.createElement('tr');
+                    
+                    // 创建复选框单元格
+                    const checkboxCell = document.createElement('td');
+                    checkboxCell.className = 'text-center';
+                    checkboxCell.innerHTML = `
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="new_item_${Date.now()}">
+                        </div>
+                    `;
+                    
+                    // 创建项目名称单元格（带下拉菜单）
+                    const nameCell = document.createElement('td');
+                    const selectElement = document.createElement('select');
+                    selectElement.className = 'form-select project-select';
+                    
+                    // 添加默认选项
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.textContent = '请选择项目';
+                    defaultOption.selected = true;
+                    defaultOption.disabled = true;
+                    selectElement.appendChild(defaultOption);
+                    
+                    // 添加项目选项
+                    projectData.forEach(project => {
+                        const option = document.createElement('option');
+                        option.value = project.id;
+                        option.textContent = project.name;
+                        option.dataset.price = project.price;
+                        selectElement.appendChild(option);
+                    });
+                    
+                    nameCell.appendChild(selectElement);
+                    
+                    // 创建价格单元格
+                    const priceCell = document.createElement('td');
+                    priceCell.className = 'price-cell';
+                    priceCell.textContent = '-';
+                    
+                    // 创建体检类型单元格
+                    const typeCell = document.createElement('td');
+                    typeCell.className = 'text-center';
+                    typeCell.innerHTML = '<span class="badge bg-info">建议</span>';
+                    
+                    // 创建状态单元格
+                    const statusCell = document.createElement('td');
+                    statusCell.className = 'text-center';
+                    statusCell.innerHTML = '<span class="badge bg-secondary">待检</span>';
+                    
+                    // 创建操作单元格
+                    const actionCell = document.createElement('td');
+                    actionCell.className = 'text-center';
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'btn btn-sm btn-outline-danger delete-item';
+                    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+                    deleteButton.addEventListener('click', function() {
+                        if (confirm('确定要删除此检查项目吗？')) {
+                            this.closest('tr').remove();
+                        }
+                    });
+                    actionCell.appendChild(deleteButton);
+                    
+                    // 将所有单元格添加到行中
+                    newRow.appendChild(checkboxCell);
+                    newRow.appendChild(nameCell);
+                    newRow.appendChild(priceCell);
+                    newRow.appendChild(typeCell);
+                    newRow.appendChild(statusCell);
+                    newRow.appendChild(actionCell);
+                    
+                    // 将新行添加到表格中
+                    supplementaryTable.appendChild(newRow);
+                    
+                    // 添加项目选择事件监听器
+                    selectElement.addEventListener('change', function() {
+                        const selectedOption = this.options[this.selectedIndex];
+                        const price = selectedOption.dataset.price;
+                        const priceCell = this.closest('tr').querySelector('.price-cell');
+                        
+                        if (price) {
+                            priceCell.textContent = `¥${formatNumber(price)}`;
+                        } else {
+                            priceCell.textContent = '-';
+                        }
+                    });
+                });
+            } else {
+                console.error('找不到添加补检项目按钮');
+            }
+
+            // 为所有删除按钮添加事件监听器
+            document.querySelectorAll('.delete-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (confirm('确定要删除此检查项目吗？')) {
+                        this.closest('tr').remove();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
