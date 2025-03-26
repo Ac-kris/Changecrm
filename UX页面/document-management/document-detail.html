@@ -50,6 +50,11 @@
                                 <i class="bi bi-shield-lock"></i> 权限管理
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../approval-management/approval-list.html">
+                                <i class="bi bi-check2-square"></i> 审批管理
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -90,9 +95,15 @@
                     </div>
                     <div class="progress-step">
                         <div class="progress-step-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <div class="progress-step-label">方案制定</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-icon">
                             <i class="bi bi-chat-dots"></i>
                         </div>
-                        <div class="progress-step-label">干预方案洽谈</div>
+                        <div class="progress-step-label">方案洽谈</div>
                     </div>
                     <div class="progress-step">
                         <div class="progress-step-icon">
@@ -125,6 +136,9 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing" type="button" role="tab" aria-controls="pricing" aria-selected="false">方案报价</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contract-tab" data-bs-toggle="tab" data-bs-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">合同管理</button>
+                    </li>
                 </ul>
 
                 <!-- 选项卡内容 -->
@@ -139,63 +153,60 @@
                                         <i class="bi bi-person"></i> 基本信息
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <div class="row mb-3">
-                                                <div class="col-md-4">
-                                                    <label for="customerName" class="form-label">姓名</label>
-                                                    <input type="text" class="form-control" id="customerName" value="张先生" maxlength="50">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">性别</label>
-                                                    <div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked>
-                                                            <label class="form-check-label" for="genderMale">男</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
-                                                            <label class="form-check-label" for="genderFemale">女</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="phoneNumber" class="form-label">手机号码</label>
-                                                    <input type="tel" class="form-control" id="phoneNumber" value="13812345678" pattern="^1[3-9]\d{9}$">
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <table class="table table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row" width="30%">客户ID：</th>
+                                                            <td>C10086</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">隐私编号：</th>
+                                                            <td>PRV20250312001</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">姓名：</th>
+                                                            <td>张先生</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">性别：</th>
+                                                            <td>男</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">年龄：</th>
+                                                            <td>35岁</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-4">
-                                                    <label for="channel" class="form-label">渠道</label>
-                                                    <select class="form-select" id="channel">
-                                                        <option value="1">线上广告</option>
-                                                        <option value="2">朋友推荐</option>
-                                                        <option value="3">医院合作</option>
-                                                        <option value="4">其他渠道</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="salesPerson" class="form-label">销售人员</label>
-                                                    <select class="form-select" id="salesPerson">
-                                                        <option value="1">张三</option>
-                                                        <option value="2">李四</option>
-                                                        <option value="3">王五</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">是否储户</label>
-                                                    <div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="isRegular" id="isRegularYes" value="yes">
-                                                            <label class="form-check-label" for="isRegularYes">是</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="isRegular" id="isRegularNo" value="no" checked>
-                                                            <label class="form-check-label" for="isRegularNo">否</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-5">
+                                                <table class="table table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row" width="30%">手机号码：</th>
+                                                            <td>138****5678</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">代理人：</th>
+                                                            <td>王某</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">销售人员：</th>
+                                                            <td>李四</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">客户来源：</th>
+                                                            <td>线上推广</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">创建时间：</th>
+                                                            <td>2025-03-15 10:30</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -209,10 +220,6 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="row mb-3">
-                                                <div class="col-md-3">
-                                                    <label for="age" class="form-label">年龄</label>
-                                                    <input type="number" class="form-control" id="age" min="0" max="150">
-                                                </div>
                                                 <div class="col-md-3">
                                                     <label class="form-label">婚否</label>
                                                     <div>
@@ -812,6 +819,7 @@
 
                     <!-- 体检管理 -->
                     <div class="tab-pane fade" id="examination" role="tabpanel" aria-labelledby="examination-tab">
+
                         <!-- 必检项目 -->
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -1269,6 +1277,10 @@
                                         <label for="medicalHistory" class="form-label">既往史</label>
                                         <textarea class="form-control" id="medicalHistory" rows="4" placeholder="请输入患者既往史信息..."></textarea>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="familyHistory" class="form-label">家族史</label>
+                                        <textarea class="form-control" id="familyHistory" rows="4" placeholder="请输入患者家族史信息..."></textarea>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="bloodPressure" class="form-label">血压 (mmHg)</label>
@@ -1286,104 +1298,8 @@
 
                     <!-- 检测报告 -->
                     <div class="tab-pane fade" id="test-report" role="tabpanel" aria-labelledby="test-report-tab">
-                        <!-- 医学检测报告 -->
-                        <div class="card mb-4">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>
-                                    <i class="bi bi-file-medical"></i> 医学检测报告
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="bi bi-plus"></i> 增加模块
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th colspan="3" class="text-center bg-light">可填写</th>
-                                            </tr>
-                                            <tr>
-                                                <th width="33%">可填写</th>
-                                                <th width="33%">结果</th>
-                                                <th width="34%">参考值</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <div>
-                                        <button class="btn btn-outline-primary me-2">
-                                            <i class="bi bi-plus"></i> 增加多一行
-                                        </button>
-                                        <button class="btn btn-outline-primary">
-                                            <i class="bi bi-type"></i> 增加标题行
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-outline-primary">
-                                            <i class="bi bi-chat-text"></i> 增加结论
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 医学影像学报告 -->
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>
-                                    <i class="bi bi-image-alt"></i> 医学影像学检查
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="bi bi-plus"></i> 增加模块
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th class="text-center bg-light">可填写</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td style="height: 150px;"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        
                         <!-- 选择医生 -->
-                        <div class="card mt-4">
-                            <div class="card-header">
-                                <i class="bi bi-person-badge"></i> 选择医生
-                            </div>
-                            <div class="card-body">
+                       
                                 <div class="mb-3">
                                     <label for="doctorSelect" class="form-label">选择医生</label>
                                     <select class="form-select" id="doctorSelect">
@@ -1392,6 +1308,16 @@
                                         <option value="2">李医生 (外科)</option>
                                         <option value="3">王医生 (妇科)</option>
                                     </select>
+                                </div>
+
+                        <!-- 检测报告编辑器 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-pencil-square"></i> 检测报告内容
+                            </div>
+                            <div class="card-body">
+                                <div id="testReportEditor">
+                                    <!-- 富文本编辑器将在这里初始化 -->
                                 </div>
                             </div>
                         </div>
@@ -1410,17 +1336,6 @@
                                         <textarea class="form-control" id="patientDescription" rows="4" placeholder="请输入患者自述内容..."></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="doctorSelect" class="form-label">选择医生</label>
-                                        <select class="form-select" id="doctorSelect">
-                                            <option selected disabled>请选择医生...</option>
-                                            <option value="1">张医生 (内科)</option>
-                                            <option value="2">李医生 (外科)</option>
-                                            <option value="3">王医生 (妇科)</option>
-                                            <option value="4">赵医生 (儿科)</option>
-                                            <option value="5">刘医生 (骨科)</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="comprehensiveAssessment" class="form-label">综合评估</label>
                                         <textarea class="form-control" id="comprehensiveAssessment" rows="5" placeholder="请输入综合评估内容..."></textarea>
                                     </div>
@@ -1431,20 +1346,70 @@
 
                     <!-- 干预方案 -->
                     <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
-                        <!-- 干预方案信息 -->
+                        <!-- 管理方案建议 -->
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="bi bi-clipboard-check"></i> 干预方案信息
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-clipboard-check"></i> 管理方案建议
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addStagePlanModal">
+                                    <i class="bi bi-plus-circle"></i> 添加阶段方案
+                                </button>
                             </div>
                             <div class="card-body">
                                 <form>
-                                    <div class="mb-3">
-                                        <label for="planDoctor" class="form-label">方案医生</label>
-                                        <input type="text" class="form-control" id="planDoctor" placeholder="请输入方案医生姓名">
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <h6 class="mb-2">第1阶段</h6>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="managementPlan" class="form-label">管理方案建议</label>
-                                        <textarea class="form-control" id="managementPlan" rows="4" placeholder="请输入管理方案建议..."></textarea>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="planDoctor" class="form-label">方案医生</label>
+                                            <input type="text" class="form-control" id="planDoctor" placeholder="请输入方案医生姓名">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                            <label for="product" class="form-label">产品</label>
+                                            <select class="form-select" id="product">
+                                                <option value="P20250001">免疫细胞储存</option>
+                                                <option value="P20250002">基因检测服务</option>
+                                                <option value="P20250003">健康咨询服务</option>
+                                                <option value="P20250004">细胞治疗方案</option>
+                                                <option value="P20250005">家庭健康管理计划</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="administrationMethod" class="form-label">给药方法</label>
+                                            <textarea class="form-control" id="administrationMethod" rows="4" placeholder="请输入给药方法..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="suggestedCycle" class="form-label">建议周期</label>
+                                            <textarea class="form-control" id="suggestedCycle" rows="4" placeholder="请输入建议周期..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="mechanismOfAction" class="form-label">机理作用</label>
+                                            <textarea class="form-control" id="mechanismOfAction" rows="4" placeholder="请输入机理作用..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="recheckProject" class="form-label">复查项目</label>
+                                            <textarea class="form-control" id="recheckProject" rows="4" placeholder="请输入复查项目..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="precautions" class="form-label">注意事项</label>
+                                            <textarea class="form-control" id="precautions" rows="4" placeholder="请输入注意事项..."></textarea>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -1453,93 +1418,139 @@
                         <!-- 产品疗程生成器 -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="bi bi-gear"></i> 产品疗程生成器
+                                <i class="bi bi-calendar-plus"></i> 产品疗程生成器
                             </div>
                             <div class="card-body">
                                 <form>
-                                    <div class="row mb-3 align-items-end">
-                                        <div class="col-md-3 mb-2 mb-md-0">
-                                            <label for="recommendedProduct" class="form-label">方案建议产品</label>
-                                            <select class="form-select" id="recommendedProduct">
-                                                <option selected disabled>请选择产品...</option>
-                                                <option value="1">NK细胞</option>
-                                                <option value="2">DC-CIK细胞</option>
-                                                <option value="3">CAR-T细胞</option>
-                                                <option value="4">TCR-T细胞</option>
-                                                <option value="5">TIL细胞</option>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="suggestedProduct" class="form-label">方案建议产品</label>
+                                            <select class="form-select" id="suggestedProduct">
+                                                <option value="" selected disabled>请选择产品...</option>
+                                                <option value="P20250001">免疫细胞储存</option>
+                                                <option value="P20250002">基因检测服务</option>
+                                                <option value="P20250003">健康咨询服务</option>
+                                                <option value="P20250004">细胞治疗方案</option>
+                                                <option value="P20250005">家庭健康管理计划</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 mb-2 mb-md-0">
-                                            <label for="dosage" class="form-label">每次剂量</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="dosage" placeholder="请输入剂量">
-                                                <span class="input-group-text">亿</span>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <label for="treatmentCycle" class="form-label">疗程周期（天）</label>
+                                            <input type="number" class="form-control" id="treatmentCycle" min="1" placeholder="请输入疗程周期...">
                                         </div>
-                                        <div class="col-md-2 mb-2 mb-md-0">
-                                            <label for="cyclePeriod" class="form-label">疗程周期</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="cyclePeriod" placeholder="请输入周期">
-                                                <span class="input-group-text">天</span>
-                                            </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="treatmentCount" class="form-label">疗程数</label>
+                                            <input type="number" class="form-control" id="treatmentCount" min="1" placeholder="请输入疗程数...">
                                         </div>
-                                        <div class="col-md-3 mb-2 mb-md-0">
-                                            <label for="estimatedStartDate" class="form-label">预计开始治疗时间</label>
-                                            <input type="date" class="form-control" id="estimatedStartDate">
+                                        <div class="col-md-6">
+                                            <label for="dosage" class="form-label">每次剂量（千万）</label>
+                                            <input type="number" class="form-control" id="dosage" min="1" placeholder="请输入每次剂量...">
                                         </div>
-                                        <div class="col-md-2 mb-2 mb-md-0">
-                                            <button type="button" class="btn btn-primary w-100">
-                                                <i class="bi bi-plus"></i> 生成
-                                            </button>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="expectedStartDate" class="form-label">预计开始治疗时间</label>
+                                            <input type="date" class="form-control" id="expectedStartDate">
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="treatmentStage" class="form-label">所属阶段</label>
+                                            <select class="form-select" id="treatmentStage">
+                                                <option value="1">第一阶段</option>
+                                                <option value="2">第二阶段</option>
+                                                <option value="3">第三阶段</option>
+                                                <option value="4">第四阶段</option>
+                                                <option value="5">第五阶段</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-primary" id="generateTreatment">
+                                            <i class="bi bi-lightning-charge"></i> 生成疗程
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
 
-                        <!-- 疗程列表 -->
+                        <!-- 阶段方案列表 -->
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>
-                                    <i class="bi bi-list-check"></i> 疗程列表
-                                </div>
+                            <div class="card-header">
+                                <i class="bi bi-list-check"></i> 阶段方案列表
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>产品</th>
-                                                <th>出库日期</th>
-                                                <th>数量</th>
-                                                <th>价格</th>
-                                                <th>备注</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>NK细胞</td>
-                                                <td>2025-04-15</td>
-                                                <td>3亿</td>
-                                                <td>¥30,000</td>
-                                                <td>首次治疗</td>
-                                            </tr>
-                                            <tr>
-                                                <td>DC-CIK细胞</td>
-                                                <td>2025-04-20</td>
-                                                <td>5亿</td>
-                                                <td>¥50,000</td>
-                                                <td>首次治疗</td>
-                                            </tr>
-                                            <tr>
-                                                <td>NK细胞</td>
-                                                <td>2025-05-10</td>
-                                                <td>3亿</td>
-                                                <td>¥30,000</td>
-                                                <td>首次治疗</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <!-- 第一阶段 -->
+                                <div class="mb-4">
+                                    <h5 class="mb-3">第一阶段</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>产品</th>
+                                                    <th>出库日期</th>
+                                                    <th>数量</th>
+                                                    <th>价格</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>NK细胞</td>
+                                                    <td>2025-04-15</td>
+                                                    <td>3亿</td>
+                                                    <td>¥30,000</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>DC-CIK细胞</td>
+                                                    <td>2025-04-20</td>
+                                                    <td>5亿</td>
+                                                    <td>¥50,000</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <!-- 第二阶段 -->
+                                <div>
+                                    <h5 class="mb-3">第二阶段</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>产品</th>
+                                                    <th>出库日期</th>
+                                                    <th>数量</th>
+                                                    <th>价格</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>NK细胞</td>
+                                                    <td>2025-05-10</td>
+                                                    <td>3亿</td>
+                                                    <td>¥30,000</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1550,16 +1561,139 @@
                         <!-- 方案状态 -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="bi bi-check-circle"></i> 方案状态
+                                <i class="bi bi-info-circle"></i> 当前状态
                             </div>
                             <div class="card-body">
-                                <div class="alert alert-info mb-0">
-                                    <strong>当前状态：</strong> <span class="badge bg-warning">草稿方案</span>
-                                    <!-- 可以切换为 <span class="badge bg-success">确认方案</span> -->
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="alert alert-warning">
+                                            <strong>草稿方案</strong>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <!-- 综合制备费用明细 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-check-circle"></i> 综合制备费用明细
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>产品名称</th>
+                                                <th>数量</th>
+                                                <th>单价</th>
+                                                <th>优惠价</th>
+                                                <th>实付价</th>
+                                                <th>小计</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option selected>NK细胞</option>
+                                                        <option>DC-CIK细胞</option>
+                                                        <option>CAR-T细胞</option>
+                                                        <option>TCR-T细胞</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option selected>3亿</option>
+                                                        <option>5亿</option>
+                                                        <option>8亿</option>
+                                                        <option>10亿</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="50,000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" value="1" min="1">
+                                                </td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" value="0" min="0" max="100">
+                                                    </div>
+                                                </td>
+                                                <td>¥50,000</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option>NK细胞</option>
+                                                        <option selected>DC-CIK细胞</option>
+                                                        <option>CAR-T细胞</option>
+                                                        <option>TCR-T细胞</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option>3亿</option>
+                                                        <option selected>5亿</option>
+                                                        <option>8亿</option>
+                                                        <option>10亿</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="60,000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" value="1" min="1">
+                                                </td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" value="10" min="0" max="100">
+                                                    </div>
+                                                </td>
+                                                <td>¥54,000</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" class="text-end"><strong>总计：</strong></td>
+                                                <td><strong>¥104,000</strong></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="mt-4 text-end">
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="checkbox" id="vipCustomer">
+                                            <label class="form-check-label" for="vipCustomer">VIP客户</label>
+                                        </div>
+                                        <button class="btn btn-primary me-2">
+                                            <i class="bi bi-check-circle"></i> 方案确定
+                                        </button>
+                                        <button class="btn btn-danger me-2">
+                                            <i class="bi bi-x-circle"></i> 方案作废
+                                        </button>
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                            <i class="bi bi-cash"></i> 付款提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- 历史方案折叠区 -->
                         <div class="accordion mb-4" id="historyAccordion">
                             <div class="accordion-item">
@@ -1610,83 +1744,49 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- 综合制备费用明细 -->
+                    <!-- 合同管理 -->
+                    <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
+                        <!-- 合同列表 -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="bi bi-currency-yen"></i> 综合制备费用明细
+                                <i class="bi bi-file-earmark-text"></i> 合同列表
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead class="table-light">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <th>产品</th>
-                                                <th>出库日期</th>
-                                                <th>数量</th>
-                                                <th>价格</th>
-                                                <th>优惠价格</th>
-                                                <th>实付价</th>
-                                                <th>备注</th>
+                                                <th>合同名称</th>
+                                                <th width="20%">操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="date" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
+                                                <td>细胞治疗服务合同</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#viewContractModal">
+                                                        <i class="bi bi-eye"></i> 查看合同
+                                                    </button>
+                                                    <button class="btn btn-sm btn-secondary">
+                                                        <i class="bi bi-download"></i> 导出合同
+                                                    </button>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="date" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="date" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="date" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
-                                                <td><input type="text" class="form-control form-control-sm"></td>
+                                                <td>知情同意书</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#viewContractModal">
+                                                        <i class="bi bi-eye"></i> 查看合同
+                                                    </button>
+                                                    <button class="btn btn-sm btn-secondary">
+                                                        <i class="bi bi-download"></i> 导出合同
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="5" class="text-end"><strong>合计：</strong></td>
-                                                <td id="totalAmount">¥0</td>
-                                                <td></td>
-                                            </tr>
-                                        </tfoot>
                                     </table>
-                                </div>
-                                <div class="d-flex justify-content-end mt-4">
-                                    <button type="button" class="btn btn-primary me-2">
-                                        <i class="bi bi-check-circle"></i> 确认方案
-                                    </button>
-                                    <button type="button" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                                        <i class="bi bi-credit-card"></i> 付款提交
-                                    </button>
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="bi bi-x-circle"></i> 方案作废
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1789,12 +1889,8 @@
                             <label for="paymentAmount" class="form-label">付款金额</label>
                             <div class="input-group">
                                 <span class="input-group-text">¥</span>
-                                <input type="text" class="form-control" id="paymentAmount" placeholder="请输入付款金额" required>
+                                <input type="text" class="form-control" id="paymentAmount" value="104000" readonly>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="paymentDate" class="form-label">付款日期</label>
-                            <input type="date" class="form-control" id="paymentDate" required>
                         </div>
                         <div class="mb-3">
                             <label for="paymentMethod" class="form-label">付款方式</label>
@@ -1807,19 +1903,37 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="paymentScreenshot" class="form-label">付款截图</label>
-                            <input type="file" class="form-control" id="paymentScreenshot" accept="image/*" required>
-                            <div class="form-text">请上传付款凭证截图，支持JPG、PNG格式</div>
+                            <label for="transactionId" class="form-label">交易单号</label>
+                            <input type="text" class="form-control" id="transactionId">
                         </div>
                         <div class="mb-3">
-                            <label for="paymentRemark" class="form-label">备注</label>
-                            <textarea class="form-control" id="paymentRemark" rows="3" placeholder="可选填写备注信息"></textarea>
+                            <label for="paymentTime" class="form-label">付款时间</label>
+                            <input type="datetime-local" class="form-control" id="paymentTime">
+                        </div>
+                        <div class="mb-3">
+                            <label for="paymentProof" class="form-label">付款凭证</label>
+                            <input type="file" class="form-control" id="paymentProof">
+                        </div>
+                        <div class="mb-3">
+                            <label for="invoiceType" class="form-label">发票类型</label>
+                            <select class="form-select" id="invoiceType">
+                                <option value="personal">个人</option>
+                                <option value="company">企业</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="invoiceTitle" class="form-label">发票抬头</label>
+                            <input type="text" class="form-control" id="invoiceTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="taxNumber" class="form-label">纳税人识别号</label>
+                            <input type="text" class="form-control" id="taxNumber">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" onclick="submitPayment()">确认提交</button>
+                    <button type="button" class="btn btn-primary">确认提交</button>
                 </div>
             </div>
         </div>
@@ -1967,5 +2081,243 @@
             });
         });
     </script>
+    
+    <!-- 合同查看弹窗 -->
+    <div class="modal fade" id="viewContractModal" tabindex="-1" aria-labelledby="viewContractModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewContractModalLabel">查看合同</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="contract-content" style="height: 400px; overflow-y: auto;">
+                        <!-- 合同内容 -->
+                        <h4 class="text-center mb-4">细胞治疗服务合同</h4>
+                        <p>甲方：________________</p>
+                        <p>乙方：________________</p>
+                        <p>签订日期：____________</p>
+                        <p>合同编号：____________</p>
+                        <p class="mb-4">根据《中华人民共和国合同法》及其他有关法律法规的规定，甲乙双方在平等、自愿、公平、诚信的基础上，经友好协商，就乙方为甲方提供细胞治疗服务事宜达成如下协议：</p>
+                        
+                        <h5>第一条 服务内容</h5>
+                        <p>乙方根据甲方的身体状况，为甲方提供以下细胞治疗服务：</p>
+                        <p>1. 细胞类型：NK细胞、DC-CIK细胞等</p>
+                        <p>2. 治疗方案：根据医生评估结果确定</p>
+                        <p>3. 服务周期：自合同签订之日起_____个月</p>
+                        
+                        <h5>第二条 服务费用</h5>
+                        <p>1. 服务总费用：人民币_____万元</p>
+                        <p>2. 支付方式：</p>
+                        <p>   (1) 首付款：签订合同时支付总费用的50%，即人民币_____万元</p>
+                        <p>   (2) 尾款：在第一次细胞回输前支付剩余50%，即人民币_____万元</p>
+                        
+                        <h5>第三条 双方权利义务</h5>
+                        <p>1. 甲方权利义务：</p>
+                        <p>   (1) 如实提供个人健康信息</p>
+                        <p>   (2) 按时完成医学检查</p>
+                        <p>   (3) 按约定支付服务费用</p>
+                        
+                        <p>2. 乙方权利义务：</p>
+                        <p>   (1) 提供专业的细胞制备服务</p>
+                        <p>   (2) 确保细胞制品质量符合国家标准</p>
+                        <p>   (3) 对甲方信息保密</p>
+                    </div>
+                </div>
+                <div class="modal-footer" style="position: sticky; bottom: 0; background-color: white;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signatureModal">
+                        <i class="bi bi-pen"></i> 签名
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 签名弹窗 -->
+    <div class="modal fade" id="signatureModal" tabindex="-1" aria-labelledby="signatureModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signatureModalLabel">请在下方签名</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="signature-pad-container">
+                        <canvas id="signaturePad" width="450" height="200" style="border: 1px solid #ccc; width: 100%;"></canvas>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="clearSignature">清除</button>
+                    <button type="button" class="btn btn-primary" id="saveSignature">保存签名</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 签名功能脚本 -->
+    <script>
+        // 签名功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const signaturePad = document.getElementById('signaturePad');
+            if (signaturePad) {
+                const ctx = signaturePad.getContext('2d');
+                let isDrawing = false;
+                let lastX = 0;
+                let lastY = 0;
+                
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#000';
+                
+                // 开始绘制
+                signaturePad.addEventListener('mousedown', (e) => {
+                    isDrawing = true;
+                    [lastX, lastY] = [e.offsetX, e.offsetY];
+                });
+                
+                // 绘制过程
+                signaturePad.addEventListener('mousemove', (e) => {
+                    if (!isDrawing) return;
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(e.offsetX, e.offsetY);
+                    ctx.stroke();
+                    [lastX, lastY] = [e.offsetX, e.offsetY];
+                });
+                
+                // 结束绘制
+                signaturePad.addEventListener('mouseup', () => {
+                    isDrawing = false;
+                });
+                
+                signaturePad.addEventListener('mouseleave', () => {
+                    isDrawing = false;
+                });
+                
+                // 清除签名
+                document.getElementById('clearSignature').addEventListener('click', () => {
+                    ctx.clearRect(0, 0, signaturePad.width, signaturePad.height);
+                });
+                
+                // 保存签名
+                document.getElementById('saveSignature').addEventListener('click', () => {
+                    alert('签名已保存');
+                    const modal = document.getElementById('signatureModal');
+                    const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                    if (bootstrapModal) {
+                        bootstrapModal.hide();
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <!-- 新建客户模态窗口 -->
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCustomerModalLabel">新建客户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newCustomerForm">
+                        <!-- 第一部分：渠道和销售信息 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="customerSource" class="form-label">渠道来源 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="customerSource" required>
+                                    <option value="">请选择渠道来源</option>
+                                    <option value="1">线上推广</option>
+                                    <option value="2">线下推广</option>
+                                    <option value="3">客户推荐</option>
+                                    <option value="4">其他</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="agent" class="form-label">代理人</label>
+                                <input type="text" class="form-control" id="agent">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="salesPerson" class="form-label">销售人员 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="salesPerson" required>
+                                    <option value="">请选择销售人员</option>
+                                    <option value="1">张三</option>
+                                    <option value="2">李四</option>
+                                    <option value="3">王五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">是否储户</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isDepositor" id="isDepositorYes" value="yes">
+                                        <label class="form-check-label" for="isDepositorYes">是</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isDepositor" id="isDepositorNo" value="no" checked>
+                                        <label class="form-check-label" for="isDepositorNo">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 分割线 -->
+                        <hr class="my-4">
+                        
+                        <!-- 第二部分：客户基本信息 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="customerName" class="form-label">客户姓名 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="customerName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">隐私客户</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="isPrivacyCustomer">
+                                    <label class="form-check-label" for="isPrivacyCustomer">是</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="privacyNumber" class="form-label">隐私编号 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="privacyNumber" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">性别 <span class="text-danger">*</span></label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" required>
+                                        <label class="form-check-label" for="genderMale">男</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                                        <label class="form-check-label" for="genderFemale">女</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="age" class="form-label">年龄 <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="age" min="0" max="150" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">手机号码 <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phone" pattern="[0-9]{11}" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitNewCustomer()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

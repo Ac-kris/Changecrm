@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>审批管理 - 细胞应用业务销售管理系统</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 引入Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="system-title text-center mb-4">
+                        <h5>细胞应用业务销售管理系统</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-house-door"></i> 首页
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../document-management/document-list.html">
+                                <i class="bi bi-file-earmark-text"></i> 文书管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../customer-management/customer-list.html">
+                                <i class="bi bi-people"></i> 客户管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../order-management/order-list.html">
+                                <i class="bi bi-cart"></i> 订单管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../project-management/project-list.html">
+                                <i class="bi bi-kanban"></i> 项目管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../permission-management/permission-list.html">
+                                <i class="bi bi-shield-lock"></i> 权限管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="approval-list.html">
+                                <i class="bi bi-check2-square"></i> 审批管理
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">审批管理</h1>
+                </div>
+
+                <!-- 筛选区域 -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">审批编号</label>
+                                <input type="text" class="form-control" placeholder="输入审批编号">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">客户姓名</label>
+                                <input type="text" class="form-control" placeholder="输入客户姓名">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">审批类型</label>
+                                <select class="form-select">
+                                    <option value="">全部类型</option>
+                                    <option value="discount">超出优惠申请</option>
+                                    <option value="vip">VIP客户</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">渠道</label>
+                                <select class="form-select">
+                                    <option value="">全部渠道</option>
+                                    <option value="online">线上</option>
+                                    <option value="offline">线下</option>
+                                    <option value="partner">合作伙伴</option>
+                                </select>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="reset" class="btn btn-outline-secondary me-2">重置</button>
+                                <button type="button" class="btn btn-primary">查询</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 审批列表 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>审批编号</th>
+                                        <th>提交人</th>
+                                        <th>客户姓名</th>
+                                        <th>隐私编号</th>
+                                        <th>审批类型</th>
+                                        <th>审批状态</th>
+                                        <th>渠道</th>
+                                        <th>代理人</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>APP20250326001</td>
+                                        <td>王销售</td>
+                                        <td>张先生</td>
+                                        <td>PRV20250312001</td>
+                                        <td>
+                                            <span class="badge bg-warning">超出优惠申请</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">待审批</span>
+                                        </td>
+                                        <td>线上</td>
+                                        <td>李某</td>
+                                        <td>
+                                            <a href="approval-detail.html?id=APP20250326001" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> 查看详情
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>APP20250326002</td>
+                                        <td>李销售</td>
+                                        <td>陈女士</td>
+                                        <td>PRV20250315002</td>
+                                        <td>
+                                            <span class="badge bg-info">VIP客户</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">待审批</span>
+                                        </td>
+                                        <td>线下</td>
+                                        <td>周某</td>
+                                        <td>
+                                            <a href="approval-detail.html?id=APP20250326002" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> 查看详情
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>APP20250325001</td>
+                                        <td>陈销售</td>
+                                        <td>刘先生</td>
+                                        <td>PRV20250310003</td>
+                                        <td>
+                                            <span class="badge bg-warning">超出优惠申请</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">待审批</span>
+                                        </td>
+                                        <td>合作伙伴</td>
+                                        <td>张某</td>
+                                        <td>
+                                            <a href="approval-detail.html?id=APP20250325001" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> 查看详情
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 分页 -->
+                        <nav aria-label="审批列表分页" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">下一页</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html> 

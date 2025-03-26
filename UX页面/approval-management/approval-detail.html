@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>审批详情 - 细胞应用业务销售管理系统</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 引入Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="system-title text-center mb-4">
+                        <h5>细胞应用业务销售管理系统</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-house-door"></i> 首页
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../document-management/document-list.html">
+                                <i class="bi bi-file-earmark-text"></i> 文书管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../customer-management/customer-list.html">
+                                <i class="bi bi-people"></i> 客户管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../order-management/order-list.html">
+                                <i class="bi bi-cart"></i> 订单管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../project-management/project-list.html">
+                                <i class="bi bi-kanban"></i> 项目管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../permission-management/permission-list.html">
+                                <i class="bi bi-shield-lock"></i> 权限管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="approval-list.html">
+                                <i class="bi bi-check2-square"></i> 审批管理
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">审批详情 <small class="text-muted">APP20250326001</small></h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="approval-list.html" class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-arrow-left"></i> 返回列表
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 审批状态 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-info-circle"></i> 审批状态
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div class="alert alert-warning">
+                                    <strong>待审批</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 审批信息 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-file-text"></i> 审批基本信息
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" width="30%">审批编号：</th>
+                                            <td>APP20250326001</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">提交人：</th>
+                                            <td>王销售</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">客户姓名：</th>
+                                            <td>张先生</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">隐私编号：</th>
+                                            <td>PRV20250312001</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" width="30%">审批类型：</th>
+                                            <td><span class="badge bg-warning">超出优惠申请</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">渠道：</th>
+                                            <td>线上</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">代理人：</th>
+                                            <td>李某</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">提交时间：</th>
+                                            <td>2025-03-26 10:30</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 服务项目列表 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-check-circle"></i> 综合制备费用明细
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>产品名称</th>
+                                        <th>数量</th>
+                                        <th>单价</th>
+                                        <th>优惠价</th>
+                                        <th>实付价</th>
+                                        <th>小计</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>NK细胞</td>
+                                        <td>3亿</td>
+                                        <td>¥50,000</td>
+                                        <td>¥50,000</td>
+                                        <td>¥0</td>
+                                        <td>¥50,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DC-CIK细胞</td>
+                                        <td>5亿</td>
+                                        <td>¥60,000</td>
+                                        <td>¥54,000</td>
+                                        <td>¥10%</td>
+                                        <td>¥54,000</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-end"><strong>总计：</strong></td>
+                                        <td><strong>¥104,000</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 申请说明 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-chat-quote"></i> 申请说明
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>客户是重要客户，希望能够给予更多优惠，申请在原有10%折扣基础上再增加5%的优惠，折扣共计15%。</p>
+                                <p>客户承诺未来会带来更多业务，是长期合作的重要客户。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 审批操作 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-pencil-square"></i> 审批操作
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <button class="btn btn-success me-4" id="approveBtn">
+                                <i class="bi bi-check-circle"></i> 审批通过
+                            </button>
+                            <button class="btn btn-danger" id="rejectBtn">
+                                <i class="bi bi-x-circle"></i> 审批不通过
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 审批确认弹窗 -->
+    <div class="modal fade" id="approvalConfirmModal" tabindex="-1" aria-labelledby="approvalConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approvalConfirmModalLabel">确认操作</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="approvalConfirmContent">
+                    您确定要审批通过该申请吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="approvalConfirmBtn">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 审批通过按钮事件
+            document.getElementById('approveBtn').addEventListener('click', function() {
+                document.getElementById('approvalConfirmContent').textContent = '您确定要审批通过该申请吗？';
+                document.getElementById('approvalConfirmBtn').className = 'btn btn-success';
+                document.getElementById('approvalConfirmBtn').setAttribute('data-action', 'approve');
+                new bootstrap.Modal(document.getElementById('approvalConfirmModal')).show();
+            });
+            
+            // 审批不通过按钮事件
+            document.getElementById('rejectBtn').addEventListener('click', function() {
+                document.getElementById('approvalConfirmContent').textContent = '您确定要驳回该申请吗？';
+                document.getElementById('approvalConfirmBtn').className = 'btn btn-danger';
+                document.getElementById('approvalConfirmBtn').setAttribute('data-action', 'reject');
+                new bootstrap.Modal(document.getElementById('approvalConfirmModal')).show();
+            });
+            
+            // 确认按钮事件
+            document.getElementById('approvalConfirmBtn').addEventListener('click', function() {
+                const action = this.getAttribute('data-action');
+                
+                // 在实际应用中，这里会发送请求到服务器
+                alert(action === 'approve' ? '审批已通过！' : '申请已驳回！');
+                
+                // 关闭弹窗并返回列表页
+                bootstrap.Modal.getInstance(document.getElementById('approvalConfirmModal')).hide();
+                setTimeout(function() {
+                    window.location.href = 'approval-list.html';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html> 

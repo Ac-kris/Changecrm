@@ -88,6 +88,10 @@
                                                     <td>C10086</td>
                                                 </tr>
                                                 <tr>
+                                                    <th scope="row">隐私编号：</th>
+                                                    <td>PRV20250312001</td>
+                                                </tr>
+                                                <tr>
                                                     <th scope="row">姓名：</th>
                                                     <td>张三</td>
                                                 </tr>
@@ -98,10 +102,6 @@
                                                 <tr>
                                                     <th scope="row">年龄：</th>
                                                     <td>35岁</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">身份证号：</th>
-                                                    <td>310************123</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -114,8 +114,8 @@
                                                     <td>138****5678</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">电子邮箱：</th>
-                                                    <td>zhangsan@example.com</td>
+                                                    <th scope="row">代理人：</th>
+                                                    <td>李四（配偶）</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">客户来源：</th>
@@ -123,7 +123,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">负责销售：</th>
-                                                    <td>李四</td>
+                                                    <td>王五</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">创建时间：</th>
@@ -152,12 +152,7 @@
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs" id="customerTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">
-                                            <i class="bi bi-person-vcard"></i> 客户档案
-                                        </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">
+                                        <button class="nav-link active" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="true">
                                             <i class="bi bi-file-earmark-text"></i> 相关文书
                                         </button>
                                     </li>
@@ -170,248 +165,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="customerTabContent">
-                                    <!-- 客户档案选项卡内容 -->
-                                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row mb-4">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <i class="bi bi-person-lines-fill"></i> 详细信息
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row" width="30%">出生日期：</th>
-                                                                    <td>1990-05-15</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">婚姻状况：</th>
-                                                                    <td>已婚</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">教育程度：</th>
-                                                                    <td>本科</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">职业：</th>
-                                                                    <td>金融分析师</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">工作单位：</th>
-                                                                    <td>某投资公司</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">家庭住址：</th>
-                                                                    <td>上海市浦东新区张江高科技园区</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <i class="bi bi-heart-pulse"></i> 健康信息
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row" width="30%">血型：</th>
-                                                                    <td>A型</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">身高：</th>
-                                                                    <td>178cm</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">体重：</th>
-                                                                    <td>75kg</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">过敏史：</th>
-                                                                    <td>青霉素过敏</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">家族病史：</th>
-                                                                    <td>父亲有高血压，祖父有糖尿病</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">既往病史：</th>
-                                                                    <td>无重大疾病</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- 过往史板块 -->
-                                        <div class="row mt-4">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <i class="bi bi-journal-medical"></i> 过往史
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label fw-bold">皮肤状况：</label>
-                                                                    <div class="d-flex flex-wrap gap-2 mb-2">
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="forehead_lines">
-                                                                            <label class="form-check-label" for="forehead_lines">额头纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="frown_lines">
-                                                                            <label class="form-check-label" for="frown_lines">川字纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="crow_feet">
-                                                                            <label class="form-check-label" for="crow_feet">鱼尾纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="eye_bags">
-                                                                            <label class="form-check-label" for="eye_bags">眼袋</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="tear_trough">
-                                                                            <label class="form-check-label" for="tear_trough">泪沟</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="nasolabial_folds">
-                                                                            <label class="form-check-label" for="nasolabial_folds">法令纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="marionette_lines">
-                                                                            <label class="form-check-label" for="marionette_lines">嘴角纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="preauricular_lines">
-                                                                            <label class="form-check-label" for="preauricular_lines">耳前纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="neck_lines">
-                                                                            <label class="form-check-label" for="neck_lines">颈纹</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="telangiectasia">
-                                                                            <label class="form-check-label" for="telangiectasia">红血丝</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex flex-wrap gap-2 mb-2">
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_none">
-                                                                            <label class="form-check-label" for="pigmentation_none">无色斑</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_mild">
-                                                                            <label class="form-check-label" for="pigmentation_mild">色斑（轻）</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_moderate">
-                                                                            <label class="form-check-label" for="pigmentation_moderate">色斑（中）</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_severe">
-                                                                            <label class="form-check-label" for="pigmentation_severe">色斑（重）</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex flex-wrap gap-2 mb-2">
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_none">
-                                                                            <label class="form-check-label" for="laxity_none">无松弛</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_mild">
-                                                                            <label class="form-check-label" for="laxity_mild">松弛度（轻）</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_moderate">
-                                                                            <label class="form-check-label" for="laxity_moderate">松弛度（中）</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_severe">
-                                                                            <label class="form-check-label" for="laxity_severe">松弛度（重）</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">其他：</label>
-                                                                        <input type="text" class="form-control" id="skin_other">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="mb-3">
-                                                                    <label class="form-label fw-bold">过敏史：</label>
-                                                                    <div class="d-flex flex-wrap gap-2 mb-2">
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="allergy_history" id="no_allergy" checked>
-                                                                            <label class="form-check-label" for="no_allergy">无</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="allergy_history" id="has_allergy">
-                                                                            <label class="form-check-label" for="has_allergy">有</label>
-                                                                        </div>
-                                                                        <input type="text" class="form-control form-control-sm" placeholder="药物类、食物类、其他" style="width: 250px;">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="mb-3">
-                                                                    <label class="form-label fw-bold">疾病史：</label>
-                                                                    <div class="d-flex flex-wrap gap-2 mb-2">
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="disease_history" id="no_disease" checked>
-                                                                            <label class="form-check-label" for="no_disease">无</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="radio" name="disease_history" id="has_disease">
-                                                                            <label class="form-check-label" for="has_disease">有</label>
-                                                                        </div>
-                                                                        <input type="text" class="form-control form-control-sm" placeholder="请填写疾病名称" style="width: 250px;">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="mb-3">
-                                                                    <label class="form-label fw-bold">主诉：</label>
-                                                                    <div class="d-flex flex-wrap gap-2 mb-2">
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="three_high" checked>
-                                                                            <label class="form-check-label" for="three_high">三高</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="serious_disease">
-                                                                            <label class="form-check-label" for="serious_disease">重大疾病</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="other_complaint">
-                                                                            <label class="form-check-label" for="other_complaint">其他</label>
-                                                                        </div>
-                                                                        <input type="text" class="form-control form-control-sm" placeholder="请填写其他主诉" style="width: 250px;">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="mb-3">
-                                                                    <label class="form-label fw-bold">目前用药：</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="请填写目前正在服用的药物"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div class="col-md-6">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
                                     <!-- 相关文书选项卡内容 -->
-                                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                                    <div class="tab-pane fade show active" id="documents" role="tabpanel" aria-labelledby="documents-tab">
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>

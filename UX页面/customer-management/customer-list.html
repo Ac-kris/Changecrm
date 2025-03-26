@@ -59,9 +59,9 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">客户管理</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <a href="customer-add.html" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCustomerModal">
                             <i class="bi bi-plus"></i> 新增客户
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -109,10 +109,8 @@
                                 <th scope="col">客户编号</th>
                                 <th scope="col">客户姓名</th>
                                 <th scope="col">手机号码</th>
-                                <th scope="col">服务项目</th>
                                 <th scope="col">销售人员</th>
                                 <th scope="col">创建时间</th>
-                                <th scope="col">客户状态</th>
                                 <th scope="col">操作</th>
                             </tr>
                         </thead>
@@ -121,138 +119,60 @@
                                 <td>CUS20250312001</td>
                                 <td><a href="customer-detail.html?id=CUS20250312001">张先生</a></td>
                                 <td>138****5678</td>
-                                <td>细胞存储-8亿-3针</td>
                                 <td>李四</td>
                                 <td>2025-03-12</td>
-                                <td><span class="status-badge status-badge-processing">跟进中</span></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            操作
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="customer-detail.html?id=CUS20250312001">查看详情</a></li>
-                                            <li><a class="dropdown-item" href="#">编辑信息</a></li>
-                                            <li><a class="dropdown-item" href="../document-management/document-list.html?customer=CUS20250312001">查看文书</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#">删除客户</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="customer-detail.html?id=CUS20250312001" class="btn btn-sm btn-outline-primary">查看详情</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>CUS20250311005</td>
                                 <td><a href="customer-detail.html?id=CUS20250311005">王女士</a></td>
                                 <td>139****4321</td>
-                                <td>细胞治疗-10亿-5针</td>
                                 <td>张三</td>
                                 <td>2025-03-11</td>
-                                <td><span class="status-badge status-badge-evaluating">已签约</span></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            操作
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                            <li><a class="dropdown-item" href="customer-detail.html?id=CUS20250311005">查看详情</a></li>
-                                            <li><a class="dropdown-item" href="#">编辑信息</a></li>
-                                            <li><a class="dropdown-item" href="../document-management/document-list.html?customer=CUS20250311005">查看文书</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#">删除客户</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="customer-detail.html?id=CUS20250311005" class="btn btn-sm btn-outline-primary">查看详情</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>CUS20250310003</td>
                                 <td><a href="customer-detail.html?id=CUS20250310003">赵先生</a></td>
                                 <td>137****9876</td>
-                                <td>基因检测-全面版</td>
                                 <td>王五</td>
                                 <td>2025-03-10</td>
-                                <td><span class="status-badge status-badge-negotiating">洽谈中</span></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
-                                            操作
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                            <li><a class="dropdown-item" href="customer-detail.html?id=CUS20250310003">查看详情</a></li>
-                                            <li><a class="dropdown-item" href="#">编辑信息</a></li>
-                                            <li><a class="dropdown-item" href="../document-management/document-list.html?customer=CUS20250310003">查看文书</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#">删除客户</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="customer-detail.html?id=CUS20250310003" class="btn btn-sm btn-outline-primary">查看详情</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>CUS20250309008</td>
                                 <td><a href="customer-detail.html?id=CUS20250309008">李女士</a></td>
                                 <td>135****2468</td>
-                                <td>细胞存储-50亿-10针</td>
                                 <td>张三</td>
                                 <td>2025-03-09</td>
-                                <td><span class="status-badge status-badge-completed">已完成</span></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-                                            操作
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                                            <li><a class="dropdown-item" href="customer-detail.html?id=CUS20250309008">查看详情</a></li>
-                                            <li><a class="dropdown-item" href="#">编辑信息</a></li>
-                                            <li><a class="dropdown-item" href="../document-management/document-list.html?customer=CUS20250309008">查看文书</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#">删除客户</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="customer-detail.html?id=CUS20250309008" class="btn btn-sm btn-outline-primary">查看详情</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>CUS20250308012</td>
                                 <td><a href="customer-detail.html?id=CUS20250308012">钱先生</a></td>
                                 <td>13644441357</td>
-                                <td>细胞治疗-8亿-3针</td>
                                 <td>李四</td>
                                 <td>2025-03-08</td>
-                                <td><span class="status-badge status-badge-completed">已完成</span></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
-                                            操作
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
-                                            <li><a class="dropdown-item" href="customer-detail.html?id=CUS20250308012">查看详情</a></li>
-                                            <li><a class="dropdown-item" href="#">编辑信息</a></li>
-                                            <li><a class="dropdown-item" href="../document-management/document-list.html?customer=CUS20250308012">查看文书</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#">删除客户</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="customer-detail.html?id=CUS20250308012" class="btn btn-sm btn-outline-primary">查看详情</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>CUS20250307015</td>
                                 <td><a href="customer-detail.html?id=CUS20250307015">孙女士</a></td>
                                 <td>134****7890</td>
-                                <td>基因检测-基础版</td>
                                 <td>王五</td>
                                 <td>2025-03-07</td>
-                                <td><span class="status-badge status-badge-failed">已流失</span></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
-                                            操作
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton6">
-                                            <li><a class="dropdown-item" href="customer-detail.html?id=CUS20250307015">查看详情</a></li>
-                                            <li><a class="dropdown-item" href="#">编辑信息</a></li>
-                                            <li><a class="dropdown-item" href="../document-management/document-list.html?customer=CUS20250307015">查看文书</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#">删除客户</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="customer-detail.html?id=CUS20250307015" class="btn btn-sm btn-outline-primary">查看详情</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -280,5 +200,113 @@
     <!-- JavaScript 依赖 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/main.js"></script>
+
+    <!-- 新建客户模态框 -->
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCustomerModalLabel">新建客户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newCustomerForm">
+                        <!-- 第一部分：渠道和销售信息 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="customerSource" class="form-label">渠道来源 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="customerSource" required>
+                                    <option value="">请选择渠道来源</option>
+                                    <option value="1">线上推广</option>
+                                    <option value="2">线下推广</option>
+                                    <option value="3">客户推荐</option>
+                                    <option value="4">其他</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="agent" class="form-label">代理人</label>
+                                <input type="text" class="form-control" id="agent">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="salesPerson" class="form-label">销售人员 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="salesPerson" required>
+                                    <option value="">请选择销售人员</option>
+                                    <option value="1">张三</option>
+                                    <option value="2">李四</option>
+                                    <option value="3">王五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">是否储户</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isDepositor" id="isDepositorYes" value="yes">
+                                        <label class="form-check-label" for="isDepositorYes">是</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isDepositor" id="isDepositorNo" value="no" checked>
+                                        <label class="form-check-label" for="isDepositorNo">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 分割线 -->
+                        <hr class="my-4">
+                        
+                        <!-- 第二部分：客户基本信息 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="customerName" class="form-label">客户姓名 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="customerName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">隐私客户</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="isPrivacyCustomer">
+                                    <label class="form-check-label" for="isPrivacyCustomer">是</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="privacyNumber" class="form-label">隐私编号 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="privacyNumber" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">性别 <span class="text-danger">*</span></label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" required>
+                                        <label class="form-check-label" for="genderMale">男</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                                        <label class="form-check-label" for="genderFemale">女</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="age" class="form-label">年龄 <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="age" min="0" max="150" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">手机号码 <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phone" pattern="[0-9]{11}" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitNewCustomer()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

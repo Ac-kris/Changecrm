@@ -237,6 +237,34 @@
                     </div>
                 </div>
                 
+                <!-- 发票信息 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-receipt"></i> 发票信息
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="invoiceType" class="form-label">发票类型</label>
+                                    <select class="form-select" id="invoiceType">
+                                        <option value="personal">个人</option>
+                                        <option value="company">企业</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="invoiceTitle" class="form-label">发票抬头</label>
+                                    <input type="text" class="form-control" id="invoiceTitle">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="taxNumber" class="form-label">纳税人识别号</label>
+                                    <input type="text" class="form-control" id="taxNumber">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
                 <!-- 底部悬浮操作栏 -->
                 <div class="fixed-bottom bg-white py-3 shadow-lg" style="border-top: 1px solid #dee2e6;">
                     <div class="container-fluid">
