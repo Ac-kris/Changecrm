@@ -4,59 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文书详情 - 细胞应用业务销售管理系统</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- 引入字体图标 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- 引入Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- 侧边栏导航 -->
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="position-sticky pt-3">
-                    <div class="system-title text-center mb-4">
-                        <h5>细胞应用业务销售管理系统</h5>
-                    </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../index.html">
-                                <i class="bi bi-house-door"></i> 首页
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="document-list.html">
-                                <i class="bi bi-file-earmark-text"></i> 文书管理
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../customer-management/customer-list.html">
-                                <i class="bi bi-people"></i> 客户管理
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../order-management/order-list.html">
-                                <i class="bi bi-cart"></i> 订单管理
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../project-management/project-list.html">
-                                <i class="bi bi-kanban"></i> 项目管理
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../permission-management/permission-list.html">
-                                <i class="bi bi-shield-lock"></i> 权限管理
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../approval-management/approval-list.html">
-                                <i class="bi bi-check2-square"></i> 审批管理
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
             </nav>
 
             <!-- 主内容区 -->
@@ -370,7 +330,7 @@
                                                             <input type="text" class="form-control" id="skin_other">
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
                                                         <label class="form-label fw-bold">过敏史：</label>
                                                         <div class="d-flex flex-wrap gap-2 mb-2">
@@ -385,7 +345,7 @@
                                                             <input type="text" class="form-control form-control-sm" placeholder="药物类、食物类、其他" style="width: 250px;">
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
                                                         <label class="form-label fw-bold">疾病史：</label>
                                                         <div class="d-flex flex-wrap gap-2 mb-2">
@@ -400,7 +360,7 @@
                                                             <input type="text" class="form-control form-control-sm" placeholder="请填写疾病名称" style="width: 250px;">
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
                                                         <label class="form-label fw-bold">主诉：</label>
                                                         <div class="d-flex flex-wrap gap-2 mb-2">
@@ -419,15 +379,15 @@
                                                             <input type="text" class="form-control form-control-sm" placeholder="请填写其他主诉" style="width: 250px;">
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
                                                         <label class="form-label fw-bold">目前用药：</label>
                                                         <textarea class="form-control" rows="2" placeholder="请填写目前正在服用的药物"></textarea>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-md-6">
-                                                    
+
                                                 </div>
                                             </div>
                                         </form>
@@ -489,7 +449,7 @@
                                 <div class="alert alert-info mb-4">
                                     <i class="bi bi-info-circle"></i> 该客户已通过小程序完成自查表填写，以下是同步的数据。
                                 </div>
-                                
+
                                 <div class="table-responsive mb-4">
                                     <table class="table table-bordered">
                                         <thead class="table-light">
@@ -1299,7 +1259,7 @@
                     <!-- 检测报告 -->
                     <div class="tab-pane fade" id="test-report" role="tabpanel" aria-labelledby="test-report-tab">
                         <!-- 选择医生 -->
-                       
+
                                 <div class="mb-3">
                                     <label for="doctorSelect" class="form-label">选择医生</label>
                                     <select class="form-select" id="doctorSelect">
@@ -1521,7 +1481,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                
+
                                 <!-- 第二阶段 -->
                                 <div>
                                     <h5 class="mb-3">第二阶段</h5>
@@ -1573,7 +1533,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 综合制备费用明细 -->
                         <div class="card mb-4">
                             <div class="card-header">
@@ -1693,7 +1653,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 历史方案折叠区 -->
                         <div class="accordion mb-4" id="historyAccordion">
                             <div class="accordion-item">
@@ -1942,7 +1902,7 @@
     <!-- JavaScript 依赖 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/main.js"></script>
-    
+
     <!-- 补检项目功能 -->
     <script>
         // 模拟项目数据
@@ -1966,22 +1926,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 获取添加补检项目按钮
             const addButton = document.getElementById('addSupplementaryItem');
-            
+
             if (addButton) {
                 // 添加补检项目按钮点击事件
                 addButton.addEventListener('click', function() {
                     // 找到补检项目表格 - 使用更兼容的选择器
                     const supplementaryCard = addButton.closest('.card');
                     const supplementaryTable = supplementaryCard.querySelector('table tbody');
-                    
+
                     if (!supplementaryTable) {
                         console.error('找不到补检项目表格');
                         return;
                     }
-                    
+
                     // 创建新行
                     const newRow = document.createElement('tr');
-                    
+
                     // 创建复选框单元格
                     const checkboxCell = document.createElement('td');
                     checkboxCell.className = 'text-center';
@@ -1990,12 +1950,12 @@
                             <input class="form-check-input" type="checkbox" id="new_item_${Date.now()}">
                         </div>
                     `;
-                    
+
                     // 创建项目名称单元格（带下拉菜单）
                     const nameCell = document.createElement('td');
                     const selectElement = document.createElement('select');
                     selectElement.className = 'form-select project-select';
-                    
+
                     // 添加默认选项
                     const defaultOption = document.createElement('option');
                     defaultOption.value = '';
@@ -2003,7 +1963,7 @@
                     defaultOption.selected = true;
                     defaultOption.disabled = true;
                     selectElement.appendChild(defaultOption);
-                    
+
                     // 添加项目选项
                     projectData.forEach(project => {
                         const option = document.createElement('option');
@@ -2012,24 +1972,24 @@
                         option.dataset.price = project.price;
                         selectElement.appendChild(option);
                     });
-                    
+
                     nameCell.appendChild(selectElement);
-                    
+
                     // 创建价格单元格
                     const priceCell = document.createElement('td');
                     priceCell.className = 'price-cell';
                     priceCell.textContent = '-';
-                    
+
                     // 创建体检类型单元格
                     const typeCell = document.createElement('td');
                     typeCell.className = 'text-center';
                     typeCell.innerHTML = '<span class="badge bg-info">建议</span>';
-                    
+
                     // 创建状态单元格
                     const statusCell = document.createElement('td');
                     statusCell.className = 'text-center';
                     statusCell.innerHTML = '<span class="badge bg-secondary">待检</span>';
-                    
+
                     // 创建操作单元格
                     const actionCell = document.createElement('td');
                     actionCell.className = 'text-center';
@@ -2042,7 +2002,7 @@
                         }
                     });
                     actionCell.appendChild(deleteButton);
-                    
+
                     // 将所有单元格添加到行中
                     newRow.appendChild(checkboxCell);
                     newRow.appendChild(nameCell);
@@ -2050,16 +2010,16 @@
                     newRow.appendChild(typeCell);
                     newRow.appendChild(statusCell);
                     newRow.appendChild(actionCell);
-                    
+
                     // 将新行添加到表格中
                     supplementaryTable.appendChild(newRow);
-                    
+
                     // 添加项目选择事件监听器
                     selectElement.addEventListener('change', function() {
                         const selectedOption = this.options[this.selectedIndex];
                         const price = selectedOption.dataset.price;
                         const priceCell = this.closest('tr').querySelector('.price-cell');
-                        
+
                         if (price) {
                             priceCell.textContent = `¥${formatNumber(price)}`;
                         } else {
@@ -2081,7 +2041,7 @@
             });
         });
     </script>
-    
+
     <!-- 合同查看弹窗 -->
     <div class="modal fade" id="viewContractModal" tabindex="-1" aria-labelledby="viewContractModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -2099,25 +2059,25 @@
                         <p>签订日期：____________</p>
                         <p>合同编号：____________</p>
                         <p class="mb-4">根据《中华人民共和国合同法》及其他有关法律法规的规定，甲乙双方在平等、自愿、公平、诚信的基础上，经友好协商，就乙方为甲方提供细胞治疗服务事宜达成如下协议：</p>
-                        
+
                         <h5>第一条 服务内容</h5>
                         <p>乙方根据甲方的身体状况，为甲方提供以下细胞治疗服务：</p>
                         <p>1. 细胞类型：NK细胞、DC-CIK细胞等</p>
                         <p>2. 治疗方案：根据医生评估结果确定</p>
                         <p>3. 服务周期：自合同签订之日起_____个月</p>
-                        
+
                         <h5>第二条 服务费用</h5>
                         <p>1. 服务总费用：人民币_____万元</p>
                         <p>2. 支付方式：</p>
                         <p>   (1) 首付款：签订合同时支付总费用的50%，即人民币_____万元</p>
                         <p>   (2) 尾款：在第一次细胞回输前支付剩余50%，即人民币_____万元</p>
-                        
+
                         <h5>第三条 双方权利义务</h5>
                         <p>1. 甲方权利义务：</p>
                         <p>   (1) 如实提供个人健康信息</p>
                         <p>   (2) 按时完成医学检查</p>
                         <p>   (3) 按约定支付服务费用</p>
-                        
+
                         <p>2. 乙方权利义务：</p>
                         <p>   (1) 提供专业的细胞制备服务</p>
                         <p>   (2) 确保细胞制品质量符合国家标准</p>
@@ -2133,7 +2093,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- 签名弹窗 -->
     <div class="modal fade" id="signatureModal" tabindex="-1" aria-labelledby="signatureModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -2154,7 +2114,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- 签名功能脚本 -->
     <script>
         // 签名功能
@@ -2165,16 +2125,16 @@
                 let isDrawing = false;
                 let lastX = 0;
                 let lastY = 0;
-                
+
                 ctx.lineWidth = 2;
                 ctx.strokeStyle = '#000';
-                
+
                 // 开始绘制
                 signaturePad.addEventListener('mousedown', (e) => {
                     isDrawing = true;
                     [lastX, lastY] = [e.offsetX, e.offsetY];
                 });
-                
+
                 // 绘制过程
                 signaturePad.addEventListener('mousemove', (e) => {
                     if (!isDrawing) return;
@@ -2184,21 +2144,21 @@
                     ctx.stroke();
                     [lastX, lastY] = [e.offsetX, e.offsetY];
                 });
-                
+
                 // 结束绘制
                 signaturePad.addEventListener('mouseup', () => {
                     isDrawing = false;
                 });
-                
+
                 signaturePad.addEventListener('mouseleave', () => {
                     isDrawing = false;
                 });
-                
+
                 // 清除签名
                 document.getElementById('clearSignature').addEventListener('click', () => {
                     ctx.clearRect(0, 0, signaturePad.width, signaturePad.height);
                 });
-                
+
                 // 保存签名
                 document.getElementById('saveSignature').addEventListener('click', () => {
                     alert('签名已保存');
@@ -2211,7 +2171,7 @@
             }
         });
     </script>
-    
+
     <!-- 新建客户模态窗口 -->
     <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -2263,10 +2223,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 分割线 -->
                         <hr class="my-4">
-                        
+
                         <!-- 第二部分：客户基本信息 -->
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -2319,5 +2279,9 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>
