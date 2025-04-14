@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出库详情 - 转化销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <a href="javascript:history.back()" class="text-decoration-none me-2">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        出库详情
+                    </h1>
+                </div>
+
+                <!-- 客户信息卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">客户信息</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">客户编号</label>
+                                <p class="form-control-static">C20250415001</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">客户姓名</label>
+                                <p class="form-control-static">
+                                    <a href="../document-management/document-detail.html?id=1">张三</a>
+                                </p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">负责销售</label>
+                                <p class="form-control-static">销售A</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">性别</label>
+                                <p class="form-control-static">男</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">年龄</label>
+                                <p class="form-control-static">35</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">是否储户</label>
+                                <p class="form-control-static">是</p>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">接收地址</label>
+                                <p class="form-control-static">广东省广州市天河区天河路385号</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 干预方案卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">干预方案</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- 阶段1 -->
+                        <div class="phase-container mb-4">
+                            <div class="phase-header mb-3">
+                                <h5>阶段一</h5>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>项目名称</th>
+                                            <th>针数</th>
+                                            <th>状态</th>
+                                            <th>出库时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>美白针</td>
+                                            <td>第1针</td>
+                                            <td><span class="badge bg-warning text-dark">未出库</span></td>
+                                            <td>2025-04-15 09:00</td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#confirm-outbound-modal">
+                                                    确认出库
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 阶段2 -->
+                        <div class="phase-container">
+                            <div class="phase-header mb-3">
+                                <h5>阶段二</h5>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>项目名称</th>
+                                            <th>针数</th>
+                                            <th>状态</th>
+                                            <th>出库时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>美白针</td>
+                                            <td>第1针</td>
+                                            <td><span class="badge bg-secondary">未开始</span></td>
+                                            <td>2025-05-15 09:00</td>
+                                            <td>-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 确认出库模态框 -->
+    <div class="modal fade" id="confirm-outbound-modal" tabindex="-1" aria-labelledby="confirm-outbound-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirm-outbound-modal-label">确认出库</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="confirm-outbound-form">
+                        <div class="mb-3">
+                            <label for="outbound-datetime" class="form-label">出库时间</label>
+                            <input type="datetime-local" class="form-control" id="outbound-datetime" value="2025-04-15T09:00" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">服务场地</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="service-location" id="service-location-clinic" value="clinic" checked>
+                                    <label class="form-check-label" for="service-location-clinic">诊所服务</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="service-location" id="service-location-onsite" value="onsite">
+                                    <label class="form-check-label" for="service-location-onsite">外出</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-none" id="address-container">
+                            <label for="service-address" class="form-label">外出地址</label>
+                            <textarea class="form-control" id="service-address" rows="2" placeholder="请输入外出服务地址"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nurse-select" class="form-label">确认排班护士</label>
+                            <select class="form-select" id="nurse-select" required>
+                                <option value="">请选择护士</option>
+                                <option value="1">李护士</option>
+                                <option value="2">王护士</option>
+                                <option value="3">赵护士</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="confirm-outbound-btn">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 服务场地切换事件
+            document.querySelectorAll('input[name="service-location"]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    const addressContainer = document.getElementById('address-container');
+                    if (this.value === 'onsite') {
+                        addressContainer.classList.remove('d-none');
+                        document.getElementById('service-address').setAttribute('required', 'required');
+                    } else {
+                        addressContainer.classList.add('d-none');
+                        document.getElementById('service-address').removeAttribute('required');
+                    }
+                });
+            });
+
+            // 确认出库按钮点击事件
+            document.getElementById('confirm-outbound-btn').addEventListener('click', function() {
+                const nurseSelect = document.getElementById('nurse-select');
+                const outboundDatetime = document.getElementById('outbound-datetime');
+                const serviceLocation = document.querySelector('input[name="service-location"]:checked').value;
+                const serviceAddress = document.getElementById('service-address');
+
+                // 表单验证
+                if (!nurseSelect.value) {
+                    alert('请选择排班护士');
+                    return;
+                }
+
+                if (!outboundDatetime.value) {
+                    alert('请选择出库时间');
+                    return;
+                }
+
+                if (serviceLocation === 'onsite' && !serviceAddress.value.trim()) {
+                    alert('请输入外出服务地址');
+                    return;
+                }
+
+                // 模拟提交
+                const modal = bootstrap.Modal.getInstance(document.getElementById('confirm-outbound-modal'));
+                modal.hide();
+
+                // 更新状态
+                const statusBadge = document.querySelector('.badge.bg-warning.text-dark');
+                statusBadge.className = 'badge bg-primary';
+                statusBadge.textContent = '已出库';
+
+                // 更新出库时间
+                const outboundTimeCell = document.querySelector('tbody tr td:nth-child(4)');
+                outboundTimeCell.textContent = outboundDatetime.value.replace('T', ' ');
+
+                // 禁用确认出库按钮
+                const confirmBtn = document.querySelector('.btn.btn-sm.btn-primary[data-bs-toggle="modal"]');
+                confirmBtn.disabled = true;
+                confirmBtn.textContent = '已确认出库';
+
+                // 显示成功消息
+                alert('出库确认成功！');
+            });
+        });
+    </script>
+</body>
+</html>

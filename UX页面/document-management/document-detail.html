@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文书详情 - 细胞应用业务销售管理系统</title>
+    <title>文书详情 - 转化销售管理系统</title>
     <!-- 引入Bootstrap -->
     <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
     <!-- 引入字体图标 -->
@@ -98,6 +98,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="contract-tab" data-bs-toggle="tab" data-bs-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">合同管理</button>
+                    </li>
+                    <!-- V1.2新增选项卡 -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="treatment-tab" data-bs-toggle="tab" data-bs-target="#treatment" type="button" role="tab" aria-controls="treatment" aria-selected="false">诊疗管理</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">复查管理</button>
                     </li>
                 </ul>
 
@@ -1743,6 +1750,148 @@
                                                     <button class="btn btn-sm btn-secondary">
                                                         <i class="bi bi-download"></i> 导出合同
                                                     </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 诊疗管理 -->
+                    <div class="tab-pane fade" id="treatment" role="tabpanel" aria-labelledby="treatment-tab">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard2-pulse"></i> 诊疗记录
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>项目名称</th>
+                                                <th>阶段</th>
+                                                <th>数量</th>
+                                                <th>状态</th>
+                                                <th>开始时间</th>
+                                                <th>结束时间</th>
+                                                <th>负责护士</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>美白针</td>
+                                                <td>第一阶段</td>
+                                                <td>3针</td>
+                                                <td><span class="badge bg-warning text-dark">未出库</span></td>
+                                                <td>2025-04-15 10:00</td>
+                                                <td>-</td>
+                                                <td>李护士</td>
+                                                <td>
+                                                    <a href="../treatment-management/treatment-detail.html?id=1" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>玻尿酸</td>
+                                                <td>第一阶段</td>
+                                                <td>2ml</td>
+                                                <td><span class="badge bg-primary">已出库</span></td>
+                                                <td>2025-04-16 14:30</td>
+                                                <td>2025-04-16 15:30</td>
+                                                <td>王护士</td>
+                                                <td>
+                                                    <a href="../treatment-management/treatment-detail.html?id=2" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>肉毒素</td>
+                                                <td>第二阶段</td>
+                                                <td>100单位</td>
+                                                <td><span class="badge bg-success">已完成</span></td>
+                                                <td>2025-04-20 11:30</td>
+                                                <td>2025-04-20 12:30</td>
+                                                <td>赵护士</td>
+                                                <td>
+                                                    <a href="../treatment-management/treatment-detail.html?id=3" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 复查管理 -->
+                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard-check"></i> 复查记录
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>复查时间</th>
+                                                <th>复查状态</th>
+                                                <th>检测项目</th>
+                                                <th>负责医生</th>
+                                                <th>负责护士</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2025-05-15 09:00</td>
+                                                <td><span class="badge bg-warning text-dark">新建复查</span></td>
+                                                <td>血常规, 肝功能, 肾功能</td>
+                                                <td>待确定</td>
+                                                <td>李护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=1" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-17 14:30</td>
+                                                <td><span class="badge bg-primary">复查项目确定</span></td>
+                                                <td>血常规, 肝功能, 生化全项</td>
+                                                <td>张医生</td>
+                                                <td>王护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=2" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-20 10:00</td>
+                                                <td><span class="badge bg-info">客户复查中</span></td>
+                                                <td>血常规, 肝功能, 生化全项, 免疫细胞功能</td>
+                                                <td>李医生</td>
+                                                <td>赵护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=3" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-25 09:30</td>
+                                                <td><span class="badge bg-primary">待疗效对比</span></td>
+                                                <td>血常规, 肝功能, 生化全项</td>
+                                                <td>王医生</td>
+                                                <td>李护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=4" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-30 14:00</td>
+                                                <td><span class="badge bg-success">复查结束</span></td>
+                                                <td>血常规, 肝功能, 生化全项</td>
+                                                <td>张医生</td>
+                                                <td>王护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=5" class="btn btn-sm btn-outline-primary">查看详情</a>
                                                 </td>
                                             </tr>
                                         </tbody>

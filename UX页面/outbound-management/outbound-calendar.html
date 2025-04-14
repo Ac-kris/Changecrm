@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出库管理 - 转化销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">出库管理</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <a href="outbound-calendar.html" class="btn btn-sm btn-outline-primary active">日历视图</a>
+                            <a href="outbound-list.html" class="btn btn-sm btn-outline-secondary">列表视图</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 筛选条件 -->
+                <div class="filter-section mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="搜索客户姓名/编号" id="search-input">
+                                <button class="btn btn-outline-secondary" type="button" id="search-btn">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="salesperson-filter">
+                                <option value="">负责销售</option>
+                                <option value="1">销售A</option>
+                                <option value="2">销售B</option>
+                                <option value="3">销售C</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="status-filter">
+                                <option value="">状态</option>
+                                <option value="pending">待出库</option>
+                                <option value="confirmed">已确认</option>
+                                <option value="completed">已完成</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="date" class="form-control" id="date-filter-start">
+                                <span class="input-group-text">至</span>
+                                <input type="date" class="form-control" id="date-filter-end">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary w-100" id="filter-btn">筛选</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 日历组件 -->
+                <div id="outbound-calendar-container">
+                    <!-- 日历组件将通过JavaScript动态加载 -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/calendar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载日历组件
+            fetch('../components/calendar.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('outbound-calendar-container').innerHTML = html;
+                    // 初始化日历
+                    initCalendar('outbound-calendar-container', 'outbound');
+                });
+        });
+    </script>
+</body>
+</html>

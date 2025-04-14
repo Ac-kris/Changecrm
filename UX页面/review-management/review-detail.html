@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复查详情 - 转化销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <a href="javascript:history.back()" class="text-decoration-none me-2">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        复查详情
+                    </h1>
+                </div>
+
+                <!-- 复查流程状态 -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="flow-status">
+                            <div class="progress-tracker">
+                                <div class="progress-step active">
+                                    <div class="progress-step-icon">
+                                        <i class="bi bi-1-circle"></i>
+                                    </div>
+                                    <div class="progress-step-label">新建复查</div>
+                                    <div class="progress-step-desc">系统自动生成</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="progress-step-icon">
+                                        <i class="bi bi-2-circle"></i>
+                                    </div>
+                                    <div class="progress-step-label">复查项目确定</div>
+                                    <div class="progress-step-desc">护士确认项目</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="progress-step-icon">
+                                        <i class="bi bi-3-circle"></i>
+                                    </div>
+                                    <div class="progress-step-label">客户复查中</div>
+                                    <div class="progress-step-desc">客服预约客户</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="progress-step-icon">
+                                        <i class="bi bi-4-circle"></i>
+                                    </div>
+                                    <div class="progress-step-label">待疗效对比</div>
+                                    <div class="progress-step-desc">客服上传报告</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="progress-step-icon">
+                                        <i class="bi bi-5-circle"></i>
+                                    </div>
+                                    <div class="progress-step-label">复查结束</div>
+                                    <div class="progress-step-desc">客服制作对比</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客户信息卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">客户信息</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">客户编号</label>
+                                <p class="form-control-static">C20250415001</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">客户姓名</label>
+                                <p class="form-control-static">
+                                    <a href="../document-management/document-detail.html?id=1">张三</a>
+                                </p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">负责销售</label>
+                                <p class="form-control-static">销售A</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">性别</label>
+                                <p class="form-control-static">男</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">年龄</label>
+                                <p class="form-control-static">35</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">是否储户</label>
+                                <p class="form-control-static">是</p>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">接收地址</label>
+                                <p class="form-control-static">广东省广州市天河区天河路385号</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 复查信息卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">复查信息</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">复查状态</label>
+                                <p class="form-control-static">
+                                    <span class="badge bg-warning text-dark">新建复查</span>
+                                </p>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">复查时间</label>
+                                <div class="input-group">
+                                    <input type="datetime-local" class="form-control" value="2025-05-15T09:00" id="review-time">
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">负责护士</label>
+                                <p class="form-control-static">李护士</p>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">复查医生</label>
+                                <p class="form-control-static">待确定</p>
+                            </div>
+                        </div>
+
+                        <!-- 复查检测项目 -->
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">复查检测项目</h6>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-item-modal">
+                                    增加项目
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>项目名称</th>
+                                                <th>来源</th>
+                                                <th>医生确认</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="review-items-body">
+                                            <!-- 示例数据 -->
+                                            <tr>
+                                                <td>血常规</td>
+                                                <td>系统自动</td>
+                                                <td><span class="badge bg-warning text-dark">未确认</span></td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>肝功能</td>
+                                                <td>系统自动</td>
+                                                <td><span class="badge bg-warning text-dark">未确认</span></td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>肾功能</td>
+                                                <td>系统自动</td>
+                                                <td><span class="badge bg-warning text-dark">未确认</span></td>
+                                                <td>-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 服务确认单导出 -->
+                        <div class="mb-4">
+                            <button type="button" class="btn btn-primary" id="export-btn" disabled>
+                                <i class="bi bi-download"></i> 导出服务确认单
+                            </button>
+                            <small class="text-muted ms-2">需要在复查项目确定后才能导出</small>
+                        </div>
+
+                        <!-- 报告上传 -->
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">报告上传</h6>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#report-upload-modal" disabled>
+                                    上传报告
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">暂无报告，需要在客户复查中状态才能上传报告</p>
+                            </div>
+                        </div>
+
+                        <!-- 疗效对比方案 -->
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">疗效对比方案</h6>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#comparison-upload-modal" disabled>
+                                    制作疗效对比
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">暂无疗效对比方案，需要在报告待上传状态才能制作疗效对比</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 底部悬浮操作栏 -->
+    <div class="floating-action-bar" id="floating-action-bar">
+        <button type="button" class="btn btn-primary" id="submit-review-items-btn">提交复查项目</button>
+    </div>
+
+    <!-- 增加项目模态框 -->
+    <div class="modal fade" id="add-item-modal" tabindex="-1" aria-labelledby="add-item-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-item-modal-label">增加复查项目</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-item-form">
+                        <div class="mb-3">
+                            <label for="item-name" class="form-label">项目名称</label>
+                            <input type="text" class="form-control" id="item-name" placeholder="请输入项目名称" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="add-item-btn">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 报告上传模态框 -->
+    <div class="modal fade" id="report-upload-modal" tabindex="-1" aria-labelledby="report-upload-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="report-upload-modal-label">上传报告</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="report-upload-form">
+                        <div class="mb-3">
+                            <label for="report-files" class="form-label">上传报告文件</label>
+                            <input type="file" class="form-control" id="report-files" multiple required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="report-note" class="form-label">备注</label>
+                            <textarea class="form-control" id="report-note" rows="4" placeholder="请输入备注信息..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="report-upload-btn">上传</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 疗效对比上传模态框 -->
+    <div class="modal fade" id="comparison-upload-modal" tabindex="-1" aria-labelledby="comparison-upload-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comparison-upload-modal-label">制作疗效对比</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="comparison-upload-form">
+                        <div class="mb-3">
+                            <label for="comparison-files" class="form-label">上传疗效对比文件</label>
+                            <input type="file" class="form-control" id="comparison-files" multiple required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comparison-analysis" class="form-label">疗效分析</label>
+                            <textarea class="form-control" id="comparison-analysis" rows="6" placeholder="请输入疗效分析..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="comparison-upload-btn">上传</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 当前状态
+            let currentStatus = 'new'; // new, items_confirmed, in_review, report_pending, completed
+
+            // 更新状态和悬浮操作栏
+            function updateStatus(status) {
+                currentStatus = status;
+                const statusBadge = document.querySelector('.badge.bg-warning.text-dark');
+                const floatingBar = document.getElementById('floating-action-bar');
+                const submitBtn = document.getElementById('submit-review-items-btn');
+
+                // 更新进度条
+                document.querySelectorAll('.progress-step').forEach((step, index) => {
+                    if (status === 'new' && index === 0) {
+                        step.classList.add('active');
+                    } else if (status === 'items_confirmed' && index <= 1) {
+                        step.classList.add('active');
+                    } else if (status === 'in_review' && index <= 2) {
+                        step.classList.add('active');
+                    } else if (status === 'report_pending' && index <= 3) {
+                        step.classList.add('active');
+                    } else if (status === 'completed' && index <= 4) {
+                        step.classList.add('active');
+                    }
+                });
+
+                // 更新状态标签
+                if (status === 'new') {
+                    statusBadge.className = 'badge bg-warning text-dark';
+                    statusBadge.textContent = '新建复查';
+                    submitBtn.textContent = '提交复查项目';
+                    floatingBar.style.display = 'flex';
+                } else if (status === 'items_confirmed') {
+                    statusBadge.className = 'badge bg-primary';
+                    statusBadge.textContent = '复查项目确定';
+                    submitBtn.textContent = '确定复查项目';
+                    floatingBar.style.display = 'flex';
+                    // 启用导出按钮
+                    document.getElementById('export-btn').disabled = false;
+                } else if (status === 'in_review') {
+                    statusBadge.className = 'badge bg-info';
+                    statusBadge.textContent = '客户复查中';
+                    floatingBar.style.display = 'none';
+                } else if (status === 'report_pending') {
+                    statusBadge.className = 'badge bg-primary';
+                    statusBadge.textContent = '待疗效对比';
+                    floatingBar.style.display = 'none';
+                } else if (status === 'completed') {
+                    statusBadge.className = 'badge bg-success';
+                    statusBadge.textContent = '复查结束';
+                    floatingBar.style.display = 'none';
+                }
+            }
+
+            // 增加项目按钮点击事件
+            document.getElementById('add-item-btn').addEventListener('click', function() {
+                // 表单验证
+                const form = document.getElementById('add-item-form');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // 获取项目名称
+                const itemName = document.getElementById('item-name').value;
+
+                // 添加到表格
+                const tbody = document.getElementById('review-items-body');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${itemName}</td>
+                    <td>护士添加</td>
+                    <td><span class="badge bg-warning text-dark">未确认</span></td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger delete-item-btn">删除</button>
+                    </td>
+                `;
+
+                tbody.appendChild(newRow);
+
+                // 绑定删除按钮事件
+                newRow.querySelector('.delete-item-btn').addEventListener('click', function() {
+                    tbody.removeChild(newRow);
+                });
+
+                // 关闭模态框
+                const modal = bootstrap.Modal.getInstance(document.getElementById('add-item-modal'));
+                modal.hide();
+
+                // 清空表单
+                document.getElementById('item-name').value = '';
+            });
+
+            // 提交复查项目按钮点击事件
+            document.getElementById('submit-review-items-btn').addEventListener('click', function() {
+                if (currentStatus === 'new') {
+                    // 更新状态为复查项目确定
+                    updateStatus('items_confirmed');
+                    alert('复查项目提交成功！');
+                } else if (currentStatus === 'items_confirmed') {
+                    // 更新状态为客户复查中
+                    updateStatus('in_review');
+                    alert('复查项目确认成功！客户已进入复查阶段。');
+
+                    // 模拟上传报告后状态变更
+                    setTimeout(function() {
+                        // 模拟上传报告
+                        const reportUploadBtn = document.querySelector('button[data-bs-target="#report-upload-modal"]');
+                        reportUploadBtn.disabled = false;
+
+                        // 模拟点击上传报告按钮
+                        reportUploadBtn.addEventListener('click', function() {
+                            // 模拟上传报告后状态变更
+                            setTimeout(function() {
+                                updateStatus('report_pending');
+
+                                // 启用疗效对比按钮
+                                const comparisonUploadBtn = document.querySelector('button[data-bs-target="#comparison-upload-modal"]');
+                                comparisonUploadBtn.disabled = false;
+
+                                // 模拟点击疗效对比按钮
+                                comparisonUploadBtn.addEventListener('click', function() {
+                                    // 模拟上传疗效对比后状态变更
+                                    setTimeout(function() {
+                                        updateStatus('completed');
+                                    }, 2000);
+                                });
+                            }, 2000);
+                        });
+                    }, 2000);
+                }
+            });
+
+            // 导出服务确认单按钮点击事件
+            document.getElementById('export-btn').addEventListener('click', function() {
+                alert('服务确认单导出成功！');
+            });
+        });
+    </script>
+</body>
+</html>

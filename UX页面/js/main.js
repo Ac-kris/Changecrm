@@ -400,7 +400,7 @@ function loadSidebar() {
     const sidebarHTML = `
     <div class="position-sticky pt-3">
         <div class="system-title text-center mb-4">
-            <h5>细胞应用业务销售管理系统</h5>
+            <h5>转化销售管理系统</h5>
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -426,6 +426,22 @@ function loadSidebar() {
             <li class="nav-item">
                 <a class="nav-link" id="nav-project" href="${basePath}project-management/project-list.html">
                     <i class="bi bi-kanban"></i> 项目管理
+                </a>
+            </li>
+            <!-- V1.2新增模块 -->
+            <li class="nav-item">
+                <a class="nav-link" id="nav-outbound" href="${basePath}outbound-management/outbound-calendar.html">
+                    <i class="bi bi-box-seam"></i> 出库管理
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-treatment" href="${basePath}treatment-management/treatment-calendar.html">
+                    <i class="bi bi-clipboard2-pulse"></i> 诊疗管理
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-review" href="${basePath}review-management/review-list.html">
+                    <i class="bi bi-clipboard-check"></i> 复查管理
                 </a>
             </li>
             <li class="nav-item">
@@ -473,6 +489,12 @@ function setActiveMenuItem() {
         document.getElementById('nav-order')?.classList.add('active');
     } else if (currentHref.includes('project-management')) {
         document.getElementById('nav-project')?.classList.add('active');
+    } else if (currentHref.includes('outbound-management')) {
+        document.getElementById('nav-outbound')?.classList.add('active');
+    } else if (currentHref.includes('treatment-management')) {
+        document.getElementById('nav-treatment')?.classList.add('active');
+    } else if (currentHref.includes('review-management')) {
+        document.getElementById('nav-review')?.classList.add('active');
     } else if (currentHref.includes('permission-management')) {
         document.getElementById('nav-permission')?.classList.add('active');
     } else if (currentHref.includes('approval-management')) {
