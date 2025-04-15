@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试页面 - 细胞应用业务销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">测试页面</h1>
+                    <div class="user-info">
+                        <span class="me-2">欢迎，测试用户</span>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-box-arrow-right"></i> 退出
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-info-circle"></i> 测试信息
+                            </div>
+                            <div class="card-body">
+                                <p>这是一个测试页面，用于验证以下功能：</p>
+                                <ul>
+                                    <li>侧边栏组件是否正常加载</li>
+                                    <li>本地CSS和JS文件是否正常工作</li>
+                                    <li>Bootstrap样式和图标是否正常显示</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-check-circle"></i> 测试按钮
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-check"></i> 主要按钮
+                                </button>
+                                <button class="btn btn-success">
+                                    <i class="bi bi-check-all"></i> 成功按钮
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-x"></i> 危险按钮
+                                </button>
+                                <button class="btn btn-warning">
+                                    <i class="bi bi-exclamation"></i> 警告按钮
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

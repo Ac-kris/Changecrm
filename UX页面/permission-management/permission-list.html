@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权限管理 - 细胞应用业务销售管理系统</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 引入Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="system-title text-center mb-4">
+                        <h5>细胞应用业务销售管理系统</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-house-door"></i> 首页
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../document-management/document-list.html">
+                                <i class="bi bi-file-earmark-text"></i> 文书管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../customer-management/customer-list.html">
+                                <i class="bi bi-people"></i> 客户管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../order-management/order-list.html">
+                                <i class="bi bi-cart"></i> 订单管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../project-management/project-list.html">
+                                <i class="bi bi-kanban"></i> 项目管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="permission-list.html">
+                                <i class="bi bi-shield-lock"></i> 权限管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../approval-management/approval-list.html">
+                                <i class="bi bi-check2-square"></i> 审批管理
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">权限管理</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-primary">
+                            <i class="bi bi-plus"></i> 新增角色
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 角色列表和权限设置 -->
+                <div class="row">
+                    <!-- 角色列表 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-people"></i> 角色列表
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">系统管理员</h6>
+                                            <small>3 用户</small>
+                                        </div>
+                                        <small>拥有所有模块的完全权限</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">销售经理</h6>
+                                            <small>5 用户</small>
+                                        </div>
+                                        <small>管理销售团队和查看销售数据</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">销售人员</h6>
+                                            <small>12 用户</small>
+                                        </div>
+                                        <small>管理客户和文书</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">财务人员</h6>
+                                            <small>4 用户</small>
+                                        </div>
+                                        <small>管理订单和支付</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">医疗顾问</h6>
+                                            <small>6 用户</small>
+                                        </div>
+                                        <small>管理体检和医疗评估</small>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i> 编辑
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i> 删除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 权限设置 -->
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-shield-lock"></i> 权限设置 - 系统管理员
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-check-all"></i> 全选
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary ms-2">
+                                        <i class="bi bi-x-lg"></i> 取消全选
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="permission-tree">
+                                    <ul>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="module1" checked>
+                                                <label class="form-check-label fw-bold" for="module1">
+                                                    文书管理
+                                                </label>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module1_1" checked>
+                                                        <label class="form-check-label" for="module1_1">
+                                                            客户档案
+                                                        </label>
+                                                    </div>
+                                                    <ul>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_1_1" checked>
+                                                                <label class="form-check-label" for="module1_1_1">
+                                                                    查看
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_1_2" checked>
+                                                                <label class="form-check-label" for="module1_1_2">
+                                                                    编辑
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_1_3" checked>
+                                                                <label class="form-check-label" for="module1_1_3">
+                                                                    删除
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module1_2" checked>
+                                                        <label class="form-check-label" for="module1_2">
+                                                            自查表
+                                                        </label>
+                                                    </div>
+                                                    <ul>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_2_1" checked>
+                                                                <label class="form-check-label" for="module1_2_1">
+                                                                    查看
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_2_2" checked>
+                                                                <label class="form-check-label" for="module1_2_2">
+                                                                    编辑
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module1_3" checked>
+                                                        <label class="form-check-label" for="module1_3">
+                                                            体检管理
+                                                        </label>
+                                                    </div>
+                                                    <ul>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_3_1" checked>
+                                                                <label class="form-check-label" for="module1_3_1">
+                                                                    查看
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_3_2" checked>
+                                                                <label class="form-check-label" for="module1_3_2">
+                                                                    编辑
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="module1_3_3" checked>
+                                                                <label class="form-check-label" for="module1_3_3">
+                                                                    预约检查
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="module2" checked>
+                                                <label class="form-check-label fw-bold" for="module2">
+                                                    客户管理
+                                                </label>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module2_1" checked>
+                                                        <label class="form-check-label" for="module2_1">
+                                                            查看
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module2_2" checked>
+                                                        <label class="form-check-label" for="module2_2">
+                                                            新增
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module2_3" checked>
+                                                        <label class="form-check-label" for="module2_3">
+                                                            编辑
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module2_4" checked>
+                                                        <label class="form-check-label" for="module2_4">
+                                                            删除
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module2_5" checked>
+                                                        <label class="form-check-label" for="module2_5">
+                                                            导入/导出
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="module3" checked>
+                                                <label class="form-check-label fw-bold" for="module3">
+                                                    订单管理
+                                                </label>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module3_1" checked>
+                                                        <label class="form-check-label" for="module3_1">
+                                                            查看
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module3_2" checked>
+                                                        <label class="form-check-label" for="module3_2">
+                                                            创建
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module3_3" checked>
+                                                        <label class="form-check-label" for="module3_3">
+                                                            支付审核
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module3_4" checked>
+                                                        <label class="form-check-label" for="module3_4">
+                                                            取消/删除
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="module4" checked>
+                                                <label class="form-check-label fw-bold" for="module4">
+                                                    权限管理
+                                                </label>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module4_1" checked>
+                                                        <label class="form-check-label" for="module4_1">
+                                                            查看
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module4_2" checked>
+                                                        <label class="form-check-label" for="module4_2">
+                                                            新增角色
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module4_3" checked>
+                                                        <label class="form-check-label" for="module4_3">
+                                                            编辑权限
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module4_4" checked>
+                                                        <label class="form-check-label" for="module4_4">
+                                                            删除角色
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module5_1" checked>
+                                                        <label class="form-check-label" for="module5_1">
+                                                            查看
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="module5_2" checked>
+                                                        <label class="form-check-label" for="module5_2">
+                                                            配置
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary">保存权限设置</button>
+                                <button class="btn btn-outline-secondary ms-2">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

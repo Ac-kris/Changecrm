@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出库管理 - 转化销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">出库管理</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <a href="outbound-calendar.html" class="btn btn-sm btn-outline-secondary">日历视图</a>
+                            <a href="outbound-list.html" class="btn btn-sm btn-outline-primary active">列表视图</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 筛选条件 -->
+                <div class="filter-section mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="搜索客户姓名/编号" id="search-input">
+                                <button class="btn btn-outline-secondary" type="button" id="search-btn">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="salesperson-filter">
+                                <option value="">负责销售</option>
+                                <option value="1">销售A</option>
+                                <option value="2">销售B</option>
+                                <option value="3">销售C</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="status-filter">
+                                <option value="">状态</option>
+                                <option value="pending">待出库</option>
+                                <option value="confirmed">已确认</option>
+                                <option value="completed">已完成</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="date" class="form-control" id="date-filter-start">
+                                <span class="input-group-text">至</span>
+                                <input type="date" class="form-control" id="date-filter-end">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary w-100" id="filter-btn">筛选</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 出库列表 -->
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>客户姓名 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>客户编号 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>负责销售 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>状态 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>出库时间 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>项目名称 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>阶段 <i class="bi bi-arrow-down-up"></i></th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="outbound-list-body">
+                            <!-- 示例数据，实际应用中应该从后端获取 -->
+                            <tr>
+                                <td>张三</td>
+                                <td>C20250415001</td>
+                                <td>销售A</td>
+                                <td><span class="badge bg-warning text-dark">未出库</span></td>
+                                <td>2025-04-15 09:00</td>
+                                <td>美白针</td>
+                                <td>第一阶段</td>
+                                <td>
+                                    <a href="outbound-detail.html?id=1" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>李四</td>
+                                <td>C20250416001</td>
+                                <td>销售B</td>
+                                <td><span class="badge bg-primary">已出库</span></td>
+                                <td>2025-04-16 14:30</td>
+                                <td>玻尿酸</td>
+                                <td>第二阶段</td>
+                                <td>
+                                    <a href="outbound-detail.html?id=2" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>王五</td>
+                                <td>C20250418001</td>
+                                <td>销售C</td>
+                                <td><span class="badge bg-warning text-dark">未出库</span></td>
+                                <td>2025-04-18 10:00</td>
+                                <td>肉毒素</td>
+                                <td>第一阶段</td>
+                                <td>
+                                    <a href="outbound-detail.html?id=3" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>赵六</td>
+                                <td>C20250420001</td>
+                                <td>销售A</td>
+                                <td><span class="badge bg-success">已完成</span></td>
+                                <td>2025-04-20 11:30</td>
+                                <td>美白针</td>
+                                <td>第一阶段</td>
+                                <td>
+                                    <a href="outbound-detail.html?id=4" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分页 -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

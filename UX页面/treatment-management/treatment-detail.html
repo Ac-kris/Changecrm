@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诊疗详情 - 转化销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <a href="javascript:history.back()" class="text-decoration-none me-2">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        诊疗详情
+                    </h1>
+                </div>
+
+                <!-- 客户信息卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">客户信息</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">客户编号</label>
+                                <p class="form-control-static">C20250415001</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">客户姓名</label>
+                                <p class="form-control-static">
+                                    <a href="../document-management/document-detail.html?id=1">张三</a>
+                                </p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">负责销售</label>
+                                <p class="form-control-static">销售A</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">性别</label>
+                                <p class="form-control-static">男</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">年龄</label>
+                                <p class="form-control-static">35</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">是否储户</label>
+                                <p class="form-control-static">是</p>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">接收地址</label>
+                                <p class="form-control-static">广东省广州市天河区天河路385号</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 诊疗信息卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">诊疗信息</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- 阶段1 -->
+                        <div class="phase-container mb-4">
+                            <div class="phase-header mb-3">
+                                <h5>阶段 1：基础治疗</h5>
+                            </div>
+
+                            <div class="treatment-details">
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label class="form-label">项目名称</label>
+                                        <p class="form-control-static">美白针</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">数量</label>
+                                        <p class="form-control-static">3针</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">服务场地</label>
+                                        <p class="form-control-static">诊所服务</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">治疗时间</label>
+                                        <p class="form-control-static">2025-04-15 10:00</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">负责护士</label>
+                                        <p class="form-control-static">李护士</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">状态</label>
+                                        <p class="form-control-static">
+                                            <span class="badge bg-primary">已确认</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- 输注记录表 -->
+                                <div class="card mb-3">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">输注记录</h6>
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#infusion-modal">
+                                            输注管理
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>输注前血压</th>
+                                                        <th>输注前脉搏</th>
+                                                        <th>输注后血压</th>
+                                                        <th>输注后脉搏</th>
+                                                        <th>输注后异常</th>
+                                                        <th>记录人</th>
+                                                        <th>附件</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2025-04-15 10:00</td>
+                                                        <td>2025-04-15 11:30</td>
+                                                        <td>120/80 mmHg</td>
+                                                        <td>75 次/分</td>
+                                                        <td>118/78 mmHg</td>
+                                                        <td>72 次/分</td>
+                                                        <td><span class="badge bg-success">否</span></td>
+                                                        <td>李护士</td>
+                                                        <td><button type="button" class="btn btn-sm btn-link">查看附件(2)</button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 用药情况 -->
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">用药情况</h6>
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#medication-modal">
+                                            用药情况登记
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>美白针输注期间，患者无不良反应。输注结束后给予口服维生素C 1片，每日一次，连续7天。建议多喝水，避免过度疲劳。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 随访管理卡片 -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">随访管理</h5>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#follow-up-modal">
+                            新增随访
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>随访疗程</th>
+                                        <th>随访时间</th>
+                                        <th>随访方式</th>
+                                        <th>是否异常</th>
+                                        <th>随访人员</th>
+                                        <th>随访内容</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>阶段 1：基础治疗</td>
+                                        <td>24小时</td>
+                                        <td>电话</td>
+                                        <td><span class="badge bg-success">正常随访</span></td>
+                                        <td>李护士</td>
+                                        <td>患者表示治疗后无不适，睡眠良好，已按医嘴服用维生素C。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>阶段 1：基础治疗</td>
+                                        <td>72小时</td>
+                                        <td>微信</td>
+                                        <td><span class="badge bg-success">正常随访</span></td>
+                                        <td>王护士</td>
+                                        <td>患者治疗区域无红肿、疼痛等不适，继续服用维生素C。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 输注管理模态框 -->
+    <div class="modal fade" id="infusion-modal" tabindex="-1" aria-labelledby="infusion-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infusion-modal-label">输注管理</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="infusion-form">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="start-time" class="form-label">开始时间</label>
+                                <input type="datetime-local" class="form-control" id="start-time" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end-time" class="form-label">结束时间</label>
+                                <input type="datetime-local" class="form-control" id="end-time" required>
+                            </div>
+                        </div>
+
+                        <h6 class="mb-3">输注前</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="pre-bp" class="form-label">血压 (mmHg)</label>
+                                <input type="text" class="form-control" id="pre-bp" placeholder="例如：120/80" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="pre-pulse" class="form-label">脉搏 (次/分)</label>
+                                <input type="text" class="form-control" id="pre-pulse" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="pre-oxygen" class="form-label">血氧 (%)</label>
+                                <input type="text" class="form-control" id="pre-oxygen" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="pre-temp" class="form-label">体温 (℃)</label>
+                                <input type="text" class="form-control" id="pre-temp" required>
+                            </div>
+                        </div>
+
+                        <h6 class="mb-3">输注后</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="post-bp" class="form-label">血压 (mmHg)</label>
+                                <input type="text" class="form-control" id="post-bp" placeholder="例如：120/80" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="post-pulse" class="form-label">脉搏 (次/分)</label>
+                                <input type="text" class="form-control" id="post-pulse" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="post-oxygen" class="form-label">血氧 (%)</label>
+                                <input type="text" class="form-control" id="post-oxygen" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="post-temp" class="form-label">体温 (℃)</label>
+                                <input type="text" class="form-control" id="post-temp" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">是否异常</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="post-abnormal" id="post-abnormal-no" value="0" checked>
+                                    <label class="form-check-label" for="post-abnormal-no">否</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="post-abnormal" id="post-abnormal-yes" value="1">
+                                    <label class="form-check-label" for="post-abnormal-yes">是</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="recorder" class="form-label">记录人</label>
+                            <input type="text" class="form-control" id="recorder" value="李护士" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="attachments" class="form-label">附件</label>
+                            <input type="file" class="form-control" id="attachments" multiple>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="infusion-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用药情况模态框 -->
+    <div class="modal fade" id="medication-modal" tabindex="-1" aria-labelledby="medication-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="medication-modal-label">用药情况登记</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="medication-form">
+                        <div class="mb-3">
+                            <label for="medication-record" class="form-label">用药情况</label>
+                            <textarea class="form-control" id="medication-record" rows="6" placeholder="请输入用药情况..." required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="medication-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增随访模态框 -->
+    <div class="modal fade" id="follow-up-modal" tabindex="-1" aria-labelledby="follow-up-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="follow-up-modal-label">新增随访</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="follow-up-form">
+                        <div class="mb-3">
+                            <label for="treatment-phase" class="form-label">随访疗程</label>
+                            <select class="form-select" id="treatment-phase" disabled>
+                                <option value="1">阶段 1：基础治疗</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="follow-up-time-point" class="form-label">随访时间</label>
+                            <select class="form-select" id="follow-up-time-point" required>
+                                <option value="">请选择随访时间</option>
+                                <option value="24h">24小时</option>
+                                <option value="72h">72小时</option>
+                                <option value="7d">7天</option>
+                                <option value="14d">14天</option>
+                                <option value="30d">30天</option>
+                                <option value="90d">90天</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="follow-up-method" class="form-label">随访方式</label>
+                            <select class="form-select" id="follow-up-method" required>
+                                <option value="">请选择随访方式</option>
+                                <option value="wechat">微信</option>
+                                <option value="phone">电话</option>
+                                <option value="face">面谈</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">是否异常</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="is-abnormal" id="is-abnormal-no" value="0" checked>
+                                    <label class="form-check-label" for="is-abnormal-no">正常随访</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="is-abnormal" id="is-abnormal-yes" value="1">
+                                    <label class="form-check-label" for="is-abnormal-yes">异常随访</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="follow-up-person" class="form-label">随访人员</label>
+                            <select class="form-select" id="follow-up-person" required>
+                                <option value="">请选择随访人员</option>
+                                <option value="1">李护士</option>
+                                <option value="2">王护士</option>
+                                <option value="3">赵护士</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="follow-up-content" class="form-label">随访内容</label>
+                            <textarea class="form-control" id="follow-up-content" rows="4" placeholder="请输入随访内容..." required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="follow-up-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 输注管理提交按钮点击事件
+            document.getElementById('infusion-submit-btn').addEventListener('click', function() {
+                // 表单验证
+                const form = document.getElementById('infusion-form');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // 模拟提交
+                const modal = bootstrap.Modal.getInstance(document.getElementById('infusion-modal'));
+                modal.hide();
+
+                // 更新输注记录表
+                const tbody = document.querySelector('.table-responsive tbody');
+                tbody.innerHTML = `
+                    <tr>
+                        <td>${document.getElementById('start-time').value.replace('T', ' ')}</td>
+                        <td>${document.getElementById('end-time').value.replace('T', ' ')}</td>
+                        <td>${document.getElementById('pre-bp').value}</td>
+                        <td>${document.getElementById('pre-pulse').value}</td>
+                        <td>${document.querySelector('input[name="pre-abnormal"]:checked').value === '1' ? '<span class="badge bg-danger">是</span>' : '<span class="badge bg-success">否</span>'}</td>
+                        <td>${document.getElementById('post-bp').value}</td>
+                        <td>${document.getElementById('post-pulse').value}</td>
+                        <td>${document.querySelector('input[name="post-abnormal"]:checked').value === '1' ? '<span class="badge bg-danger">是</span>' : '<span class="badge bg-success">否</span>'}</td>
+                        <td>${document.getElementById('recorder').value}</td>
+                        <td>${document.getElementById('attachments').files.length > 0 ? `<button type="button" class="btn btn-sm btn-link">查看附件(${document.getElementById('attachments').files.length})</button>` : '无'}</td>
+                    </tr>
+                `;
+
+                // 显示成功消息
+                alert('输注记录提交成功！');
+            });
+
+            // 用药情况提交按钮点击事件
+            document.getElementById('medication-submit-btn').addEventListener('click', function() {
+                // 表单验证
+                const form = document.getElementById('medication-form');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // 模拟提交
+                const modal = bootstrap.Modal.getInstance(document.getElementById('medication-modal'));
+                modal.hide();
+
+                // 更新用药情况
+                const medicationContent = document.querySelector('.card:last-child .card-body');
+                medicationContent.innerHTML = `<p>${document.getElementById('medication-record').value}</p>`;
+
+                // 显示成功消息
+                alert('用药情况提交成功！');
+            });
+
+            // 新增随访提交按钮点击事件
+            document.getElementById('follow-up-submit-btn').addEventListener('click', function() {
+                // 表单验证
+                const form = document.getElementById('follow-up-form');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // 模拟提交
+                const modal = bootstrap.Modal.getInstance(document.getElementById('follow-up-modal'));
+                modal.hide();
+
+                // 获取随访方式文本
+                let methodText = '';
+                const methodValue = document.getElementById('follow-up-method').value;
+                if (methodValue === 'wechat') methodText = '微信';
+                else if (methodValue === 'phone') methodText = '电话';
+                else if (methodValue === 'face') methodText = '面谈';
+
+                // 获取随访时间点文本
+                let timePointText = '';
+                const timePointValue = document.getElementById('follow-up-time-point').value;
+                if (timePointValue === '24h') timePointText = '24小时';
+                else if (timePointValue === '72h') timePointText = '72小时';
+                else if (timePointValue === '7d') timePointText = '7天';
+                else if (timePointValue === '14d') timePointText = '14天';
+                else if (timePointValue === '30d') timePointText = '30天';
+                else if (timePointValue === '90d') timePointText = '90天';
+
+                // 更新随访记录表
+                const tbody = document.querySelector('.card:last-child .table-responsive tbody');
+                tbody.innerHTML = `
+                    <tr>
+                        <td>阶段 1：基础治疗</td>
+                        <td>${timePointText}</td>
+                        <td>${methodText}</td>
+                        <td>${document.querySelector('input[name="is-abnormal"]:checked').value === '1' ? '<span class="badge bg-danger">是</span>' : '<span class="badge bg-success">否</span>'}</td>
+                        <td>${document.getElementById('follow-up-person').options[document.getElementById('follow-up-person').selectedIndex].text}</td>
+                        <td>${document.getElementById('follow-up-content').value}</td>
+                    </tr>
+                `;
+
+                // 显示成功消息
+                alert('随访记录提交成功！');
+            });
+        });
+    </script>
+</body>
+</html>

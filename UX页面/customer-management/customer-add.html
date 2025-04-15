@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增客户 - 细胞应用业务销售管理系统</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 引入Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="system-title text-center mb-4">
+                        <h5>细胞应用业务销售管理系统</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-house-door"></i> 首页
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../document-management/document-list.html">
+                                <i class="bi bi-file-earmark-text"></i> 文书管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="customer-list.html">
+                                <i class="bi bi-people"></i> 客户管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../order-management/order-list.html">
+                                <i class="bi bi-cart"></i> 订单管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../project-management/project-list.html">
+                                <i class="bi bi-kanban"></i> 项目管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../permission-management/permission-list.html">
+                                <i class="bi bi-shield-lock"></i> 权限管理
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">新增客户</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-outline-secondary me-2" onclick="window.history.back()">
+                            <i class="bi bi-arrow-left"></i> 返回
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 表单区域 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="customerForm">
+                            <!-- 基础信息卡片 -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">
+                                    <i class="bi bi-person-circle"></i> 基础信息
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="customerName" class="form-label">姓名 <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="customerName" name="customerName" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">性别 <span class="text-danger">*</span></label>
+                                            <div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked>
+                                                    <label class="form-check-label" for="genderMale">男</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                                                    <label class="form-check-label" for="genderFemale">女</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="age" class="form-label">年龄</label>
+                                            <input type="number" class="form-control" id="age" name="age" min="0" max="150">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">婚否</label>
+                                            <div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="maritalStatus" id="maritalStatusYes" value="yes">
+                                                    <label class="form-check-label" for="maritalStatusYes">已婚</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="maritalStatus" id="maritalStatusNo" value="no" checked>
+                                                    <label class="form-check-label" for="maritalStatusNo">未婚</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="birthDate" class="form-label">出生日期</label>
+                                            <input type="date" class="form-control" id="birthDate" name="birthDate">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="heightWeight" class="form-label">身高/体重</label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="height" name="height" placeholder="身高(cm)" min="0" max="300">
+                                                <span class="input-group-text">/</span>
+                                                <input type="number" class="form-control" id="weight" name="weight" placeholder="体重(kg)" min="0" max="500" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="bmi" class="form-label">BMI</label>
+                                            <input type="text" class="form-control" id="bmi" name="bmi" readonly>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="phoneNumber" class="form-label">电话 <span class="text-danger">*</span></label>
+                                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" pattern="^1[3-9]\d{9}$" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="address" class="form-label">现居地</label>
+                                            <div class="input-group">
+                                                <select class="form-select" id="province" name="province">
+                                                    <option value="" selected disabled>省份</option>
+                                                    <option value="北京">北京</option>
+                                                    <option value="上海">上海</option>
+                                                    <option value="广东">广东</option>
+                                                    <!-- 其他省份选项 -->
+                                                </select>
+                                                <select class="form-select" id="city" name="city">
+                                                    <option value="" selected disabled>城市</option>
+                                                    <!-- 城市选项将通过JavaScript动态加载 -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="occupation" class="form-label">职业</label>
+                                            <div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="occupation_selfemployed" name="occupation[]" value="自营公司">
+                                                    <label class="form-check-label" for="occupation_selfemployed">自营公司</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="occupation_enterprise" name="occupation[]" value="企业管理">
+                                                    <label class="form-check-label" for="occupation_enterprise">企业管理</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="occupation_finance" name="occupation[]" value="金融太太">
+                                                    <label class="form-check-label" for="occupation_finance">金融太太</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="occupation_civil" name="occupation[]" value="公务员">
+                                                    <label class="form-check-label" for="occupation_civil">公务员</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="occupation_doctor" name="occupation[]" value="白领">
+                                                    <label class="form-check-label" for="occupation_doctor">白领</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="occupation_other" name="occupation[]" value="其他">
+                                                    <label class="form-check-label" for="occupation_other">其他</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 健康信息卡片 -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-success text-white">
+                                    <i class="bi bi-heart-pulse"></i> 健康信息
+                                </div>
+                                <div class="card-body">
+                                    <!-- 皮肤状况 -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-bold">皮肤状况</label>
+                                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="forehead_lines" name="skin_condition[]" value="额头纹">
+                                                    <label class="form-check-label" for="forehead_lines">额头纹</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="frown_lines" name="skin_condition[]" value="川字纹">
+                                                    <label class="form-check-label" for="frown_lines">川字纹</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="crow_feet" name="skin_condition[]" value="鱼尾纹">
+                                                    <label class="form-check-label" for="crow_feet">鱼尾纹</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="eye_bags" name="skin_condition[]" value="眼袋">
+                                                    <label class="form-check-label" for="eye_bags">眼袋</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="tear_trough" name="skin_condition[]" value="泪沟">
+                                                    <label class="form-check-label" for="tear_trough">泪沟</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="nasolabial_folds" name="skin_condition[]" value="法令纹">
+                                                    <label class="form-check-label" for="nasolabial_folds">法令纹</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="marionette_lines" name="skin_condition[]" value="嘴角纹">
+                                                    <label class="form-check-label" for="marionette_lines">嘴角纹</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="neck_lines" name="skin_condition[]" value="颈纹">
+                                                    <label class="form-check-label" for="neck_lines">颈纹</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_none" value="无色斑">
+                                                    <label class="form-check-label" for="pigmentation_none">无色斑</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_mild" value="色斑（轻）">
+                                                    <label class="form-check-label" for="pigmentation_mild">色斑（轻）</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_moderate" value="色斑（中）">
+                                                    <label class="form-check-label" for="pigmentation_moderate">色斑（中）</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_severe" value="色斑（重）">
+                                                    <label class="form-check-label" for="pigmentation_severe">色斑（重）</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_none" value="无松弛">
+                                                    <label class="form-check-label" for="laxity_none">无松弛</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_mild" value="松弛度（轻）">
+                                                    <label class="form-check-label" for="laxity_mild">松弛度（轻）</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_moderate" value="松弛度（中）">
+                                                    <label class="form-check-label" for="laxity_moderate">松弛度（中）</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_severe" value="松弛度（重）">
+                                                    <label class="form-check-label" for="laxity_severe">松弛度（重）</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">其他：</label>
+                                                <input type="text" class="form-control" id="skin_other" name="skin_other">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 过敏史 -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-bold">过敏史</label>
+                                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="allergy_history" id="no_allergy" value="无" checked>
+                                                    <label class="form-check-label" for="no_allergy">无</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="allergy_history" id="has_allergy" value="有">
+                                                    <label class="form-check-label" for="has_allergy">有</label>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm" id="allergy_details" name="allergy_details" placeholder="药物类、食物类、其他" style="width: 250px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 疾病史 -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-bold">疾病史</label>
+                                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="disease_history" id="no_disease" value="无" checked>
+                                                    <label class="form-check-label" for="no_disease">无</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="disease_history" id="has_disease" value="有">
+                                                    <label class="form-check-label" for="has_disease">有</label>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm" id="disease_details" name="disease_details" placeholder="请填写疾病名称" style="width: 250px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 主诉 -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-bold">主诉</label>
+                                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="three_high" name="chief_complaint[]" value="三高">
+                                                    <label class="form-check-label" for="three_high">三高</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="serious_disease" name="chief_complaint[]" value="重大疾病">
+                                                    <label class="form-check-label" for="serious_disease">重大疾病</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="other_complaint" name="chief_complaint[]" value="其他">
+                                                    <label class="form-check-label" for="other_complaint">其他</label>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm" id="complaint_other" name="complaint_other" placeholder="请填写其他主诉" style="width: 250px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 目前用药 -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-bold">目前用药</label>
+                                            <textarea class="form-control" id="current_medication" name="current_medication" rows="3" placeholder="请填写目前正在服用的药物"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 提交按钮 -->
+                            <div class="d-flex justify-content-center mb-5">
+                                <button type="button" class="btn btn-secondary me-2" onclick="window.history.back()">取消</button>
+                                <button type="submit" class="btn btn-primary">保存客户信息</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // 计算BMI
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            if (height && weight) {
+                // BMI = 体重(kg) / (身高(m) * 身高(m))
+                const heightInMeters = height / 100;
+                const bmi = weight / (heightInMeters * heightInMeters);
+                document.getElementById('bmi').value = bmi.toFixed(2);
+            }
+        }
+        
+        // 添加身高体重输入事件监听器
+        document.getElementById('height').addEventListener('input', calculateBMI);
+        document.getElementById('weight').addEventListener('input', calculateBMI);
+        
+        // 表单提交处理
+        document.getElementById('customerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // 在实际应用中，这里应该有表单验证和数据提交到服务器的代码
+            
+            // 模拟提交成功
+            alert('客户信息保存成功！');
+            window.location.href = 'customer-list.html';
+        });
+        
+        // 省市联动
+        document.getElementById('province').addEventListener('change', function() {
+            const province = this.value;
+            const citySelect = document.getElementById('city');
+            
+            // 清空城市选项
+            citySelect.innerHTML = '<option value="" selected disabled>城市</option>';
+            
+            // 根据选择的省份添加对应的城市选项
+            if (province === '北京') {
+                addCityOption('东城区');
+                addCityOption('西城区');
+                addCityOption('朝阳区');
+                addCityOption('海淀区');
+            } else if (province === '上海') {
+                addCityOption('黄浦区');
+                addCityOption('徐汇区');
+                addCityOption('长宁区');
+                addCityOption('静安区');
+            } else if (province === '广东') {
+                addCityOption('广州');
+                addCityOption('深圳');
+                addCityOption('珠海');
+                addCityOption('佛山');
+            }
+            
+            function addCityOption(cityName) {
+                const option = document.createElement('option');
+                option.value = cityName;
+                option.textContent = cityName;
+                citySelect.appendChild(option);
+            }
+        });
+    </script>
+</body>
+</html> 

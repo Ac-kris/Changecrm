@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单详情 - 细胞应用业务销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">订单详情</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-outline-secondary me-2" onclick="window.history.back()">
+                            <i class="bi bi-arrow-left"></i> 返回
+                        </button>
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="bi bi-x-circle"></i> 取消订单
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 整合后的订单信息卡片 -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <i class="bi bi-cart-check"></i> 订单信息
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" width="30%">订单编号：</th>
+                                                    <td>ORD20250310003</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">订单状态：</th>
+                                                    <td><span class="badge bg-info text-dark">支付审核中</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">客户姓名：</th>
+                                                    <td>
+                                                        <a href="../customer-management/customer-detail.html?id=CUS20250308012">
+                                                            赵先生
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">手机号码：</th>
+                                                    <td>13644441357</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">销售人员：</th>
+                                                    <td>王五</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" width="30%">服务项目：</th>
+                                                    <td>细胞治疗-8亿-3针</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">订单原价：</th>
+                                                    <td>¥30,000.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">优惠金额：</th>
+                                                    <td>¥2,000.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">实付金额：</th>
+                                                    <td><strong class="text-danger">¥28,000.00</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">订单备注：</th>
+                                                    <td>客户希望在4月初安排服务</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 支付信息 -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <i class="bi bi-credit-card"></i> 支付信息
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" width="30%">支付方式：</th>
+                                                    <td>银行转账</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">支付时间：</th>
+                                                    <td>2025-03-10 14:45:32</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">交易单号：</th>
+                                                    <td>TRX20250310144532</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">创建时间：</th>
+                                                    <td>2025-03-10 10:30:15</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- 支付凭证 -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <i class="bi bi-image"></i> 支付凭证
+                                            </div>
+                                            <div class="card-body">
+                                                <img src="https://via.placeholder.com/400x300" class="img-fluid rounded" alt="支付凭证">
+                                                <div class="mt-2">
+                                                    <small class="text-muted">上传时间：2025-03-10 14:50</small>
+                                                    <div class="mt-2">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary">查看大图</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary">下载</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 服务项目 -->
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <i class="bi bi-clipboard-check"></i> 服务项目
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">项目名称</th>
+                                            <th scope="col">规格</th>
+                                            <th scope="col">单价</th>
+                                            <th scope="col">数量</th>
+                                            <th scope="col">小计</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>细胞治疗</td>
+                                            <td>8亿-3针</td>
+                                            <td>¥10,000.00</td>
+                                            <td>3</td>
+                                            <td>¥30,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"></td>
+                                            <td><strong>优惠金额：</strong></td>
+                                            <td>¥2,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"></td>
+                                            <td><strong>实付金额：</strong></td>
+                                            <td><strong class="text-danger">¥28,000.00</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 发票信息 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-receipt"></i> 发票信息
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="invoiceType" class="form-label">发票类型</label>
+                                    <select class="form-select" id="invoiceType">
+                                        <option value="personal">个人</option>
+                                        <option value="company">企业</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="invoiceTitle" class="form-label">发票抬头</label>
+                                    <input type="text" class="form-control" id="invoiceTitle">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="taxNumber" class="form-label">纳税人识别号</label>
+                                    <input type="text" class="form-control" id="taxNumber">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 底部悬浮操作栏 -->
+                <div class="fixed-bottom bg-white py-3 shadow-lg" style="border-top: 1px solid #dee2e6;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-success me-2">
+                                    <i class="bi bi-check-circle"></i> 审核通过
+                                </button>
+                                <button type="button" class="btn btn-danger me-2">
+                                    <i class="bi bi-x-circle"></i> 审核拒绝
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="bi bi-cash-coin"></i> 付款提交
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 为底部悬浮栏预留空间 -->
+                <div style="height: 70px;"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

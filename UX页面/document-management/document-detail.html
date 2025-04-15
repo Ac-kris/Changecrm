@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文书详情 - 转化销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">文书详情 <small class="text-muted">DOC20250312001</small></h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#exportModal">
+                            <i class="bi bi-download"></i> 导出
+                        </button>
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="bi bi-trash"></i> 删除文书
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 进度条 -->
+                <div class="progress-tracker mb-4">
+                    <div class="progress-step completed">
+                        <div class="progress-step-icon">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                        <div class="progress-step-label">待建档</div>
+                    </div>
+                    <div class="progress-step active">
+                        <div class="progress-step-icon">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <div class="progress-step-label">体检管理中</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-icon">
+                            <i class="bi bi-clipboard2-pulse"></i>
+                        </div>
+                        <div class="progress-step-label">医生评估中</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <div class="progress-step-label">方案制定</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-icon">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <div class="progress-step-label">方案洽谈</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-step-icon">
+                            <i class="bi bi-flag"></i>
+                        </div>
+                        <div class="progress-step-label">已成单/未成单</div>
+                    </div>
+                </div>
+
+                <!-- 选项卡 -->
+                <ul class="nav nav-tabs mb-4" id="documentTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">客户档案</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="self-check-tab" data-bs-toggle="tab" data-bs-target="#self-check" type="button" role="tab" aria-controls="self-check" aria-selected="false">自查表</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="examination-tab" data-bs-toggle="tab" data-bs-target="#examination" type="button" role="tab" aria-controls="examination" aria-selected="false">体检管理</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="test-report-tab" data-bs-toggle="tab" data-bs-target="#test-report" type="button" role="tab" aria-controls="test-report" aria-selected="false">检测报告</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="evaluation-tab" data-bs-toggle="tab" data-bs-target="#evaluation" type="button" role="tab" aria-controls="evaluation" aria-selected="false">医生评估</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">干预方案</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing" type="button" role="tab" aria-controls="pricing" aria-selected="false">方案报价</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contract-tab" data-bs-toggle="tab" data-bs-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">合同管理</button>
+                    </li>
+                    <!-- V1.2新增选项卡 -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="treatment-tab" data-bs-toggle="tab" data-bs-target="#treatment" type="button" role="tab" aria-controls="treatment" aria-selected="false">诊疗管理</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">复查管理</button>
+                    </li>
+                </ul>
+
+                <!-- 选项卡内容 -->
+                <div class="tab-content" id="documentTabsContent">
+                    <!-- 客户档案 -->
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <!-- 基本信息 -->
+                            <div class="col-md-12 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-person"></i> 基本信息
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <table class="table table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row" width="30%">客户ID：</th>
+                                                            <td>C10086</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">隐私编号：</th>
+                                                            <td>PRV20250312001</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">姓名：</th>
+                                                            <td>张先生</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">性别：</th>
+                                                            <td>男</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">年龄：</th>
+                                                            <td>35岁</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <table class="table table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row" width="30%">手机号码：</th>
+                                                            <td>138****5678</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">代理人：</th>
+                                                            <td>王某</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">销售人员：</th>
+                                                            <td>李四</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">客户来源：</th>
+                                                            <td>线上推广</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">创建时间：</th>
+                                                            <td>2025-03-15 10:30</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 详细信息 -->
+                            <div class="col-md-12 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-person-lines-fill"></i> 详细信息
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row mb-3">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">婚否</label>
+                                                    <div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="maritalStatus" id="maritalStatusYes" value="yes">
+                                                            <label class="form-check-label" for="maritalStatusYes">已婚</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="maritalStatus" id="maritalStatusNo" value="no" checked>
+                                                            <label class="form-check-label" for="maritalStatusNo">未婚</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="birthDate" class="form-label">出生日期</label>
+                                                    <input type="date" class="form-control" id="birthDate">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="height" class="form-label">身高(cm)</label>
+                                                    <input type="number" class="form-control" id="height" min="0" max="300" step="0.1" onchange="calculateBMI()">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="weight" class="form-label">体重(kg)</label>
+                                                    <input type="number" class="form-control" id="weight" min="0" max="500" step="0.1" onchange="calculateBMI()">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="bmi" class="form-label">BMI</label>
+                                                    <input type="text" class="form-control" id="bmi" readonly>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="province" class="form-label">现居省份</label>
+                                                    <select class="form-select" id="province" onchange="updateCities()">
+                                                        <option value="">请选择省份</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="city" class="form-label">现居城市</label>
+                                                    <select class="form-select" id="city">
+                                                        <option value="">请选择城市</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="occupation" class="form-label">职业</label>
+                                                    <input type="text" class="form-control" id="occupation">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 过往史 -->
+                            <div class="col-md-12 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-journal-medical"></i> 过往史
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-bold">皮肤状况：</label>
+                                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="forehead_lines">
+                                                                <label class="form-check-label" for="forehead_lines">额头纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="frown_lines">
+                                                                <label class="form-check-label" for="frown_lines">川字纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="crow_feet">
+                                                                <label class="form-check-label" for="crow_feet">鱼尾纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="eye_bags">
+                                                                <label class="form-check-label" for="eye_bags">眼袋</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="tear_trough">
+                                                                <label class="form-check-label" for="tear_trough">泪沟</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="nasolabial_folds">
+                                                                <label class="form-check-label" for="nasolabial_folds">法令纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="marionette_lines">
+                                                                <label class="form-check-label" for="marionette_lines">嘴角纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="preauricular_lines">
+                                                                <label class="form-check-label" for="preauricular_lines">耳前纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="neck_lines">
+                                                                <label class="form-check-label" for="neck_lines">颈纹</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="telangiectasia">
+                                                                <label class="form-check-label" for="telangiectasia">红血丝</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_none">
+                                                                <label class="form-check-label" for="pigmentation_none">无色斑</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_mild">
+                                                                <label class="form-check-label" for="pigmentation_mild">色斑（轻）</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_moderate">
+                                                                <label class="form-check-label" for="pigmentation_moderate">色斑（中）</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="pigmentation" id="pigmentation_severe">
+                                                                <label class="form-check-label" for="pigmentation_severe">色斑（重）</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_none">
+                                                                <label class="form-check-label" for="laxity_none">无松弛</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_mild">
+                                                                <label class="form-check-label" for="laxity_mild">松弛度（轻）</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_moderate">
+                                                                <label class="form-check-label" for="laxity_moderate">松弛度（中）</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="skin_laxity" id="laxity_severe">
+                                                                <label class="form-check-label" for="laxity_severe">松弛度（重）</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">其他：</label>
+                                                            <input type="text" class="form-control" id="skin_other">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-bold">过敏史：</label>
+                                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="allergy_history" id="no_allergy" checked>
+                                                                <label class="form-check-label" for="no_allergy">无</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="allergy_history" id="has_allergy">
+                                                                <label class="form-check-label" for="has_allergy">有</label>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="药物类、食物类、其他" style="width: 250px;">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-bold">疾病史：</label>
+                                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="disease_history" id="no_disease" checked>
+                                                                <label class="form-check-label" for="no_disease">无</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="disease_history" id="has_disease">
+                                                                <label class="form-check-label" for="has_disease">有</label>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="请填写疾病名称" style="width: 250px;">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-bold">主诉：</label>
+                                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="three_high" checked>
+                                                                <label class="form-check-label" for="three_high">三高</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="serious_disease">
+                                                                <label class="form-check-label" for="serious_disease">重大疾病</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="other_complaint">
+                                                                <label class="form-check-label" for="other_complaint">其他</label>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-sm" placeholder="请填写其他主诉" style="width: 250px;">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-bold">目前用药：</label>
+                                                        <textarea class="form-control" rows="2" placeholder="请填写目前正在服用的药物"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 附件 -->
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-paperclip"></i> 附件
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="attachments" class="form-label">上传附件</label>
+                                            <input class="form-control" type="file" id="attachments" multiple>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>文件名</th>
+                                                        <th>大小</th>
+                                                        <th>上传时间</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>身份证正反面.pdf</td>
+                                                        <td>1.2MB</td>
+                                                        <td>2025-03-12 10:30</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary me-1">
+                                                                <i class="bi bi-download"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-danger">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 自查表 -->
+                    <div class="tab-pane fade" id="self-check" role="tabpanel" aria-labelledby="self-check-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard-check"></i> 自查表信息
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info mb-4">
+                                    <i class="bi bi-info-circle"></i> 该客户已通过小程序完成自查表填写，以下是同步的数据。
+                                </div>
+
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th width="15%">系统</th>
+                                                <th>亚健康状状及不良习惯</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="table-light">神经系统</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="insomnia">
+                                                            <label class="form-check-label" for="insomnia">失眠多梦</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="headache">
+                                                            <label class="form-check-label" for="headache">头痛/头晕</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="memory_loss">
+                                                            <label class="form-check-label" for="memory_loss">记忆力减退</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="slow_response">
+                                                            <label class="form-check-label" for="slow_response">反应迟钝</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="forgetfulness">
+                                                            <label class="form-check-label" for="forgetfulness">忘事</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">循环系统</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="shortness_breath">
+                                                            <label class="form-check-label" for="shortness_breath">气短/喘</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hypertension">
+                                                            <label class="form-check-label" for="hypertension">高血压</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hyperlipidemia">
+                                                            <label class="form-check-label" for="hyperlipidemia">高血脂</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hyperglycemia">
+                                                            <label class="form-check-label" for="hyperglycemia">高血糖</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="diabetes">
+                                                            <label class="form-check-label" for="diabetes">糖尿病</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">新陈代谢功能</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="heart_disease">
+                                                            <label class="form-check-label" for="heart_disease">心脏病/冠心病</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="fatty_liver">
+                                                            <label class="form-check-label" for="fatty_liver">脂肪肝/肥胖</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hyperthyroidism">
+                                                            <label class="form-check-label" for="hyperthyroidism">甲亢</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hypothyroidism">
+                                                            <label class="form-check-label" for="hypothyroidism">甲减</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="abdominal_fat">
+                                                            <label class="form-check-label" for="abdominal_fat">腰腹部赘肉</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="poor_nutrition">
+                                                            <label class="form-check-label" for="poor_nutrition">营养吸收差</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">免疫调节</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="catch_cold">
+                                                            <label class="form-check-label" for="catch_cold">易感冒</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="cough">
+                                                            <label class="form-check-label" for="cough">咳嗽</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="smoking">
+                                                            <label class="form-check-label" for="smoking">口吸烟</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="drinking">
+                                                            <label class="form-check-label" for="drinking">喝酒</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="unhealthy_diet">
+                                                            <label class="form-check-label" for="unhealthy_diet">饮食不健康/不运动</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="oral_ulcer">
+                                                            <label class="form-check-label" for="oral_ulcer">口腔溃疡</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="throat_discomfort">
+                                                            <label class="form-check-label" for="throat_discomfort">咽部不适/咳嗽</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="allergy">
+                                                            <label class="form-check-label" for="allergy">过敏</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="tumor">
+                                                            <label class="form-check-label" for="tumor">各种肿瘤</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">运动系统</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="physical_decline">
+                                                            <label class="form-check-label" for="physical_decline">体力下降/易疲劳</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="joint_degeneration">
+                                                            <label class="form-check-label" for="joint_degeneration">关节退化</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="osteoporosis">
+                                                            <label class="form-check-label" for="osteoporosis">骨质疏生</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="shoulder_pain">
+                                                            <label class="form-check-label" for="shoulder_pain">肩周疼痛</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="back_pain">
+                                                            <label class="form-check-label" for="back_pain">腰酸背痛/腰椎间盘</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="leg_pain">
+                                                            <label class="form-check-label" for="leg_pain">腿脚疼痛/无力</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">内分泌系统</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="infertility">
+                                                            <label class="form-check-label" for="infertility">不孕</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="thyroid">
+                                                            <label class="form-check-label" for="thyroid">甲状腺</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hair_loss">
+                                                            <label class="form-check-label" for="hair_loss">脱发</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="menopause">
+                                                            <label class="form-check-label" for="menopause">更年期潮热/头晕/耳鸣</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="menstrual">
+                                                            <label class="form-check-label" for="menstrual">月经不调/痛经</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="sexual_function">
+                                                            <label class="form-check-label" for="sexual_function">性功能减退</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">消化系统</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="stomach_pain">
+                                                            <label class="form-check-label" for="stomach_pain">胃痛/胀胀/反酸</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="overeating">
+                                                            <label class="form-check-label" for="overeating">暴饮暴食/肥胖</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="constipation">
+                                                            <label class="form-check-label" for="constipation">便秘不畅</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="dry_stool">
+                                                            <label class="form-check-label" for="dry_stool">大便干结/便秘</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="bitter_mouth">
+                                                            <label class="form-check-label" for="bitter_mouth">口苦/口臭</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="hemorrhoids">
+                                                            <label class="form-check-label" for="hemorrhoids">痔疮/肛周疼痛</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="irregular_bowel">
+                                                            <label class="form-check-label" for="irregular_bowel">长短长长</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">皮肤功能</td>
+                                                <td>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="skin_sagging">
+                                                            <label class="form-check-label" for="skin_sagging">皮肤松弛下垂</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="deep_wrinkles">
+                                                            <label class="form-check-label" for="deep_wrinkles">或皱纹深</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="allergic_dermatitis">
+                                                            <label class="form-check-label" for="allergic_dermatitis">过敏性皮炎</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="dull_skin">
+                                                            <label class="form-check-label" for="dull_skin">面色发暗发黄</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="rough_skin">
+                                                            <label class="form-check-label" for="rough_skin">皮肤粗糙无光泽</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="pigmentation">
+                                                            <label class="form-check-label" for="pigmentation">色斑/色素沉着</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="chloasma">
+                                                            <label class="form-check-label" for="chloasma">黄褐斑</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="freckles_acne">
+                                                            <label class="form-check-label" for="freckles_acne">雀斑/痤疮</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-light">其他</td>
+                                                <td>
+                                                    <div class="d-flex flex-column gap-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="allergy_history">
+                                                            <label class="form-check-label" for="allergy_history">1. 高速过敏体质有严重过敏史</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="shock">
+                                                            <label class="form-check-label" for="shock">2. 休克，全身衰竭，生命体征不稳，以及不能配合检查</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="late_cancer">
+                                                            <label class="form-check-label" for="late_cancer">3. 晚期恶性肿瘤患者</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="infection">
+                                                            <label class="form-check-label" for="infection">4. 全身感染或局部严重感染需治疗患者</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="organ_dysfunction">
+                                                            <label class="form-check-label" for="organ_dysfunction">5. 合并心、肺、脑、胃、肝等重要脏器的功能障碍</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="coagulation">
+                                                            <label class="form-check-label" for="coagulation">6. 凝血功能障碍性疾病（如血友病）</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="infectious_disease">
+                                                            <label class="form-check-label" for="infectious_disease">7. 传染性疾病(如HIV、KPR、乙肝内源性及肝炎、活动性结核等)</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="genetic_defect">
+                                                            <label class="form-check-label" for="genetic_defect">8. 染色体或基因缺陷、免疫功能缺陷</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="unclear_diagnosis">
+                                                            <label class="form-check-label" for="unclear_diagnosis">9. 诊断未明确</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="cavity_separation">
+                                                            <label class="form-check-label" for="cavity_separation">10. 做过腔室分离术</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 体检管理 -->
+                    <div class="tab-pane fade" id="examination" role="tabpanel" aria-labelledby="examination-tab">
+
+                        <!-- 必检项目 -->
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-clipboard2-pulse"></i> 必检项目
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-arrow-repeat"></i> 一键补检
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th width="15%" class="text-center">科室</th>
+                                                <th width="35%">项目</th>
+                                                <th width="35%">项目</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="4" class="align-middle text-center">放射科</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="chest_xray">
+                                                        <label class="form-check-label" for="chest_xray">十二导联心电图</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="anti_hiv">
+                                                        <label class="form-check-label" for="anti_hiv">人类免疫缺陷病毒抗体 (Anti-HIV) 定性</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="dr_chest">
+                                                        <label class="form-check-label" for="dr_chest">DR 胸部正位片</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="hbsag">
+                                                        <label class="form-check-label" for="hbsag">人类T淋巴细胞白血病病毒抗体</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="chest_ct">
+                                                        <label class="form-check-label" for="chest_ct">胸片/胸部CT</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="tp_dna">
+                                                        <label class="form-check-label" for="tp_dna">梅毒螺旋体 (TP-DNA) 定性</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="liver_b">
+                                                        <label class="form-check-label" for="liver_b">肝胆胰脾B超</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="hbv_dna">
+                                                        <label class="form-check-label" for="hbv_dna">乙型肝炎病毒 (HBV-DNA) 定性</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5" class="align-middle text-center">检验科</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="blood_routine">
+                                                        <label class="form-check-label" for="blood_routine">血常规</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="hcv_igm">
+                                                        <label class="form-check-label" for="hcv_igm">丙型肝炎病毒抗体 IgM (HCV-IgM)</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="liver_function">
+                                                        <label class="form-check-label" for="liver_function">肝功十四项</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="cmv_dna">
+                                                        <label class="form-check-label" for="cmv_dna">巨细胞病毒 (CMV-DNA) 定性</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="kidney_function">
+                                                        <label class="form-check-label" for="kidney_function">肾功五项</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="eb_dna">
+                                                        <label class="form-check-label" for="eb_dna">EB病毒 (EB-DNA) 定性</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="t_cell">
+                                                        <label class="form-check-label" for="t_cell">T淋巴细胞亚群</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="male_tumor">
+                                                        <label class="form-check-label" for="male_tumor">男性肿瘤标志物常规筛查</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="erythrocyte">
+                                                        <label class="form-check-label" for="erythrocyte">红细胞三项</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="female_tumor">
+                                                        <label class="form-check-label" for="female_tumor">女性肿瘤标志物常规筛查</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2" class="align-middle text-center">生化科</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="blood_lipid">
+                                                        <label class="form-check-label" for="blood_lipid">血脂八项</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="c_reactive">
+                                                        <label class="form-check-label" for="c_reactive">C-反应蛋白</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">免疫科</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="total_ige">
+                                                        <label class="form-check-label" for="total_ige">总 IgE</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle text-center">过敏原</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="allergen">
+                                                        <label class="form-check-label" for="allergen">免疫五项</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 补检项目 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard-plus"></i> 补检项目
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%"></th>
+                                                <th>检查项目</th>
+                                                <th width="15%">价格</th>
+                                                <th width="10%" class="text-center">体检类型</th>
+                                                <th width="10%" class="text-center">状态</th>
+                                                <th width="10%" class="text-center">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="anti_hiv_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="anti_hiv_supp">人类免疫缺陷病毒抗体 (Anti-HIV) 定性</label>
+                                                </td>
+                                                <td>¥120</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="t_cell_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="t_cell_supp">T淋巴细胞白血病病毒抗体</label>
+                                                </td>
+                                                <td>¥180</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="tp_dna_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="tp_dna_supp">梅毒螺旋体 (TP-DNA) 定性</label>
+                                                </td>
+                                                <td>¥150</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="hbv_dna_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="hbv_dna_supp">乙型肝炎病毒 (HBV-DNA) 定性</label>
+                                                </td>
+                                                <td>¥200</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="hcv_igm_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="hcv_igm_supp">丙型肝炎病毒抗体 IgM (HCV-IgM)</label>
+                                                </td>
+                                                <td>¥160</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="cmv_dna_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="cmv_dna_supp">巨细胞病毒 (CMV-DNA) 定性</label>
+                                                </td>
+                                                <td>¥220</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="eb_dna_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="eb_dna_supp">EB病毒 (EB-DNA) 定性</label>
+                                                </td>
+                                                <td>¥190</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="total_ige_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="total_ige_supp">总 IgE</label>
+                                                </td>
+                                                <td>¥100</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="allergen_supp">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="allergen_supp">免疫五项</label>
+                                                </td>
+                                                <td>¥250</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="lung_function">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="lung_function">肺功能活动</label>
+                                                </td>
+                                                <td>¥300</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info">必检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary">待检</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-danger delete-item">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3 text-end">
+                                    <button class="btn btn-primary" id="addSupplementaryItem">
+                                        <i class="bi bi-plus"></i> 添加补检项目
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 既往史、血压、心率 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard-heart"></i> 体检基础信息
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="medicalHistory" class="form-label">既往史</label>
+                                        <textarea class="form-control" id="medicalHistory" rows="4" placeholder="请输入患者既往史信息..."></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="familyHistory" class="form-label">家族史</label>
+                                        <textarea class="form-control" id="familyHistory" rows="4" placeholder="请输入患者家族史信息..."></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="bloodPressure" class="form-label">血压 (mmHg)</label>
+                                            <input type="text" class="form-control" id="bloodPressure" placeholder="例如：120/80">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="heartRate" class="form-label">心率 (次/分)</label>
+                                            <input type="number" class="form-control" id="heartRate" placeholder="例如：75">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 检测报告 -->
+                    <div class="tab-pane fade" id="test-report" role="tabpanel" aria-labelledby="test-report-tab">
+                        <!-- 选择医生 -->
+
+                                <div class="mb-3">
+                                    <label for="doctorSelect" class="form-label">选择医生</label>
+                                    <select class="form-select" id="doctorSelect">
+                                        <option selected disabled>请选择医生...</option>
+                                        <option value="1">张医生 (内科)</option>
+                                        <option value="2">李医生 (外科)</option>
+                                        <option value="3">王医生 (妇科)</option>
+                                    </select>
+                                </div>
+
+                        <!-- 检测报告编辑器 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-pencil-square"></i> 检测报告内容
+                            </div>
+                            <div class="card-body">
+                                <div id="testReportEditor">
+                                    <!-- 富文本编辑器将在这里初始化 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 医生评估 -->
+                    <div class="tab-pane fade" id="evaluation" role="tabpanel" aria-labelledby="evaluation-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard2-pulse"></i> 医生评估信息
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="patientDescription" class="form-label">患者自述</label>
+                                        <textarea class="form-control" id="patientDescription" rows="4" placeholder="请输入患者自述内容..."></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="comprehensiveAssessment" class="form-label">综合评估</label>
+                                        <textarea class="form-control" id="comprehensiveAssessment" rows="5" placeholder="请输入综合评估内容..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 干预方案 -->
+                    <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+                        <!-- 管理方案建议 -->
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-clipboard-check"></i> 管理方案建议
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addStagePlanModal">
+                                    <i class="bi bi-plus-circle"></i> 添加阶段方案
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <h6 class="mb-2">第1阶段</h6>
+                                        </div>
+                                    </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="planDoctor" class="form-label">方案医生</label>
+                                            <input type="text" class="form-control" id="planDoctor" placeholder="请输入方案医生姓名">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                            <label for="product" class="form-label">产品</label>
+                                            <select class="form-select" id="product">
+                                                <option value="P20250001">免疫细胞储存</option>
+                                                <option value="P20250002">基因检测服务</option>
+                                                <option value="P20250003">健康咨询服务</option>
+                                                <option value="P20250004">细胞治疗方案</option>
+                                                <option value="P20250005">家庭健康管理计划</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="administrationMethod" class="form-label">给药方法</label>
+                                            <textarea class="form-control" id="administrationMethod" rows="4" placeholder="请输入给药方法..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="suggestedCycle" class="form-label">建议周期</label>
+                                            <textarea class="form-control" id="suggestedCycle" rows="4" placeholder="请输入建议周期..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="mechanismOfAction" class="form-label">机理作用</label>
+                                            <textarea class="form-control" id="mechanismOfAction" rows="4" placeholder="请输入机理作用..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="recheckProject" class="form-label">复查项目</label>
+                                            <textarea class="form-control" id="recheckProject" rows="4" placeholder="请输入复查项目..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="precautions" class="form-label">注意事项</label>
+                                            <textarea class="form-control" id="precautions" rows="4" placeholder="请输入注意事项..."></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- 产品疗程生成器 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-calendar-plus"></i> 产品疗程生成器
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="suggestedProduct" class="form-label">方案建议产品</label>
+                                            <select class="form-select" id="suggestedProduct">
+                                                <option value="" selected disabled>请选择产品...</option>
+                                                <option value="P20250001">免疫细胞储存</option>
+                                                <option value="P20250002">基因检测服务</option>
+                                                <option value="P20250003">健康咨询服务</option>
+                                                <option value="P20250004">细胞治疗方案</option>
+                                                <option value="P20250005">家庭健康管理计划</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="treatmentCycle" class="form-label">疗程周期（天）</label>
+                                            <input type="number" class="form-control" id="treatmentCycle" min="1" placeholder="请输入疗程周期...">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="treatmentCount" class="form-label">疗程数</label>
+                                            <input type="number" class="form-control" id="treatmentCount" min="1" placeholder="请输入疗程数...">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="dosage" class="form-label">每次剂量（千万）</label>
+                                            <input type="number" class="form-control" id="dosage" min="1" placeholder="请输入每次剂量...">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="expectedStartDate" class="form-label">预计开始治疗时间</label>
+                                            <input type="date" class="form-control" id="expectedStartDate">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="treatmentStage" class="form-label">所属阶段</label>
+                                            <select class="form-select" id="treatmentStage">
+                                                <option value="1">第一阶段</option>
+                                                <option value="2">第二阶段</option>
+                                                <option value="3">第三阶段</option>
+                                                <option value="4">第四阶段</option>
+                                                <option value="5">第五阶段</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-primary" id="generateTreatment">
+                                            <i class="bi bi-lightning-charge"></i> 生成疗程
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- 阶段方案列表 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-list-check"></i> 阶段方案列表
+                            </div>
+                            <div class="card-body">
+                                <!-- 第一阶段 -->
+                                <div class="mb-4">
+                                    <h5 class="mb-3">第一阶段</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>产品</th>
+                                                    <th>出库日期</th>
+                                                    <th>数量</th>
+                                                    <th>价格</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>NK细胞</td>
+                                                    <td>2025-04-15</td>
+                                                    <td>3亿</td>
+                                                    <td>¥30,000</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>DC-CIK细胞</td>
+                                                    <td>2025-04-20</td>
+                                                    <td>5亿</td>
+                                                    <td>¥50,000</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- 第二阶段 -->
+                                <div>
+                                    <h5 class="mb-3">第二阶段</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>产品</th>
+                                                    <th>出库日期</th>
+                                                    <th>数量</th>
+                                                    <th>价格</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>NK细胞</td>
+                                                    <td>2025-05-10</td>
+                                                    <td>3亿</td>
+                                                    <td>¥30,000</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 方案报价 -->
+                    <div class="tab-pane fade" id="pricing" role="tabpanel" aria-labelledby="pricing-tab">
+                        <!-- 方案状态 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-info-circle"></i> 当前状态
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="alert alert-warning">
+                                            <strong>草稿方案</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 综合制备费用明细 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-check-circle"></i> 综合制备费用明细
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>产品名称</th>
+                                                <th>数量</th>
+                                                <th>单价</th>
+                                                <th>优惠价</th>
+                                                <th>实付价</th>
+                                                <th>小计</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option selected>NK细胞</option>
+                                                        <option>DC-CIK细胞</option>
+                                                        <option>CAR-T细胞</option>
+                                                        <option>TCR-T细胞</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option selected>3亿</option>
+                                                        <option>5亿</option>
+                                                        <option>8亿</option>
+                                                        <option>10亿</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="50,000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" value="1" min="1">
+                                                </td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" value="0" min="0" max="100">
+                                                    </div>
+                                                </td>
+                                                <td>¥50,000</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option>NK细胞</option>
+                                                        <option selected>DC-CIK细胞</option>
+                                                        <option>CAR-T细胞</option>
+                                                        <option>TCR-T细胞</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select">
+                                                        <option>3亿</option>
+                                                        <option selected>5亿</option>
+                                                        <option>8亿</option>
+                                                        <option>10亿</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="60,000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" value="1" min="1">
+                                                </td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" value="10" min="0" max="100">
+                                                    </div>
+                                                </td>
+                                                <td>¥54,000</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" class="text-end"><strong>总计：</strong></td>
+                                                <td><strong>¥104,000</strong></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="mt-4 text-end">
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="checkbox" id="vipCustomer">
+                                            <label class="form-check-label" for="vipCustomer">VIP客户</label>
+                                        </div>
+                                        <button class="btn btn-primary me-2">
+                                            <i class="bi bi-check-circle"></i> 方案确定
+                                        </button>
+                                        <button class="btn btn-danger me-2">
+                                            <i class="bi bi-x-circle"></i> 方案作废
+                                        </button>
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                            <i class="bi bi-cash"></i> 付款提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 历史方案折叠区 -->
+                        <div class="accordion mb-4" id="historyAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="historyHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#historyCollapse" aria-expanded="false" aria-controls="historyCollapse">
+                                        <i class="bi bi-clock-history me-2"></i> 历史方案记录
+                                    </button>
+                                </h2>
+                                <div id="historyCollapse" class="accordion-collapse collapse" aria-labelledby="historyHeading" data-bs-parent="#historyAccordion">
+                                    <div class="accordion-body">
+                                        <!-- 历史方案内容 -->
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <h6 class="mb-0">方案 #1（2025-02-15）</h6>
+                                                <span class="badge bg-secondary">已作废</span>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-sm">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>产品</th>
+                                                            <th>出库日期</th>
+                                                            <th>数量</th>
+                                                            <th>价格</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>NK细胞</td>
+                                                            <td>2025-03-01</td>
+                                                            <td>3亿</td>
+                                                            <td>¥30,000</td>
+                                                            <td>首次治疗</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="3" class="text-end"><strong>合计：</strong></td>
+                                                            <td>¥30,000</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 合同管理 -->
+                    <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
+                        <!-- 合同列表 -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-file-earmark-text"></i> 合同列表
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>合同名称</th>
+                                                <th width="20%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>细胞治疗服务合同</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#viewContractModal">
+                                                        <i class="bi bi-eye"></i> 查看合同
+                                                    </button>
+                                                    <button class="btn btn-sm btn-secondary">
+                                                        <i class="bi bi-download"></i> 导出合同
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>知情同意书</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#viewContractModal">
+                                                        <i class="bi bi-eye"></i> 查看合同
+                                                    </button>
+                                                    <button class="btn btn-sm btn-secondary">
+                                                        <i class="bi bi-download"></i> 导出合同
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 诊疗管理 -->
+                    <div class="tab-pane fade" id="treatment" role="tabpanel" aria-labelledby="treatment-tab">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard2-pulse"></i> 诊疗记录
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>项目名称</th>
+                                                <th>阶段</th>
+                                                <th>数量</th>
+                                                <th>状态</th>
+                                                <th>开始时间</th>
+                                                <th>结束时间</th>
+                                                <th>负责护士</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>美白针</td>
+                                                <td>第一阶段</td>
+                                                <td>3针</td>
+                                                <td><span class="badge bg-warning text-dark">未出库</span></td>
+                                                <td>2025-04-15 10:00</td>
+                                                <td>-</td>
+                                                <td>李护士</td>
+                                                <td>
+                                                    <a href="../treatment-management/treatment-detail.html?id=1" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>玻尿酸</td>
+                                                <td>第一阶段</td>
+                                                <td>2ml</td>
+                                                <td><span class="badge bg-primary">已出库</span></td>
+                                                <td>2025-04-16 14:30</td>
+                                                <td>2025-04-16 15:30</td>
+                                                <td>王护士</td>
+                                                <td>
+                                                    <a href="../treatment-management/treatment-detail.html?id=2" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>肉毒素</td>
+                                                <td>第二阶段</td>
+                                                <td>100单位</td>
+                                                <td><span class="badge bg-success">已完成</span></td>
+                                                <td>2025-04-20 11:30</td>
+                                                <td>2025-04-20 12:30</td>
+                                                <td>赵护士</td>
+                                                <td>
+                                                    <a href="../treatment-management/treatment-detail.html?id=3" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 复查管理 -->
+                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard-check"></i> 复查记录
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>复查时间</th>
+                                                <th>复查状态</th>
+                                                <th>检测项目</th>
+                                                <th>负责医生</th>
+                                                <th>负责护士</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2025-05-15 09:00</td>
+                                                <td><span class="badge bg-warning text-dark">新建复查</span></td>
+                                                <td>血常规, 肝功能, 肾功能</td>
+                                                <td>待确定</td>
+                                                <td>李护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=1" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-17 14:30</td>
+                                                <td><span class="badge bg-primary">复查项目确定</span></td>
+                                                <td>血常规, 肝功能, 生化全项</td>
+                                                <td>张医生</td>
+                                                <td>王护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=2" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-20 10:00</td>
+                                                <td><span class="badge bg-info">客户复查中</span></td>
+                                                <td>血常规, 肝功能, 生化全项, 免疫细胞功能</td>
+                                                <td>李医生</td>
+                                                <td>赵护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=3" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-25 09:30</td>
+                                                <td><span class="badge bg-primary">待疗效对比</span></td>
+                                                <td>血常规, 肝功能, 生化全项</td>
+                                                <td>王医生</td>
+                                                <td>李护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=4" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2025-05-30 14:00</td>
+                                                <td><span class="badge bg-success">复查结束</span></td>
+                                                <td>血常规, 肝功能, 生化全项</td>
+                                                <td>张医生</td>
+                                                <td>王护士</td>
+                                                <td>
+                                                    <a href="../review-management/review-detail.html?id=5" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 悬浮操作栏 -->
+                <div class="floating-action-bar">
+                    <button type="button" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> 返回列表
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        <i class="bi bi-save"></i> 保存
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-arrow-right-circle"></i> 提交并进入下一阶段
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 导出模态框 -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">选择导出内容</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportProfile" checked>
+                        <label class="form-check-label" for="exportProfile">
+                            客户档案
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportSelfCheck" checked>
+                        <label class="form-check-label" for="exportSelfCheck">
+                            自查表
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportRequiredExams" checked>
+                        <label class="form-check-label" for="exportRequiredExams">
+                            必检项目
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportAdditionalExams" checked>
+                        <label class="form-check-label" for="exportAdditionalExams">
+                            补检项目
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportMedicalHistory" checked>
+                        <label class="form-check-label" for="exportMedicalHistory">
+                            既往史
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportMedicalReports" checked>
+                        <label class="form-check-label" for="exportMedicalReports">
+                            医学检验报告
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportDoctorEvaluation" checked>
+                        <label class="form-check-label" for="exportDoctorEvaluation">
+                            医生评估
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="exportTreatmentPlan" checked>
+                        <label class="form-check-label" for="exportTreatmentPlan">
+                            干预方案
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确定导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 付款提交模态框 -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">付款提交</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="paymentForm">
+                        <div class="mb-3">
+                            <label for="paymentAmount" class="form-label">付款金额</label>
+                            <div class="input-group">
+                                <span class="input-group-text">¥</span>
+                                <input type="text" class="form-control" id="paymentAmount" value="104000" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="paymentMethod" class="form-label">付款方式</label>
+                            <select class="form-select" id="paymentMethod" required>
+                                <option value="" selected disabled>请选择付款方式</option>
+                                <option value="1">银行转账</option>
+                                <option value="2">微信支付</option>
+                                <option value="3">支付宝</option>
+                                <option value="4">现金</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionId" class="form-label">交易单号</label>
+                            <input type="text" class="form-control" id="transactionId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="paymentTime" class="form-label">付款时间</label>
+                            <input type="datetime-local" class="form-control" id="paymentTime">
+                        </div>
+                        <div class="mb-3">
+                            <label for="paymentProof" class="form-label">付款凭证</label>
+                            <input type="file" class="form-control" id="paymentProof">
+                        </div>
+                        <div class="mb-3">
+                            <label for="invoiceType" class="form-label">发票类型</label>
+                            <select class="form-select" id="invoiceType">
+                                <option value="personal">个人</option>
+                                <option value="company">企业</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="invoiceTitle" class="form-label">发票抬头</label>
+                            <input type="text" class="form-control" id="invoiceTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="taxNumber" class="form-label">纳税人识别号</label>
+                            <input type="text" class="form-control" id="taxNumber">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确认提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+
+    <!-- 补检项目功能 -->
+    <script>
+        // 模拟项目数据
+        const projectData = [
+            { id: 1, name: "基因检测A型", price: 1200, spec: "8亿" },
+            { id: 2, name: "基因检测B型", price: 1500, spec: "10亿" },
+            { id: 3, name: "细胞活力检测", price: 800, spec: "基础版" },
+            { id: 4, name: "免疫系统评估", price: 2000, spec: "全面版" },
+            { id: 5, name: "代谢功能检测", price: 1800, spec: "专业版" },
+            { id: 6, name: "微量元素检测", price: 600, spec: "8亿" },
+            { id: 7, name: "激素水平检测", price: 1200, spec: "全套" },
+            { id: 8, name: "肠道菌群分析", price: 1600, spec: "10亿" }
+        ];
+
+        // 格式化数字显示
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // 确保DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取添加补检项目按钮
+            const addButton = document.getElementById('addSupplementaryItem');
+
+            if (addButton) {
+                // 添加补检项目按钮点击事件
+                addButton.addEventListener('click', function() {
+                    // 找到补检项目表格 - 使用更兼容的选择器
+                    const supplementaryCard = addButton.closest('.card');
+                    const supplementaryTable = supplementaryCard.querySelector('table tbody');
+
+                    if (!supplementaryTable) {
+                        console.error('找不到补检项目表格');
+                        return;
+                    }
+
+                    // 创建新行
+                    const newRow = document.createElement('tr');
+
+                    // 创建复选框单元格
+                    const checkboxCell = document.createElement('td');
+                    checkboxCell.className = 'text-center';
+                    checkboxCell.innerHTML = `
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="new_item_${Date.now()}">
+                        </div>
+                    `;
+
+                    // 创建项目名称单元格（带下拉菜单）
+                    const nameCell = document.createElement('td');
+                    const selectElement = document.createElement('select');
+                    selectElement.className = 'form-select project-select';
+
+                    // 添加默认选项
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.textContent = '请选择项目';
+                    defaultOption.selected = true;
+                    defaultOption.disabled = true;
+                    selectElement.appendChild(defaultOption);
+
+                    // 添加项目选项
+                    projectData.forEach(project => {
+                        const option = document.createElement('option');
+                        option.value = project.id;
+                        option.textContent = project.name;
+                        option.dataset.price = project.price;
+                        selectElement.appendChild(option);
+                    });
+
+                    nameCell.appendChild(selectElement);
+
+                    // 创建价格单元格
+                    const priceCell = document.createElement('td');
+                    priceCell.className = 'price-cell';
+                    priceCell.textContent = '-';
+
+                    // 创建体检类型单元格
+                    const typeCell = document.createElement('td');
+                    typeCell.className = 'text-center';
+                    typeCell.innerHTML = '<span class="badge bg-info">建议</span>';
+
+                    // 创建状态单元格
+                    const statusCell = document.createElement('td');
+                    statusCell.className = 'text-center';
+                    statusCell.innerHTML = '<span class="badge bg-secondary">待检</span>';
+
+                    // 创建操作单元格
+                    const actionCell = document.createElement('td');
+                    actionCell.className = 'text-center';
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'btn btn-sm btn-outline-danger delete-item';
+                    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+                    deleteButton.addEventListener('click', function() {
+                        if (confirm('确定要删除此检查项目吗？')) {
+                            this.closest('tr').remove();
+                        }
+                    });
+                    actionCell.appendChild(deleteButton);
+
+                    // 将所有单元格添加到行中
+                    newRow.appendChild(checkboxCell);
+                    newRow.appendChild(nameCell);
+                    newRow.appendChild(priceCell);
+                    newRow.appendChild(typeCell);
+                    newRow.appendChild(statusCell);
+                    newRow.appendChild(actionCell);
+
+                    // 将新行添加到表格中
+                    supplementaryTable.appendChild(newRow);
+
+                    // 添加项目选择事件监听器
+                    selectElement.addEventListener('change', function() {
+                        const selectedOption = this.options[this.selectedIndex];
+                        const price = selectedOption.dataset.price;
+                        const priceCell = this.closest('tr').querySelector('.price-cell');
+
+                        if (price) {
+                            priceCell.textContent = `¥${formatNumber(price)}`;
+                        } else {
+                            priceCell.textContent = '-';
+                        }
+                    });
+                });
+            } else {
+                console.error('找不到添加补检项目按钮');
+            }
+
+            // 为所有删除按钮添加事件监听器
+            document.querySelectorAll('.delete-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (confirm('确定要删除此检查项目吗？')) {
+                        this.closest('tr').remove();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- 合同查看弹窗 -->
+    <div class="modal fade" id="viewContractModal" tabindex="-1" aria-labelledby="viewContractModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewContractModalLabel">查看合同</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="contract-content" style="height: 400px; overflow-y: auto;">
+                        <!-- 合同内容 -->
+                        <h4 class="text-center mb-4">细胞治疗服务合同</h4>
+                        <p>甲方：________________</p>
+                        <p>乙方：________________</p>
+                        <p>签订日期：____________</p>
+                        <p>合同编号：____________</p>
+                        <p class="mb-4">根据《中华人民共和国合同法》及其他有关法律法规的规定，甲乙双方在平等、自愿、公平、诚信的基础上，经友好协商，就乙方为甲方提供细胞治疗服务事宜达成如下协议：</p>
+
+                        <h5>第一条 服务内容</h5>
+                        <p>乙方根据甲方的身体状况，为甲方提供以下细胞治疗服务：</p>
+                        <p>1. 细胞类型：NK细胞、DC-CIK细胞等</p>
+                        <p>2. 治疗方案：根据医生评估结果确定</p>
+                        <p>3. 服务周期：自合同签订之日起_____个月</p>
+
+                        <h5>第二条 服务费用</h5>
+                        <p>1. 服务总费用：人民币_____万元</p>
+                        <p>2. 支付方式：</p>
+                        <p>   (1) 首付款：签订合同时支付总费用的50%，即人民币_____万元</p>
+                        <p>   (2) 尾款：在第一次细胞回输前支付剩余50%，即人民币_____万元</p>
+
+                        <h5>第三条 双方权利义务</h5>
+                        <p>1. 甲方权利义务：</p>
+                        <p>   (1) 如实提供个人健康信息</p>
+                        <p>   (2) 按时完成医学检查</p>
+                        <p>   (3) 按约定支付服务费用</p>
+
+                        <p>2. 乙方权利义务：</p>
+                        <p>   (1) 提供专业的细胞制备服务</p>
+                        <p>   (2) 确保细胞制品质量符合国家标准</p>
+                        <p>   (3) 对甲方信息保密</p>
+                    </div>
+                </div>
+                <div class="modal-footer" style="position: sticky; bottom: 0; background-color: white;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signatureModal">
+                        <i class="bi bi-pen"></i> 签名
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 签名弹窗 -->
+    <div class="modal fade" id="signatureModal" tabindex="-1" aria-labelledby="signatureModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signatureModalLabel">请在下方签名</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="signature-pad-container">
+                        <canvas id="signaturePad" width="450" height="200" style="border: 1px solid #ccc; width: 100%;"></canvas>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="clearSignature">清除</button>
+                    <button type="button" class="btn btn-primary" id="saveSignature">保存签名</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 签名功能脚本 -->
+    <script>
+        // 签名功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const signaturePad = document.getElementById('signaturePad');
+            if (signaturePad) {
+                const ctx = signaturePad.getContext('2d');
+                let isDrawing = false;
+                let lastX = 0;
+                let lastY = 0;
+
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#000';
+
+                // 开始绘制
+                signaturePad.addEventListener('mousedown', (e) => {
+                    isDrawing = true;
+                    [lastX, lastY] = [e.offsetX, e.offsetY];
+                });
+
+                // 绘制过程
+                signaturePad.addEventListener('mousemove', (e) => {
+                    if (!isDrawing) return;
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(e.offsetX, e.offsetY);
+                    ctx.stroke();
+                    [lastX, lastY] = [e.offsetX, e.offsetY];
+                });
+
+                // 结束绘制
+                signaturePad.addEventListener('mouseup', () => {
+                    isDrawing = false;
+                });
+
+                signaturePad.addEventListener('mouseleave', () => {
+                    isDrawing = false;
+                });
+
+                // 清除签名
+                document.getElementById('clearSignature').addEventListener('click', () => {
+                    ctx.clearRect(0, 0, signaturePad.width, signaturePad.height);
+                });
+
+                // 保存签名
+                document.getElementById('saveSignature').addEventListener('click', () => {
+                    alert('签名已保存');
+                    const modal = document.getElementById('signatureModal');
+                    const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                    if (bootstrapModal) {
+                        bootstrapModal.hide();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- 新建客户模态窗口 -->
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCustomerModalLabel">新建客户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newCustomerForm">
+                        <!-- 第一部分：渠道和销售信息 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="customerSource" class="form-label">渠道来源 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="customerSource" required>
+                                    <option value="">请选择渠道来源</option>
+                                    <option value="1">线上推广</option>
+                                    <option value="2">线下推广</option>
+                                    <option value="3">客户推荐</option>
+                                    <option value="4">其他</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="agent" class="form-label">代理人</label>
+                                <input type="text" class="form-control" id="agent">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="salesPerson" class="form-label">销售人员 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="salesPerson" required>
+                                    <option value="">请选择销售人员</option>
+                                    <option value="1">张三</option>
+                                    <option value="2">李四</option>
+                                    <option value="3">王五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">是否储户</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isDepositor" id="isDepositorYes" value="yes">
+                                        <label class="form-check-label" for="isDepositorYes">是</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isDepositor" id="isDepositorNo" value="no" checked>
+                                        <label class="form-check-label" for="isDepositorNo">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 分割线 -->
+                        <hr class="my-4">
+
+                        <!-- 第二部分：客户基本信息 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="customerName" class="form-label">客户姓名 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="customerName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">隐私客户</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="isPrivacyCustomer">
+                                    <label class="form-check-label" for="isPrivacyCustomer">是</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="privacyNumber" class="form-label">隐私编号 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="privacyNumber" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">性别 <span class="text-danger">*</span></label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" required>
+                                        <label class="form-check-label" for="genderMale">男</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                                        <label class="form-check-label" for="genderFemale">女</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="age" class="form-label">年龄 <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="age" min="0" max="150" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">手机号码 <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phone" pattern="[0-9]{11}" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitNewCustomer()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

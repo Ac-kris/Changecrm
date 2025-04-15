@@ -1,0 +1,1239 @@
+# 转化销售系统 V1.2 前端开发技术文档
+
+## 目录
+1. 项目概述
+2. 技术栈选择
+3. 项目结构
+4. 页面组件设计
+5. 开发规范
+
+## 1. 项目概述
+
+本项目是转化销售系统 V1.2 的前端实现，主要包含出库管理、诊疗管理、复查管理和文书管理四个核心模块。系统旨在优化和管理从销售线索转化到客户服务交付（出库、诊疗、复查）的全流程，并集成必要的沟通（飞书推送）和文档管理功能。
+
+### 核心模块
+- **出库管理**：管理和追踪基于已批准销售文书生成的客户服务/产品的计划性出库流程
+- **诊疗管理**：记录诊疗过程和随访管理
+- **复查管理**：管理客户的复查流程
+- **文书管理扩展**：增加诊疗和复查Tab
+
+## 2. 技术栈选择
+
+- **框架**：React 18
+- **UI 组件库**：Ant Design 5.x
+- **状态管理**：Redux Toolkit
+- **路由**：React Router 6
+- **HTTP 请求**：Axios
+- **CSS 预处理器**：Less
+- **构建工具**：Vite
+- **代码规范**：ESLint + Prettier
+- **类型检查**：TypeScript 5.x
+
+## 3. 项目结构
+
+```
+src/
+├── assets/              # 静态资源
+│   ├── images/          # 图片资源
+│   ├── styles/          # 全局样式
+│   └── icons/           # 图标资源
+├── components/          # 公共组件
+│   ├── Layout/          # 布局组件
+│   ├── Calendar/        # 日历组件
+│   ├── Table/           # 表格组件
+│   ├── Form/            # 表单组件
+│   └── Modal/           # 弹窗组件
+├── pages/               # 页面组件
+│   ├── outbound/        # 出库管理
+│   ├── treatment/       # 诊疗管理
+│   ├── review/          # 复查管理
+│   └── document/        # 文书管理
+├── models/              # 数据模型定义
+├── services/            # API 服务
+├── utils/               # 工具函数
+├── hooks/               # 自定义 Hooks
+├── store/               # Redux 状态管理
+├── router/              # 路由配置
+├── constants/           # 常量定义
+├── types/               # TypeScript 类型定义
+├── App.tsx              # 应用入口
+└── main.tsx             # 主入口文件
+```
+
+## 4. 页面组件设计
+
+### 4.1 出库管理模块
+
+#### 4.1.1 出库日历页面 (OutboundCalendarView)
+
+```markdown
+# 出库日历页面设计
+
+## 页面布局
+- 顶部：标题、筛选条件、视图切换按钮（日历/列表）
+- 中部：日历控件（月/周视图）
+- 底部：分页或加载更多
+
+## 组件结构
+```jsx
+<div className="outbound-calendar-container">
+  <div className="outbound-header">
+    <h2>出库管理</h2>
+    <div className="filter-container">
+      {/* 筛选组件 */}
+    </div>
+    <div className="view-toggle">
+      {/* 视图切换按钮 */}
+    </div>
+  </div>
+  
+  <div className="calendar-view">
+    {/* 日历控件 */}
+    <div className="calendar-grid">
+      {/* 日期格子 */}
+      <div className="date-cell">
+        <div className="date-header">4月15日</div>
+        <div className="date-content">
+          {/* 计划条目 */}
+          <div className="plan-item">
+            <span className="customer-name">张三</span>
+            <span className="project-name">美白针</span>
+            <span className="phase">第一阶段</span>
+            <span className="quantity">3针</span>
+          </div>
+          {/* 更多条目... */}
+          <div className="more-indicator">+2 更多</div>
+        </div>
+      </div>
+      {/* 更多日期格子... */}
+    </div>
+  </div>
+</div>
+```
+
+## 交互设计
+- 点击日期格子：展开该日期的所有出库计划
+- 点击计划条目：跳转到对应的出库详情页面
+- 点击"更多"：展开该日期的所有计划
+- 视图切换：在日历视图和列表视图之间切换
+```
+
+#### 4.1.2 出库列表页面 (OutboundListView)
+
+```markdown
+# 出库列表页面设计
+
+## 页面布局
+- 顶部：标题、筛选条件、视图切换按钮（日历/列表）
+- 中部：数据表格
+- 底部：分页器
+
+## 组件结构
+```jsx
+<div className="outbound-list-container">
+  <div className="outbound-header">
+    <h2>出库管理</h2>
+    <div className="filter-container">
+      <Input.Search placeholder="搜索客户姓名/编号" />
+      <Select placeholder="负责销售" />
+      <Select placeholder="状态" />
+      <RangePicker placeholder={["开始日期", "结束日期"]} />
+      <Button type="primary">搜索</Button>
+      <Button>重置</Button>
+    </div>
+    <div className="view-toggle">
+      {/* 视图切换按钮 */}
+    </div>
+  </div>
+  
+  <div className="list-view">
+    <Table
+      columns={[
+        { title: '客户姓名', dataIndex: 'customerName', key: 'customerName' },
+        { title: '客户编号', dataIndex: 'customerId', key: 'customerId' },
+        { title: '负责销售', dataIndex: 'salesperson', key: 'salesperson' },
+        { title: '状态', dataIndex: 'status', key: 'status',
+          render: (status) => <Tag color={statusColorMap[status]}>{statusTextMap[status]}</Tag>
+        },
+        { title: '出库时间', dataIndex: 'outboundTime', key: 'outboundTime' },
+        { title: '项目名称', dataIndex: 'projectName', key: 'projectName' },
+        { title: '阶段', dataIndex: 'phase', key: 'phase' },
+        { title: '操作', key: 'action',
+          render: (_, record) => (
+            <Button type="link" onClick={() => navigateToDetail(record.id)}>查看详情</Button>
+          )
+        }
+      ]}
+      dataSource={outboundList}
+      pagination={{ pageSize: 10 }}
+    />
+  </div>
+  
+  <div className="pagination-container">
+    {/* 分页器 */}
+  </div>
+</div>
+```
+
+## 交互设计
+- 点击"查看详情"：跳转到对应的出库详情页面
+- 筛选条件：支持按客户姓名/编号、负责销售、状态、出库时间范围进行筛选
+- 分页：支持分页浏览
+```
+
+#### 4.1.3 出库详情页面 (OutboundDetailPage)
+
+```markdown
+# 出库详情页面设计
+
+## 页面布局
+- 顶部：标题、返回按钮
+- 中部：客户信息板块、干预方案板块
+- 底部：操作按钮
+
+## 组件结构
+```jsx
+<div className="outbound-detail-container">
+  <div className="detail-header">
+    <Button icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>返回</Button>
+    <h2>出库详情</h2>
+  </div>
+  
+  <div className="detail-content">
+    {/* 客户信息板块 */}
+    <Card title="客户信息" className="customer-info-block">
+      <Descriptions bordered column={3}>
+        <Descriptions.Item label="客户编号">{customerInfo.id}</Descriptions.Item>
+        <Descriptions.Item label="客户姓名">
+          <a onClick={() => navigateToCustomer(customerInfo.id)}>{customerInfo.name}</a>
+        </Descriptions.Item>
+        <Descriptions.Item label="负责销售">{customerInfo.salesperson}</Descriptions.Item>
+        <Descriptions.Item label="性别">{customerInfo.gender}</Descriptions.Item>
+        <Descriptions.Item label="年龄">{customerInfo.age}</Descriptions.Item>
+        <Descriptions.Item label="是否储户">{customerInfo.isVip ? '是' : '否'}</Descriptions.Item>
+        <Descriptions.Item label="接收地址" span={3}>{customerInfo.address}</Descriptions.Item>
+      </Descriptions>
+    </Card>
+    
+    {/* 干预方案板块 */}
+    <Card title="干预方案" className="intervention-plan-block">
+      {interventionPlans.map((phase, phaseIndex) => (
+        <div key={phaseIndex} className="phase-container">
+          <div className="phase-header">
+            <h3>阶段 {phase.phaseNumber}：{phase.phaseName}</h3>
+          </div>
+          
+          <div className="project-list">
+            {phase.projects.map((project, projectIndex) => (
+              <Card key={projectIndex} className="project-item">
+                <div className="project-info">
+                  <div className="project-header">
+                    <h4>{project.name}</h4>
+                    <span className="quantity">{project.quantity}针</span>
+                  </div>
+                  
+                  <div className="project-details">
+                    <div className="detail-item">
+                      <span className="label">出库时间：</span>
+                      <DatePicker 
+                        showTime 
+                        value={project.outboundTime} 
+                        onChange={(date) => handleTimeChange(phaseIndex, projectIndex, date)}
+                        disabled={isTimeEditDisabled(project.outboundTime)}
+                      />
+                    </div>
+                    
+                    <div className="detail-item">
+                      <span className="label">状态：</span>
+                      <Tag color={getStatusColor(project.status)}>{getStatusText(project.status)}</Tag>
+                    </div>
+                    
+                    <div className="project-actions">
+                      {project.status === 'pending' && (
+                        <Button type="primary" onClick={() => handleConfirmOutbound(phaseIndex, projectIndex)}>
+                          确认出库
+                        </Button>
+                      )}
+                      
+                      {project.status === 'confirmed' && (
+                        <Button type="default" onClick={() => handleModify(phaseIndex, projectIndex)}>
+                          修改
+                        </Button>
+                      )}
+                      
+                      {['confirmed', 'completed'].includes(project.status) && (
+                        <Button type="link" onClick={() => navigateToTreatment(project.treatmentId)}>
+                          查看诊疗记录
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
+    </Card>
+  </div>
+</div>
+```
+
+## 交互设计
+- 确认出库弹窗：
+```jsx
+<Modal
+  title="确认出库"
+  visible={confirmModalVisible}
+  onOk={handleConfirmSubmit}
+  onCancel={() => setConfirmModalVisible(false)}
+>
+  <Form layout="vertical">
+    <Form.Item label="服务场地" name="serviceLocation" rules={[{ required: true }]}>
+      <Radio.Group>
+        <Radio value="clinic">诊所服务</Radio>
+        <Radio value="onsite">外出</Radio>
+      </Radio.Group>
+    </Form.Item>
+    
+    <Form.Item label="确认排班护士" name="nurse" rules={[{ required: true }]}>
+      <Select placeholder="请选择护士">
+        {nurses.map(nurse => (
+          <Select.Option key={nurse.id} value={nurse.id}>{nurse.name}</Select.Option>
+        ))}
+      </Select>
+    </Form.Item>
+  </Form>
+</Modal>
+```
+
+- 点击客户姓名：跳转到文书详情中的客户信息部分
+- 修改出库时间：当前时间早于出库时间时可修改
+- 确认出库：弹窗选择服务场地和排班护士
+- 修改按钮：允许修改之前选择的服务场地、排班护士和出库时间
+- 查看诊疗记录：跳转到对应的诊疗详情页面
+```
+
+### 4.2 诊疗管理模块
+
+#### 4.2.1 诊疗日历页面 (TreatmentCalendarView)
+
+```markdown
+# 诊疗日历页面设计
+
+## 页面布局
+- 顶部：标题、筛选条件、视图切换按钮（日历/列表）
+- 中部：日历控件（月/周视图）
+- 底部：分页或加载更多
+
+## 组件结构
+```jsx
+<div className="treatment-calendar-container">
+  <div className="treatment-header">
+    <h2>诊疗管理</h2>
+    <div className="filter-container">
+      {/* 筛选组件 */}
+    </div>
+    <div className="view-toggle">
+      {/* 视图切换按钮 */}
+    </div>
+  </div>
+  
+  <div className="calendar-view">
+    {/* 日历控件 */}
+    <div className="calendar-grid">
+      {/* 日期格子 */}
+      <div className="date-cell">
+        <div className="date-header">4月15日</div>
+        <div className="date-content">
+          {/* 诊疗条目 */}
+          <div className="treatment-item">
+            <span className="customer-name">张三</span>
+            <span className="project-name">美白针</span>
+            <span className="phase">第一阶段</span>
+            <span className="quantity">3针</span>
+            <span className="nurse-name">护士：李四</span>
+          </div>
+          {/* 更多条目... */}
+          <div className="more-indicator">+2 更多</div>
+        </div>
+      </div>
+      {/* 更多日期格子... */}
+    </div>
+  </div>
+</div>
+```
+
+## 交互设计
+- 点击日期格子：展开该日期的所有诊疗计划
+- 点击诊疗条目：跳转到对应的诊疗详情页面
+- 点击"更多"：展开该日期的所有计划
+- 视图切换：在日历视图和列表视图之间切换
+```
+
+#### 4.2.2 诊疗列表页面 (TreatmentListView)
+
+```markdown
+# 诊疗列表页面设计
+
+## 页面布局
+- 顶部：标题、筛选条件、视图切换按钮（日历/列表）
+- 中部：数据表格
+- 底部：分页器
+
+## 组件结构
+```jsx
+<div className="treatment-list-container">
+  <div className="treatment-header">
+    <h2>诊疗管理</h2>
+    <div className="filter-container">
+      <Input.Search placeholder="搜索客户姓名/编号" />
+      <Select placeholder="负责销售" />
+      <Select placeholder="状态" />
+      <Select placeholder="负责护士" />
+      <RangePicker placeholder={["开始日期", "结束日期"]} />
+      <Button type="primary">搜索</Button>
+      <Button>重置</Button>
+    </div>
+    <div className="view-toggle">
+      {/* 视图切换按钮 */}
+    </div>
+  </div>
+  
+  <div className="list-view">
+    <Table
+      columns={[
+        { title: '客户姓名', dataIndex: 'customerName', key: 'customerName' },
+        { title: '客户编号', dataIndex: 'customerId', key: 'customerId' },
+        { title: '负责销售', dataIndex: 'salesperson', key: 'salesperson' },
+        { title: '状态', dataIndex: 'status', key: 'status',
+          render: (status) => <Tag color={statusColorMap[status]}>{statusTextMap[status]}</Tag>
+        },
+        { title: '治疗时间', dataIndex: 'treatmentTime', key: 'treatmentTime' },
+        { title: '负责护士', dataIndex: 'nurse', key: 'nurse' },
+        { title: '操作', key: 'action',
+          render: (_, record) => (
+            <Button type="link" onClick={() => navigateToDetail(record.id)}>查看详情</Button>
+          )
+        }
+      ]}
+      dataSource={treatmentList}
+      pagination={{ pageSize: 10 }}
+    />
+  </div>
+  
+  <div className="pagination-container">
+    {/* 分页器 */}
+  </div>
+</div>
+```
+
+## 交互设计
+- 点击"查看详情"：跳转到对应的诊疗详情页面
+- 筛选条件：支持按客户姓名/编号、负责销售、状态、负责护士、治疗时间范围进行筛选
+- 分页：支持分页浏览
+```
+
+#### 4.2.3 诊疗详情页面 (TreatmentDetailPage)
+
+```markdown
+# 诊疗详情页面设计
+
+## 页面布局
+- 顶部：标题、返回按钮
+- 中部：客户信息板块、诊疗版块、随访管理板块
+- 底部：操作按钮
+
+## 组件结构
+```jsx
+<div className="treatment-detail-container">
+  <div className="detail-header">
+    <Button icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>返回</Button>
+    <h2>诊疗详情</h2>
+  </div>
+  
+  <div className="detail-content">
+    {/* 客户信息板块 */}
+    <Card title="客户信息" className="customer-info-block">
+      <Descriptions bordered column={3}>
+        <Descriptions.Item label="客户编号">{customerInfo.id}</Descriptions.Item>
+        <Descriptions.Item label="客户姓名">
+          <a onClick={() => navigateToCustomer(customerInfo.id)}>{customerInfo.name}</a>
+        </Descriptions.Item>
+        <Descriptions.Item label="负责销售">{customerInfo.salesperson}</Descriptions.Item>
+        <Descriptions.Item label="性别">{customerInfo.gender}</Descriptions.Item>
+        <Descriptions.Item label="年龄">{customerInfo.age}</Descriptions.Item>
+        <Descriptions.Item label="是否储户">{customerInfo.isVip ? '是' : '否'}</Descriptions.Item>
+        <Descriptions.Item label="接收地址" span={3}>{customerInfo.address}</Descriptions.Item>
+      </Descriptions>
+    </Card>
+    
+    {/* 诊疗版块 */}
+    <Card title="诊疗信息" className="treatment-info-block">
+      {treatmentPhases.map((phase, phaseIndex) => (
+        <div key={phaseIndex} className="phase-container">
+          <div className="phase-header">
+            <h3>阶段 {phase.phaseNumber}：{phase.phaseName}</h3>
+          </div>
+          
+          <div className="treatment-details">
+            <Descriptions bordered column={3}>
+              <Descriptions.Item label="项目名称">{phase.projectName}</Descriptions.Item>
+              <Descriptions.Item label="数量">{phase.quantity}</Descriptions.Item>
+              <Descriptions.Item label="服务场地">{phase.serviceLocation}</Descriptions.Item>
+              <Descriptions.Item label="治疗时间">{phase.treatmentTime}</Descriptions.Item>
+              <Descriptions.Item label="负责护士">{phase.nurse}</Descriptions.Item>
+              <Descriptions.Item label="状态">
+                <Tag color={getStatusColor(phase.status)}>{getStatusText(phase.status)}</Tag>
+              </Descriptions.Item>
+            </Descriptions>
+            
+            {/* 输注记录表 */}
+            <div className="infusion-records">
+              <div className="section-header">
+                <h4>输注记录</h4>
+                {phase.status === 'confirmed' && (
+                  <Button type="primary" onClick={() => handleOpenInfusionModal(phaseIndex)}>
+                    输注管理
+                  </Button>
+                )}
+              </div>
+              
+              {phase.infusionRecords && phase.infusionRecords.length > 0 ? (
+                <Table
+                  columns={[
+                    { title: '开始时间', dataIndex: 'startTime', key: 'startTime' },
+                    { title: '结束时间', dataIndex: 'endTime', key: 'endTime' },
+                    { title: '输注前血压', dataIndex: 'preBp', key: 'preBp' },
+                    { title: '输注前脉搏', dataIndex: 'prePulse', key: 'prePulse' },
+                    { title: '输注前异常', dataIndex: 'preAbnormal', key: 'preAbnormal',
+                      render: (abnormal) => abnormal ? <Tag color="red">是</Tag> : <Tag color="green">否</Tag>
+                    },
+                    { title: '输注后血压', dataIndex: 'postBp', key: 'postBp' },
+                    { title: '输注后脉搏', dataIndex: 'postPulse', key: 'postPulse' },
+                    { title: '输注后异常', dataIndex: 'postAbnormal', key: 'postAbnormal',
+                      render: (abnormal) => abnormal ? <Tag color="red">是</Tag> : <Tag color="green">否</Tag>
+                    },
+                    { title: '记录人', dataIndex: 'recorder', key: 'recorder' },
+                    { title: '附件', dataIndex: 'attachments', key: 'attachments',
+                      render: (attachments) => attachments && attachments.length > 0 ? (
+                        <Button type="link">查看附件({attachments.length})</Button>
+                      ) : '无'
+                    }
+                  ]}
+                  dataSource={phase.infusionRecords}
+                  pagination={false}
+                />
+              ) : (
+                <Empty description="暂无输注记录" />
+              )}
+            </div>
+            
+            {/* 用药情况 */}
+            <div className="medication-records">
+              <div className="section-header">
+                <h4>用药情况</h4>
+                <Button onClick={() => handleOpenMedicationModal(phaseIndex)}>
+                  {phase.medicationRecord ? '查看/修改用药情况' : '用药情况登记'}
+                </Button>
+              </div>
+              
+              {phase.medicationRecord ? (
+                <div className="medication-content">
+                  <p>{phase.medicationRecord}</p>
+                </div>
+              ) : (
+                <Empty description="暂无用药记录" />
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </Card>
+    
+    {/* 随访管理板块 */}
+    <Card title="随访管理" className="follow-up-block">
+      <div className="section-header">
+        <h4>随访记录</h4>
+        <Button type="primary" onClick={() => handleOpenFollowUpModal()}>
+          新增随访
+        </Button>
+      </div>
+      
+      {followUpRecords && followUpRecords.length > 0 ? (
+        <Table
+          columns={[
+            { title: '随访疗程', dataIndex: 'treatmentPhase', key: 'treatmentPhase' },
+            { title: '随访时间', dataIndex: 'followUpTime', key: 'followUpTime' },
+            { title: '随访方式', dataIndex: 'followUpMethod', key: 'followUpMethod' },
+            { title: '是否异常', dataIndex: 'isAbnormal', key: 'isAbnormal',
+              render: (abnormal) => abnormal ? <Tag color="red">是</Tag> : <Tag color="green">否</Tag>
+            },
+            { title: '随访人员', dataIndex: 'followUpPerson', key: 'followUpPerson' },
+            { title: '随访内容', dataIndex: 'content', key: 'content',
+              render: (content) => (
+                <Tooltip title={content}>
+                  <div className="ellipsis-text">{content}</div>
+                </Tooltip>
+              )
+            }
+          ]}
+          dataSource={followUpRecords}
+          pagination={{ pageSize: 5 }}
+        />
+      ) : (
+        <Empty description="暂无随访记录" />
+      )}
+    </Card>
+  </div>
+</div>
+```
+
+## 交互设计
+- 输注管理弹窗：
+```jsx
+<Modal
+  title="输注管理"
+  visible={infusionModalVisible}
+  onOk={handleInfusionSubmit}
+  onCancel={() => setInfusionModalVisible(false)}
+  width={800}
+>
+  <Form layout="vertical" form={infusionForm}>
+    <Row gutter={16}>
+      <Col span={12}>
+        <Form.Item label="开始时间" name="startTime" rules={[{ required: true }]}>
+          <DatePicker showTime style={{ width: '100%' }} />
+        </Form.Item>
+      </Col>
+      <Col span={12}>
+        <Form.Item label="结束时间" name="endTime" rules={[{ required: true }]}>
+          <DatePicker showTime style={{ width: '100%' }} />
+        </Form.Item>
+      </Col>
+    </Row>
+    
+    <Divider>输注前</Divider>
+    
+    <Row gutter={16}>
+      <Col span={6}>
+        <Form.Item label="血压" name="preBp" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+      <Col span={6}>
+        <Form.Item label="脉搏" name="prePulse" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+      <Col span={6}>
+        <Form.Item label="血氧" name="preOxygen" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+      <Col span={6}>
+        <Form.Item label="体温" name="preTemp" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+    </Row>
+    
+    <Form.Item label="是否异常" name="preAbnormal" rules={[{ required: true }]}>
+      <Radio.Group>
+        <Radio value={false}>否</Radio>
+        <Radio value={true}>是</Radio>
+      </Radio.Group>
+    </Form.Item>
+    
+    <Divider>输注后</Divider>
+    
+    <Row gutter={16}>
+      <Col span={6}>
+        <Form.Item label="血压" name="postBp" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+      <Col span={6}>
+        <Form.Item label="脉搏" name="postPulse" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+      <Col span={6}>
+        <Form.Item label="血氧" name="postOxygen" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+      <Col span={6}>
+        <Form.Item label="体温" name="postTemp" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </Col>
+    </Row>
+    
+    <Form.Item label="是否异常" name="postAbnormal" rules={[{ required: true }]}>
+      <Radio.Group>
+        <Radio value={false}>否</Radio>
+        <Radio value={true}>是</Radio>
+      </Radio.Group>
+    </Form.Item>
+    
+    <Form.Item label="记录人" name="recorder">
+      <Input disabled />
+    </Form.Item>
+    
+    <Form.Item label="附件" name="attachments">
+      <Upload
+        listType="picture-card"
+        fileList={fileList}
+        onChange={handleFileChange}
+        beforeUpload={() => false}
+```jsx
+        <Upload
+          listType="picture-card"
+          fileList={fileList}
+          onChange={handleFileChange}
+          beforeUpload={() => false}
+        >
+          <div>
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>上传</div>
+          </div>
+        </Upload>
+      </Form.Item>
+    </Form>
+  </Modal>
+```
+
+- 用药情况弹窗：
+```jsx
+<Modal
+  title="用药情况登记"
+  visible={medicationModalVisible}
+  onOk={handleMedicationSubmit}
+  onCancel={() => setMedicationModalVisible(false)}
+>
+  <Form layout="vertical" form={medicationForm}>
+    <Form.Item label="用药情况" name="medicationRecord" rules={[{ required: true }]}>
+      <Input.TextArea rows={6} placeholder="请输入用药情况..." />
+    </Form.Item>
+  </Form>
+</Modal>
+```
+
+- 新增随访弹窗：
+```jsx
+<Modal
+  title="新增随访"
+  visible={followUpModalVisible}
+  onOk={handleFollowUpSubmit}
+  onCancel={() => setFollowUpModalVisible(false)}
+>
+  <Form layout="vertical" form={followUpForm}>
+    <Form.Item label="随访疗程" name="treatmentPhase" rules={[{ required: true }]}>
+      <Select disabled>
+        <Select.Option value={currentPhaseId}>
+          {currentPhaseName}
+        </Select.Option>
+      </Select>
+    </Form.Item>
+    
+    <Form.Item label="随访时间" name="followUpTimePoint" rules={[{ required: true }]}>
+      <Select>
+        <Select.Option value="24h">24小时</Select.Option>
+        <Select.Option value="72h">72小时</Select.Option>
+        <Select.Option value="7d">7天</Select.Option>
+        <Select.Option value="14d">14天</Select.Option>
+        <Select.Option value="30d">30天</Select.Option>
+        <Select.Option value="90d">90天</Select.Option>
+      </Select>
+    </Form.Item>
+    
+    <Form.Item label="随访方式" name="followUpMethod" rules={[{ required: true }]}>
+      <Select>
+        <Select.Option value="wechat">微信</Select.Option>
+        <Select.Option value="phone">电话</Select.Option>
+        <Select.Option value="face">面谈</Select.Option>
+      </Select>
+    </Form.Item>
+    
+    <Form.Item label="是否异常" name="isAbnormal" rules={[{ required: true }]}>
+      <Radio.Group>
+        <Radio value={false}>正常随访</Radio>
+        <Radio value={true}>异常随访</Radio>
+      </Radio.Group>
+    </Form.Item>
+    
+    <Form.Item label="随访人员" name="followUpPerson" rules={[{ required: true }]}>
+      <Select>
+        {nurses.map(nurse => (
+          <Select.Option key={nurse.id} value={nurse.id}>{nurse.name}</Select.Option>
+        ))}
+      </Select>
+    </Form.Item>
+    
+    <Form.Item label="随访内容" name="content" rules={[{ required: true }]}>
+      <Input.TextArea rows={4} placeholder="请输入随访内容..." />
+    </Form.Item>
+  </Form>
+</Modal>
+```
+```
+
+### 4.3 复查管理模块
+
+#### 4.3.1 复查列表页面 (ReviewListView)
+
+```markdown
+# 复查列表页面设计
+
+## 页面布局
+- 顶部：标题、筛选条件
+- 中部：数据表格
+- 底部：分页器
+
+## 组件结构
+```jsx
+<div className="review-list-container">
+  <div className="review-header">
+    <h2>复查管理</h2>
+    <div className="filter-container">
+      <Input.Search placeholder="搜索客户姓名/编号" />
+      <Select placeholder="复查状态">
+        <Select.Option value="new">新建复查</Select.Option>
+        <Select.Option value="items_confirmed">复查项目确定</Select.Option>
+        <Select.Option value="in_review">客户复查中</Select.Option>
+        <Select.Option value="report_pending">报告待上传</Select.Option>
+        <Select.Option value="comparing">疗效对比中</Select.Option>
+      </Select>
+      <RangePicker placeholder={["开始日期", "结束日期"]} />
+      <Button type="primary">搜索</Button>
+      <Button>重置</Button>
+    </div>
+  </div>
+  
+  <div className="list-view">
+    <Table
+      columns={[
+        { title: '客户姓名', dataIndex: 'customerName', key: 'customerName' },
+        { title: '复查时间', dataIndex: 'reviewTime', key: 'reviewTime' },
+        { title: '复查状态', dataIndex: 'status', key: 'status',
+          render: (status) => <Tag color={reviewStatusColorMap[status]}>{reviewStatusTextMap[status]}</Tag>
+        },
+        { title: '负责护士', dataIndex: 'nurse', key: 'nurse' },
+        { title: '复查医生', dataIndex: 'doctor', key: 'doctor' },
+        { title: '操作', key: 'action',
+          render: (_, record) => (
+            <Button type="link" onClick={() => navigateToDetail(record.id)}>查看详情</Button>
+          )
+        }
+      ]}
+      dataSource={reviewList}
+      pagination={{ pageSize: 10 }}
+    />
+  </div>
+  
+  <div className="pagination-container">
+    {/* 分页器 */}
+  </div>
+</div>
+```
+
+## 交互设计
+- 点击"查看详情"：跳转到对应的复查详情页面
+- 筛选条件：支持按客户姓名/编号、复查状态、复查时间范围进行筛选
+- 分页：支持分页浏览
+```
+
+#### 4.3.2 复查详情页面 (ReviewDetailPage)
+
+```markdown
+# 复查详情页面设计
+
+## 页面布局
+- 顶部：标题、返回按钮
+- 中部：复查流程状态展示、客户信息板块、复查信息板块
+- 底部：操作按钮
+
+## 组件结构
+```jsx
+<div className="review-detail-container">
+  <div className="detail-header">
+    <Button icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>返回</Button>
+    <h2>复查详情</h2>
+  </div>
+  
+  <div className="detail-content">
+    {/* 复查流程状态展示 */}
+    <div className="flow-status">
+      <Steps current={getCurrentStep(reviewInfo.status)}>
+        <Steps.Step title="新建复查" description="系统自动生成" />
+        <Steps.Step title="复查项目确定" description="护士确认项目" />
+        <Steps.Step title="医生审核" description="医生确认项目" />
+        <Steps.Step title="客户复查中" description="客服预约客户" />
+        <Steps.Step title="报告待上传" description="客服上传报告" />
+        <Steps.Step title="疗效对比中" description="客服制作对比" />
+      </Steps>
+    </div>
+    
+    {/* 客户信息板块 */}
+    <Card title="客户信息" className="customer-info-block">
+      <Descriptions bordered column={3}>
+        <Descriptions.Item label="客户编号">{customerInfo.id}</Descriptions.Item>
+        <Descriptions.Item label="客户姓名">
+          <a onClick={() => navigateToCustomer(customerInfo.id)}>{customerInfo.name}</a>
+        </Descriptions.Item>
+        <Descriptions.Item label="负责销售">{customerInfo.salesperson}</Descriptions.Item>
+        <Descriptions.Item label="性别">{customerInfo.gender}</Descriptions.Item>
+        <Descriptions.Item label="年龄">{customerInfo.age}</Descriptions.Item>
+        <Descriptions.Item label="是否储户">{customerInfo.isVip ? '是' : '否'}</Descriptions.Item>
+        <Descriptions.Item label="接收地址" span={3}>{customerInfo.address}</Descriptions.Item>
+      </Descriptions>
+    </Card>
+    
+    {/* 复查信息板块 */}
+    <Card title="复查信息" className="review-info-block">
+      <Descriptions bordered column={3}>
+        <Descriptions.Item label="复查状态">
+          <Tag color={reviewStatusColorMap[reviewInfo.status]}>{reviewStatusTextMap[reviewInfo.status]}</Tag>
+        </Descriptions.Item>
+        <Descriptions.Item label="复查时间">
+          {reviewInfo.status === 'new' || reviewInfo.status === 'items_confirmed' ? (
+            <DatePicker 
+              showTime 
+              value={reviewInfo.reviewTime} 
+              onChange={(date) => handleReviewTimeChange(date)}
+              disabled={!canEditReviewTime()}
+            />
+          ) : (
+            reviewInfo.reviewTime
+          )}
+        </Descriptions.Item>
+        <Descriptions.Item label="负责护士">{reviewInfo.nurse}</Descriptions.Item>
+        <Descriptions.Item label="复查医生">{reviewInfo.doctor || '待确定'}</Descriptions.Item>
+      </Descriptions>
+      
+      {/* 复查检测项目 */}
+      <div className="review-items-section">
+        <div className="section-header">
+          <h4>复查检测项目</h4>
+          {(reviewInfo.status === 'new' && isNurse()) && (
+            <Button type="primary" onClick={() => handleAddItem()}>
+              增加项目
+            </Button>
+          )}
+          {(reviewInfo.status === 'items_confirmed' && isDoctor()) && (
+            <Button type="primary" onClick={() => handleConfirmItems()}>
+              确认项目
+            </Button>
+          )}
+        </div>
+        
+        <Table
+          columns={[
+            { title: '项目名称', dataIndex: 'itemName', key: 'itemName' },
+            { title: '来源', dataIndex: 'source', key: 'source',
+              render: (source) => source === 'system' ? '系统自动' : '护士添加'
+            },
+            { title: '医生确认', dataIndex: 'doctorConfirmed', key: 'doctorConfirmed',
+              render: (confirmed) => confirmed ? <Tag color="green">已确认</Tag> : <Tag color="orange">未确认</Tag>
+            },
+            { title: '操作', key: 'action',
+              render: (_, record, index) => (
+                <>
+                  {(reviewInfo.status === 'new' && isNurse() && record.source !== 'system') && (
+                    <Button type="link" danger onClick={() => handleRemoveItem(index)}>
+                      删除
+                    </Button>
+                  )}
+                  {(reviewInfo.status === 'items_confirmed' && isDoctor()) && (
+                    <Button type="link" onClick={() => handleEditItem(index)}>
+                      修改
+                    </Button>
+                  )}
+                </>
+              )
+            }
+          ]}
+          dataSource={reviewItems}
+          pagination={false}
+        />
+      </div>
+      
+      {/* 服务确认单导出 */}
+      {(reviewInfo.status !== 'new' && (isNurse() || isCustomerService())) && (
+        <div className="export-section">
+          <Button type="primary" icon={<DownloadOutlined />} onClick={() => handleExportConfirmation()}>
+            导出服务确认单
+          </Button>
+        </div>
+      )}
+      
+      {/* 报告上传 */}
+      {(reviewInfo.status === 'in_review' && isCustomerService()) && (
+        <div className="report-upload-section">
+          <div className="section-header">
+            <h4>报告上传</h4>
+            <Button type="primary" onClick={() => setReportUploadModalVisible(true)}>
+              上传报告
+            </Button>
+          </div>
+        </div>
+      )}
+      
+      {/* 疗效对比方案 */}
+      {(reviewInfo.status === 'report_pending' && isCustomerService()) && (
+        <div className="comparison-section">
+          <div className="section-header">
+            <h4>疗效对比方案</h4>
+            <Button type="primary" onClick={() => setComparisonUploadModalVisible(true)}>
+              制作疗效对比
+            </Button>
+          </div>
+        </div>
+      )}
+      
+      {/* 已上传的报告和对比方案展示 */}
+      {reviewInfo.reportFiles && reviewInfo.reportFiles.length > 0 && (
+        <div className="uploaded-files-section">
+          <h4>已上传报告</h4>
+          <div className="file-list">
+            {reviewInfo.reportFiles.map((file, index) => (
+              <div key={index} className="file-item">
+                <FileOutlined /> {file.name}
+                <Button type="link" onClick={() => handlePreviewFile(file)}>查看</Button>
+                <Button type="link" onClick={() => handleDownloadFile(file)}>下载</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {reviewInfo.comparisonFiles && reviewInfo.comparisonFiles.length > 0 && (
+        <div className="uploaded-files-section">
+          <h4>疗效对比方案</h4>
+          <div className="file-list">
+            {reviewInfo.comparisonFiles.map((file, index) => (
+              <div key={index} className="file-item">
+                <FileOutlined /> {file.name}
+                <Button type="link" onClick={() => handlePreviewFile(file)}>查看</Button>
+                <Button type="link" onClick={() => handleDownloadFile(file)}>下载</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </Card>
+  </div>
+</div>
+```
+
+## 交互设计
+- 增加项目弹窗：
+```jsx
+<Modal
+  title="增加复查项目"
+  visible={addItemModalVisible}
+  onOk={handleAddItemSubmit}
+  onCancel={() => setAddItemModalVisible(false)}
+>
+  <Form layout="vertical" form={addItemForm}>
+    <Form.Item label="项目名称" name="itemName" rules={[{ required: true }]}>
+      <Input placeholder="请输入项目名称" />
+    </Form.Item>
+  </Form>
+</Modal>
+```
+
+- 确认项目弹窗：
+```jsx
+<Modal
+  title="确认复查项目"
+  visible={confirmItemsModalVisible}
+  onOk={handleConfirmItemsSubmit}
+  onCancel={() => setConfirmItemsModalVisible(false)}
+>
+  <p>请确认以下复查项目：</p>
+  <List
+    dataSource={reviewItems}
+    renderItem={(item) => (
+      <List.Item
+        actions={[
+          <Button type="link" onClick={() => handleEditItemInModal(item)}>修改</Button>
+        ]}
+      >
+        <List.Item.Meta
+          title={item.itemName}
+          description={item.source === 'system' ? '系统自动' : '护士添加'}
+        />
+      </List.Item>
+    )}
+  />
+  <div style={{ marginTop: 16 }}>
+    <Button type="dashed" onClick={() => handleAddItemInModal()} block>
+      <PlusOutlined /> 添加项目
+    </Button>
+  </div>
+</Modal>
+```
+
+- 上传报告弹窗：
+```jsx
+<Modal
+  title="上传报告"
+  visible={reportUploadModalVisible}
+  onOk={handleReportUploadSubmit}
+  onCancel={() => setReportUploadModalVisible(false)}
+>
+  <Form layout="vertical" form={reportUploadForm}>
+    <Form.Item label="上传报告文件" name="reportFiles" rules={[{ required: true }]}>
+      <Upload
+        listType="picture"
+        fileList={reportFileList}
+        onChange={handleReportFileChange}
+        beforeUpload={() => false}
+        multiple
+      >
+        <Button icon={<UploadOutlined />}>选择文件</Button>
+      </Upload>
+    </Form.Item>
+    <Form.Item label="备注" name="reportNote">
+      <Input.TextArea rows={4} placeholder="请输入备注信息..." />
+    </Form.Item>
+  </Form>
+</Modal>
+```
+
+- 制作疗效对比弹窗：
+```jsx
+<Modal
+  title="制作疗效对比"
+  visible={comparisonUploadModalVisible}
+  onOk={handleComparisonUploadSubmit}
+  onCancel={() => setComparisonUploadModalVisible(false)}
+>
+  <Form layout="vertical" form={comparisonUploadForm}>
+    <Form.Item label="上传疗效对比文件" name="comparisonFiles" rules={[{ required: true }]}>
+      <Upload
+        listType="picture"
+        fileList={comparisonFileList}
+        onChange={handleComparisonFileChange}
+        beforeUpload={() => false}
+        multiple
+      >
+        <Button icon={<UploadOutlined />}>选择文件</Button>
+      </Upload>
+    </Form.Item>
+    <Form.Item label="疗效分析" name="comparisonAnalysis">
+      <Input.TextArea rows={6} placeholder="请输入疗效分析..." />
+    </Form.Item>
+  </Form>
+</Modal>
+```
+```
+
+### 4.4 文书管理扩展模块
+
+#### 4.4.1 文书详情页面扩展 (DocumentDetailExtension)
+
+```markdown
+# 文书详情页面扩展设计
+
+## 页面布局
+- 现有文书详情页面增加两个Tab：诊疗管理、复查管理
+
+## 组件结构
+```jsx
+<div className="document-detail-container">
+  <div className="detail-header">
+    <h2>文书详情</h2>
+  </div>
+  
+  <div className="detail-content">
+    <Tabs defaultActiveKey="basic">
+      <Tabs.TabPane tab="基础信息" key="basic">
+        {/* 现有的基础信息内容 */}
+      </Tabs.TabPane>
+      
+      <Tabs.TabPane tab="报价详情" key="quote">
+        {/* 现有的报价详情内容 */}
+      </Tabs.TabPane>
+      
+      {/* 新增的诊疗管理Tab */}
+      <Tabs.TabPane tab="诊疗管理" key="treatment">
+        <div className="treatment-tab-content">
+          <Table
+            columns={[
+              { title: '项目名称', dataIndex: 'projectName', key: 'projectName' },
+              { title: '阶段', dataIndex: 'phase', key: 'phase' },
+              { title: '数量', dataIndex: 'quantity', key: 'quantity' },
+              { title: '状态', dataIndex: 'status', key: 'status',
+                render: (status) => <Tag color={statusColorMap[status]}>{statusTextMap[status]}</Tag>
+              },
+              { title: '开始时间', dataIndex: 'startTime', key: 'startTime' },
+              { title: '结束时间', dataIndex: 'endTime', key: 'endTime' },
+              { title: '负责护士', dataIndex: 'nurse', key: 'nurse' }
+            ]}
+            dataSource={treatmentList}
+            pagination={false}
+            rowKey="id"
+          />
+        </div>
+      </Tabs.TabPane>
+      
+      {/* 新增的复查管理Tab */}
+      <Tabs.TabPane tab="复查管理" key="review">
+        <div className="review-tab-content">
+          <Table
+            columns={[
+              { title: '复查时间', dataIndex: 'reviewTime', key: 'reviewTime' },
+              { title: '复查状态', dataIndex: 'status', key: 'status',
+                render: (status) => <Tag color={reviewStatusColorMap[status]}>{reviewStatusTextMap[status]}</Tag>
+              },
+              { title: '检测项目', dataIndex: 'items', key: 'items',
+                render: (items) => items ? items.join(', ') : '无'
+              },
+              { title: '负责医生', dataIndex: 'doctor', key: 'doctor' },
+              { title: '负责护士', dataIndex: 'nurse', key: 'nurse' }
+            ]}
+            dataSource={reviewList}
+            pagination={false}
+            rowKey="id"
+          />
+        </div>
+      </Tabs.TabPane>
+    </Tabs>
+  </div>
+</div>
+```
+
+## 交互设计
+- 切换Tab：点击Tab标签切换不同内容
+- 数据加载：Tab激活时异步加载数据
+- 展示限制：只读展示，无操作按钮
+```
+
+5. 开发规范
+5.1 代码风格
+使用 ESLint + Prettier 规范代码风格
+使用 TypeScript 进行类型检查
+组件命名采用 PascalCase
+文件命名采用 kebab-case
+常量使用全大写 SNAKE_CASE
+变量和函数使用 camelCase
+5.2 目录结构规范
+每个页面组件放在 pages 目录下对应模块的子目录中
+公共组件放在 components 目录下
+工具函数放在 utils 目录下
+5.3 组件开发规范
+使用函数式组件和 React Hooks
+组件内部状态使用 useState
+副作用使用 useEffect
+复杂组件拆分为小组件
+使用 props 类型声明
+使用 memo 优化渲染性能
+5.4 样式规范
+使用 Less 预处理器
+使用 CSS Modules 或 BEM 命名规范
+响应式设计
+主题变量统一管理
+避免内联样式

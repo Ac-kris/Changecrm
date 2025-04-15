@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户详情 - 细胞应用业务销售管理系统</title>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap/bootstrap.min.css">
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边栏导航 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- 侧边栏内容将通过JavaScript动态加载 -->
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">客户详情</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-outline-secondary me-2" onclick="window.history.back()">
+                            <i class="bi bi-arrow-left"></i> 返回
+                        </button>
+                        <button type="button" class="btn btn-primary me-2">
+                            <i class="bi bi-pencil"></i> 编辑客户
+                        </button>
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="bi bi-trash"></i> 删除客户
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 客户基本信息卡片 -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <i class="bi bi-person-circle"></i> 客户基本信息
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" width="30%">客户ID：</th>
+                                                    <td>C10086</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">隐私编号：</th>
+                                                    <td>PRV20250312001</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">姓名：</th>
+                                                    <td>张三</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">性别：</th>
+                                                    <td>男</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">年龄：</th>
+                                                    <td>35岁</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" width="30%">手机号码：</th>
+                                                    <td>138****5678</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">代理人：</th>
+                                                    <td>李四（配偶）</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">客户来源：</th>
+                                                    <td>线上推广</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">负责销售：</th>
+                                                    <td>王五</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">创建时间：</th>
+                                                    <td>2025-02-15 10:30</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info mb-0">
+                                            <i class="bi bi-info-circle"></i> <strong>备注：</strong> 客户对细胞治疗非常感兴趣，有家族遗传病史，希望了解更多关于基因治疗的信息。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客户详细信息选项卡 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs" id="customerTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="true">
+                                            <i class="bi bi-file-earmark-text"></i> 相关文书
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab" aria-controls="orders" aria-selected="false">
+                                            <i class="bi bi-cart"></i> 订单记录
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content" id="customerTabContent">
+                                    <!-- 相关文书选项卡内容 -->
+                                    <div class="tab-pane fade show active" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">文书ID</th>
+                                                        <th scope="col">创建时间</th>
+                                                        <th scope="col">更新时间</th>
+                                                        <th scope="col">负责人</th>
+                                                        <th scope="col">文书状态</th>
+                                                        <th scope="col">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>D20250301-001</td>
+                                                        <td>2025-03-01</td>
+                                                        <td>2025-03-05</td>
+                                                        <td>李四</td>
+                                                        <td><span class="badge bg-success">进行中</span></td>
+                                                        <td>
+                                                            <a href="../document-management/document-detail.html" class="btn btn-sm btn-outline-primary">查看</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>D20250220-005</td>
+                                                        <td>2025-02-20</td>
+                                                        <td>2025-02-28</td>
+                                                        <td>王五</td>
+                                                        <td><span class="badge bg-warning text-dark">审核中</span></td>
+                                                        <td>
+                                                            <a href="../document-management/document-detail.html" class="btn btn-sm btn-outline-primary">查看</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>D20250215-002</td>
+                                                        <td>2025-02-15</td>
+                                                        <td>2025-02-15</td>
+                                                        <td>张三</td>
+                                                        <td><span class="badge bg-info">已完成</span></td>
+                                                        <td>
+                                                            <a href="../document-management/document-detail.html" class="btn btn-sm btn-outline-primary">查看</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- 订单记录选项卡内容 -->
+                                    <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">订单编号</th>
+                                                        <th scope="col">下单时间</th>
+                                                        <th scope="col">订单金额</th>
+                                                        <th scope="col">支付状态</th>
+                                                        <th scope="col">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>O20250305-001</td>
+                                                        <td>2025-03-05</td>
+                                                        <td>¥50,000</td>
+                                                        <td><span class="badge bg-success">已支付</span></td>
+                                                        <td>
+                                                            <a href="../order-management/order-detail.html" class="btn btn-sm btn-outline-primary">查看</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>O20250220-003</td>
+                                                        <td>2025-02-20</td>
+                                                        <td>¥15,000</td>
+                                                        <td><span class="badge bg-success">已支付</span></td>
+                                                        <td>
+                                                            <a href="../order-management/order-detail.html" class="btn btn-sm btn-outline-primary">查看</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>O20250215-007</td>
+                                                        <td>2025-02-15</td>
+                                                        <td>¥2,000</td>
+                                                        <td><span class="badge bg-warning text-dark">待支付</span></td>
+                                                        <td>
+                                                            <a href="../order-management/order-detail.html" class="btn btn-sm btn-outline-primary">查看</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="../js/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

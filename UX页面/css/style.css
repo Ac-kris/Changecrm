@@ -1,0 +1,409 @@
+/* 全局样式 */
+body {
+    font-family: "Microsoft YaHei", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* 侧边栏样式 */
+#sidebar {
+    min-height: 100vh;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar .nav-link {
+    color: #333;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+}
+
+.sidebar .nav-link.active {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar .nav-link i {
+    margin-right: 0.5rem;
+}
+
+.system-title {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 内容区样式 */
+main {
+    padding-bottom: 2rem;
+}
+
+/* 卡片样式 */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-weight: 500;
+}
+
+/* 表格样式 */
+.table-container {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* 表单样式 */
+.form-label {
+    font-weight: 500;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* 进度条样式 */
+.progress-tracker {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.progress-tracker::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e9ecef;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.progress-step {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    padding: 0 0.5rem;
+    text-align: center;
+}
+
+.progress-step-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+}
+
+.progress-step.active .progress-step-icon {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.progress-step.completed .progress-step-icon {
+    background-color: #198754;
+    color: #fff;
+}
+
+/* 悬浮操作栏 */
+.floating-action-bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - 16.66667%);
+    background-color: #fff;
+    box-shadow: 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    z-index: 1000;
+}
+
+/* 响应式调整 */
+@media (max-width: 767.98px) {
+    .floating-action-bar {
+        width: 100%;
+    }
+}
+
+/* 选项卡样式 */
+.nav-tabs .nav-link {
+    color: #495057;
+    border: none;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    border-bottom: 2px solid rgba(13, 110, 253, 0.5);
+}
+
+/* 日历组件样式 */
+.calendar-component {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-weekdays {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 0.5rem;
+}
+
+.calendar-weekday {
+    flex: 1;
+    text-align: center;
+    font-weight: 500;
+    padding: 0.5rem 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.date-cell {
+    min-height: 120px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    position: relative;
+}
+
+.date-cell.today {
+    background-color: rgba(13, 110, 253, 0.05);
+    border-color: #0d6efd;
+}
+
+.date-cell.other-month {
+    background-color: #f8f9fa;
+    opacity: 0.6;
+}
+
+.date-header {
+    text-align: right;
+    font-weight: 500;
+    padding: 0.25rem;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 0.25rem;
+}
+
+.date-content {
+    overflow-y: auto;
+    max-height: 80px;
+}
+
+.plan-item {
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.plan-item:hover {
+    background-color: #dee2e6;
+}
+
+.plan-item.outbound {
+    background-color: #cff4fc;
+    border-left: 3px solid #0dcaf0;
+}
+
+.plan-item.treatment {
+    background-color: #d1e7dd;
+    border-left: 3px solid #198754;
+}
+
+.plan-item.review {
+    background-color: #fff3cd;
+    border-left: 3px solid #ffc107;
+}
+
+.more-indicator {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.more-indicator:hover {
+    text-decoration: underline;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.week-cell {
+    min-height: 200px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    position: relative;
+}
+
+.week-cell.today {
+    background-color: rgba(13, 110, 253, 0.05);
+    border-color: #0d6efd;
+}
+
+/* 复查详情页悬浮操作栏 */
+.floating-action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* 搜索栏样式 */
+.search-bar {
+    margin-bottom: 1.5rem;
+}
+
+/* 筛选器样式 */
+.filter-section {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-title {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* 附件上传样式 */
+.attachment-upload {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.25rem;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.attachment-upload:hover {
+    border-color: #0d6efd;
+}
+
+.attachment-list {
+    margin-top: 1rem;
+}
+
+.attachment-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.attachment-item i {
+    margin-right: 0.5rem;
+}
+
+/* 权限树样式 */
+.permission-tree ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.permission-tree > ul {
+    padding-left: 0;
+}
+
+.permission-tree li {
+    margin-bottom: 0.5rem;
+}
+
+.permission-tree .form-check {
+    margin-bottom: 0.25rem;
+}
+
+/* 状态标签样式 */
+.status-badge {
+    padding: 0.35em 0.65em;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    font-size: 0.875em;
+}
+
+.status-badge-pending {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.status-badge-processing {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+.status-badge-evaluating {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-badge-negotiating {
+    background-color: #e2e3e5;
+    color: #41464b;
+}
+
+.status-badge-completed {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-badge-failed {
+    background-color: #f8d7da;
+    color: #842029;
+}
