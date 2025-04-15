@@ -2,16 +2,39 @@
  * 日历组件JavaScript功能
  */
 
-// 当前日期和视图状态
+// 全局状态变量
 let currentDate = new Date();
 let currentView = 'month'; // 'month', 'week', 'list'
+let events = []; // 用于存储当前加载的事件数据
+let calendarEventType = ''; // 用于存储当前日历的类型 ('outbound' or 'treatment')
 
 // 初始化日历组件
-function initCalendar(containerId, eventType) {
-    // 设置日历标题
-    updateCalendarTitle();
+async function initCalendar(containerId, eventType) { 
+    calendarEventType = eventType; 
+    console.log(`Initializing calendar for type: ${calendarEventType}`);
 
-    // 生成日历视图
+    // 1. 先加载事件数据
+    await loadEvents(calendarEventType); 
+    console.log('Initial events loaded:', events);
+
+    // 2. 将日历导航到有示例数据的月份 (例如 2025年4月)
+    // 检查是否有事件数据，如果有，将currentDate设置为第一个事件的月份
+    if (events.length > 0) {
+        try {
+            const firstEventDate = new Date(events[0].date);
+            if (!isNaN(firstEventDate.getTime())) {
+                currentDate = new Date(firstEventDate.getFullYear(), firstEventDate.getMonth(), 1);
+                console.log(`Set currentDate to the month of the first event: ${currentDate.toISOString().split('T')[0]}`);
+            } else {
+                console.warn('First event has invalid date, keeping default currentDate.');
+            }
+        } catch (e) {
+            console.error('Error setting currentDate from first event:', e);
+        }
+    }
+
+    // 3. 更新标题并生成初始视图 (现在基于正确的月份和已加载的数据)
+    updateCalendarTitle();
     generateCalendarView();
 
     // 绑定导航按钮事件
@@ -42,8 +65,8 @@ function initCalendar(containerId, eventType) {
         switchView('list');
     });
 
-    // 加载事件数据
-    loadEvents(eventType);
+    // 不再需要在这里调用 loadEvents，因为它已在前面await
+    // loadEvents(calendarEventType);
 }
 
 // 更新日历标题
@@ -112,6 +135,7 @@ function generateMonthView() {
     for (let i = 0; i < firstDayOfWeek; i++) {
         const day = prevMonthLastDay - firstDayOfWeek + i + 1;
         const dateCell = createDateCell(day, true);
+        dateCell.querySelector('.date-header').setAttribute('data-day', day);
         calendarGrid.appendChild(dateCell);
     }
 
@@ -124,6 +148,40 @@ function generateMonthView() {
             dateCell.classList.add('today');
         }
 
+        const dayEvents = getEventsForDate(new Date(year, month, i));
+        if (dayEvents.length > 0) {
+            const eventsContainer = document.createElement('div');
+            eventsContainer.className = 'calendar-events';
+            dayEvents.forEach(event => {
+                const displayPhase = event.phase ? ` - ${event.phase}` : '';
+                const displayNeedle = event.needleCount ? ` - ${event.needleCount}针` : '';
+                const displayText = `${event.customerName}${event.projectName ? ' - ' + event.projectName : ''}${displayPhase}${displayNeedle}`;
+                const displayTitle = `${displayText} (${getStatusText(event.status)}) ${event.time || ''}`;
+
+                const eventElement = document.createElement('div');
+                const badgeClass = getStatusBadgeClass(event.status);
+                eventElement.className = `calendar-event p-1 mb-1 rounded small ${badgeClass}`;
+                if (badgeClass.includes('warning') || badgeClass.includes('light') || badgeClass.includes('info')) {
+                    eventElement.classList.add('text-dark');
+                } else {
+                    eventElement.classList.add('text-white');
+                }
+
+                eventElement.textContent = displayText;
+                eventElement.dataset.eventId = event.id;
+
+                eventElement.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const clickedEvent = events.find(ev => ev.id == event.id);
+                    if (clickedEvent) {
+                        navigateToDetail(clickedEvent.id, calendarEventType);
+                    }
+                });
+                eventsContainer.appendChild(eventElement);
+            });
+            dateCell.appendChild(eventsContainer);
+        }
+
         calendarGrid.appendChild(dateCell);
     }
 
@@ -134,6 +192,7 @@ function generateMonthView() {
     // 生成下个月的日期格子
     for (let i = 1; i <= remainingCells; i++) {
         const dateCell = createDateCell(i, true);
+        dateCell.querySelector('.date-header').setAttribute('data-day', i);
         calendarGrid.appendChild(dateCell);
     }
 }
@@ -150,6 +209,7 @@ function createDateCell(day, isOtherMonth) {
     const dateHeader = document.createElement('div');
     dateHeader.className = 'date-header';
     dateHeader.textContent = day;
+    dateHeader.setAttribute('data-day', day);
 
     const dateContent = document.createElement('div');
     dateContent.className = 'date-content';
@@ -189,9 +249,44 @@ function generateWeekView() {
         const dateHeader = document.createElement('div');
         dateHeader.className = 'date-header';
         dateHeader.textContent = `${cellDate.getMonth() + 1}月${cellDate.getDate()}日`;
+        dateHeader.setAttribute('data-day', cellDate.getDate());
 
         const dateContent = document.createElement('div');
         dateContent.className = 'date-content';
+
+        const dayEvents = getEventsForDate(cellDate);
+        if (dayEvents.length > 0) {
+            const eventsContainer = document.createElement('div');
+            eventsContainer.className = 'calendar-events';
+            dayEvents.forEach(event => {
+                const displayPhase = event.phase ? ` - ${event.phase}` : '';
+                const displayNeedle = event.needleCount ? ` - ${event.needleCount}针` : '';
+                const displayText = `${event.customerName}${event.projectName ? ' - ' + event.projectName : ''}${displayPhase}${displayNeedle}`;
+                const displayTitle = `${displayText} (${getStatusText(event.status)}) ${event.time || ''}`;
+
+                const eventElement = document.createElement('div');
+                const badgeClass = getStatusBadgeClass(event.status);
+                eventElement.className = `calendar-event p-1 mb-1 rounded small ${badgeClass}`;
+                if (badgeClass.includes('warning') || badgeClass.includes('light') || badgeClass.includes('info')) {
+                    eventElement.classList.add('text-dark');
+                } else {
+                    eventElement.classList.add('text-white');
+                }
+
+                eventElement.textContent = displayText;
+                eventElement.dataset.eventId = event.id;
+
+                eventElement.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const clickedEvent = events.find(ev => ev.id == event.id);
+                    if (clickedEvent) {
+                        navigateToDetail(clickedEvent.id, calendarEventType);
+                    }
+                });
+                eventsContainer.appendChild(eventElement);
+            });
+            dateContent.appendChild(eventsContainer);
+        }
 
         weekCell.appendChild(dateHeader);
         weekCell.appendChild(dateContent);
@@ -209,11 +304,109 @@ function getWeekStartDate(date) {
 
 // 生成列表视图
 function generateListView() {
-    const listViewBody = document.getElementById('list-view-body');
-    listViewBody.innerHTML = '';
+    const calendarBody = document.getElementById('calendar-body');
+    calendarBody.innerHTML = '';
+
+    console.log("Generating List View (Table). Current events:", events);
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    console.log(`Filtering list view for: ${year}-${month + 1}`);
 
     // 在实际应用中，这里应该从后端获取数据
     // 此处为演示，使用模拟数据
+
+    // 确保 events 是数组并且有数据
+    if (!Array.isArray(events) || events.length === 0) {
+        calendarBody.innerHTML = '<div class="p-3">当前月份无事件数据</div>';
+        console.log("List View: No events data available.");
+        return;
+    }
+
+    const monthEvents = events.filter(event => {
+        try {
+            const eventDate = new Date(event.date);
+            // 检查日期是否有效
+            if (isNaN(eventDate.getTime())) {
+                console.warn(`Invalid date format for event id ${event.id}: ${event.date}`);
+                return false;
+            }
+            return eventDate.getFullYear() === year && eventDate.getMonth() === month;
+        } catch (e) {
+            console.error(`Error parsing date for event id ${event.id}: ${event.date}`, e);
+            return false;
+        }
+    });
+    console.log(`List View: Filtered ${events.length} total events down to ${monthEvents.length} for ${year}-${month + 1}`);
+
+    monthEvents.sort((a, b) => {
+        // 优先按日期排序，然后按时间排序
+        const dateComparison = a.date.localeCompare(b.date);
+        if (dateComparison !== 0) {
+            return dateComparison;
+        } else {
+            // 如果日期相同，比较时间 (处理可能没有时间的情况)
+            const timeA = a.time || '00:00';
+            const timeB = b.time || '00:00';
+            return timeA.localeCompare(timeB);
+        } 
+    });
+
+    // --- 生成表格 HTML ---
+    let tableHtml = `<table class="table table-striped table-hover calendar-list-table"> 
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>时间</th>
+                                <th>客户姓名</th>
+                                <th>项目名称</th>
+                                <th>阶段</th>
+                                <th>针数</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+    if (monthEvents.length === 0) {
+        tableHtml += `<tr><td colspan="8" class="text-center">当前月份无事件</td></tr>`;
+    } else {
+        monthEvents.forEach(event => {
+            // 处理可能缺失的字段
+            const dateDisplay = event.date || '-';
+            const timeDisplay = event.time || '-';
+            const customerNameDisplay = event.customerName || '-';
+            const projectNameDisplay = event.projectName || '-';
+            const phaseDisplay = event.phase || '-';
+            const needleCountDisplay = event.needleCount !== undefined ? event.needleCount : '-'; // Check for undefined
+            const statusDisplay = getStatusText(event.status);
+            const statusBadgeClass = getStatusBadgeClass(event.status);
+
+            tableHtml += `<tr>
+                            <td>${dateDisplay}</td>
+                            <td>${timeDisplay}</td>
+                            <td>${customerNameDisplay}</td>
+                            <td>${projectNameDisplay}</td>
+                            <td>${phaseDisplay}</td>
+                            <td>${needleCountDisplay}</td>
+                            <td><span class="badge ${statusBadgeClass} rounded-pill">${statusDisplay}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary view-detail-btn" 
+                                        onclick="navigateToDetail(${event.id}, '${calendarEventType}')">
+                                    查看详情
+                                </button>
+                            </td>
+                        </tr>`;
+        });
+    }
+
+    tableHtml += `   </tbody>
+                    </table>`;
+
+    calendarBody.innerHTML = tableHtml;
+    console.log("List View: Rendered HTML Table.");
+
+    // 表格行内的按钮已经绑定了 onclick, 无需额外绑定
 }
 
 // 切换视图
@@ -255,391 +448,187 @@ function navigateCalendar(direction) {
 }
 
 // 加载事件数据
-function loadEvents(eventType) {
-    // 在实际应用中，这里应该从后端获取数据
-    // 此处为演示，使用模拟数据
-    const events = getEventData(eventType);
+async function loadEvents(eventType) {
+    console.log(`Loading events for type: ${eventType}`);
+    try {
+        let sampleEvents = [];
 
-    // 将事件数据添加到日历中
-    displayEvents(events, eventType);
-}
+        if (eventType === 'outbound') {
+            sampleEvents = [
+                { id: 1, date: '2025-04-15', time: '10:00', customerName: '张三', projectName: '项目A', phase: '阶段1', needleCount: null, status: '未出库' },
+                { id: 2, date: '2025-04-16', time: '14:00', customerName: '李四', projectName: '项目B', phase: '阶段2', needleCount: null, status: '已出库' },
+                { id: 3, date: '2025-04-17', time: '09:30', customerName: '王五', projectName: '项目C', phase: '阶段1', needleCount: null, status: '未出库' },
+                { id: 4, date: '2025-04-17', time: '11:00', customerName: '赵六', projectName: '项目D', phase: '阶段3', needleCount: null, status: '已出库' },
+                { id: 5, date: '2025-04-18', time: '16:00', customerName: '孙七', projectName: '项目E', phase: '阶段2', needleCount: null, status: '已完成' }, // Added completed status
+            ];
+        } else if (eventType === 'treatment') {
+            sampleEvents = [
+                { id: 101, date: '2025-04-20', time: '09:00', customerName: '周八', projectName: '', phase: '疗程1', needleCount: 5, status: '未出库' }, // Use '未出库' for initial?
+                { id: 102, date: '2025-04-21', time: '14:30', customerName: '吴九', projectName: '', phase: '疗程2', needleCount: 8, status: '待治疗' },
+                { id: 103, date: '2025-04-22', time: '10:00', customerName: '郑十', projectName: '', phase: '疗程1', needleCount: 6, status: '已治疗' },
+                { id: 104, date: '2025-04-22', time: '15:00', customerName: '周八', projectName: '', phase: '疗程2', needleCount: 7, status: '待治疗' },
+                { id: 105, date: '2025-04-23', time: '11:00', customerName: '吴九', projectName: '', phase: '疗程3', needleCount: 9, status: '已完成' }, // Added completed status
+            ];
+        }
 
-// 获取事件数据
-function getEventData(eventType) {
-    // 模拟数据
-    if (eventType === 'outbound') {
-        return [
-            {
-                id: 1,
-                date: '2025-04-15',
-                time: '09:00',
-                customerName: '张三',
-                projectName: '美白针',
-                phase: '第一阶段',
-                quantity: '3针',
-                status: 'pending'
-            },
-            {
-                id: 2,
-                date: '2025-04-16',
-                time: '14:30',
-                customerName: '李四',
-                projectName: '玻尿酸',
-                phase: '第二阶段',
-                quantity: '2ml',
-                status: 'confirmed'
-            },
-            {
-                id: 3,
-                date: '2025-04-18',
-                time: '10:00',
-                customerName: '王五',
-                projectName: '肉毒素',
-                phase: '第一阶段',
-                quantity: '100单位',
-                status: 'pending'
-            },
-            {
-                id: 4,
-                date: '2025-04-20',
-                time: '11:30',
-                customerName: '赵六',
-                projectName: '美白针',
-                phase: '第一阶段',
-                quantity: '3针',
-                status: 'completed'
-            }
-        ];
-    } else if (eventType === 'treatment') {
-        return [
-            {
-                id: 1,
-                date: '2025-04-15',
-                time: '10:00',
-                customerName: '张三',
-                projectName: '美白针',
-                phase: '第一阶段',
-                quantity: '3针',
-                nurse: '李护士',
-                status: 'pending'
-            },
-            {
-                id: 2,
-                date: '2025-04-16',
-                time: '14:30',
-                customerName: '李四',
-                projectName: '玻尿酸',
-                phase: '第一阶段',
-                quantity: '2ml',
-                nurse: '王护士',
-                status: 'confirmed'
-            },
-            {
-                id: 3,
-                date: '2025-04-20',
-                time: '11:30',
-                customerName: '赵六',
-                projectName: '肉毒素',
-                phase: '第二阶段',
-                quantity: '100单位',
-                nurse: '赵护士',
-                status: 'completed'
-            }
-        ];
+        // 清空现有事件
+        events = [];
+
+        // 模拟异步加载
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        events = sampleEvents;
+        console.log('Events loaded:', events);
+
+        // 生成或刷新日历视图以显示新事件
+        generateCalendarView();
+
+    } catch (error) {
+        console.error('Error loading events:', error);
+        const calendarBody = document.querySelector('.calendar-body');
+        if (calendarBody) {
+            calendarBody.innerHTML = '<div>加载事件数据时出错，请稍后重试。</div>';
+        }
     }
-
-    return [];
 }
 
 // 显示事件数据
-function displayEvents(events, eventType) {
-    // 清空所有日期格子中的事件
-    document.querySelectorAll('.date-content').forEach(content => {
-        content.innerHTML = '';
-    });
-
-    // 按日期分组事件
-    const eventsByDate = {};
+function displayEvents() {
+    console.warn("displayEvents function was called, but events are now rendered directly during view generation. Check call stack if unexpected.");
+    if (!Array.isArray(events) || events.length === 0) return;
 
     events.forEach(event => {
-        const date = event.date;
-        if (!eventsByDate[date]) {
-            eventsByDate[date] = [];
-        }
-        eventsByDate[date].push(event);
-    });
+        try {
+            const eventDate = new Date(event.date);
+            if (isNaN(eventDate.getTime())) {
+                console.warn(`Invalid date for event id ${event.id}: ${event.date}`);
+                return; // Skip invalid date
+            }
+            const day = eventDate.getDate();
+            const eventMonth = eventDate.getMonth();
+            const eventYear = eventDate.getFullYear();
 
-    // 将事件添加到对应的日期格子中
-    for (const date in eventsByDate) {
-        const events = eventsByDate[date];
-        const dateObj = new Date(date);
+            if (eventYear === currentDate.getFullYear() && eventMonth === currentDate.getMonth()) {
+                const cellSelector = `.date-cell:not(.other-month) .date-header[data-day='${day}']`;
+                const dateHeader = document.querySelector(cellSelector);
 
-        // 如果日期在当前月份内
-        if (dateObj.getMonth() === currentDate.getMonth() &&
-            dateObj.getFullYear() === currentDate.getFullYear()) {
-
-            const day = dateObj.getDate();
-            const dateCell = document.querySelector(`.date-cell:not(.other-month) .date-header:contains('${day}')`).parentNode;
-            const dateContent = dateCell.querySelector('.date-content');
-
-            // 添加事件
-            events.forEach((event, index) => {
-                if (index < 3) { // 最多显示3个事件
-                    const planItem = document.createElement('div');
-                    planItem.className = `plan-item ${eventType}`;
-                    planItem.dataset.eventId = event.id;
-
-                    let itemContent = `<span class="customer-name">${event.customerName}</span>`;
-                    itemContent += ` - <span class="project-name">${event.projectName}</span>`;
-
-                    planItem.innerHTML = itemContent;
-
-                    // 添加点击事件
-                    planItem.addEventListener('click', function() {
-                        showEventDetail(event, eventType);
-                    });
-
-                    dateContent.appendChild(planItem);
+                if (dateHeader) {
+                    const eventsContainer = dateHeader.closest('.date-cell').querySelector('.events-container');
+                    if (eventsContainer) {
+                        const eventElement = document.createElement('div');
+                        eventElement.className = `calendar-event ${getStatusBadgeClass(event.status)}`;
+                        eventElement.dataset.eventId = event.id;
+                        eventElement.title = `${event.customerName} (${getStatusText(event.status)}) ${event.time || ''}`;
+                        eventElement.textContent = `${event.time ? event.time.substring(0, 5) : ''} ${event.customerName}`;
+                        eventsContainer.appendChild(eventElement);
+                        eventElement.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            showEventDetail(event);
+                        });
+                    } else {
+                        console.warn(`Events container not found for day ${day}`);
+                    }
+                } else {
+                    console.log(`Date header not found for day ${day} using selector: ${cellSelector}`);
                 }
-            });
-
-            // 如果事件数量超过3个，显示"更多"指示器
-            if (events.length > 3) {
-                const moreIndicator = document.createElement('div');
-                moreIndicator.className = 'more-indicator';
-                moreIndicator.textContent = `+${events.length - 3} 更多`;
-
-                // 添加点击事件
-                moreIndicator.addEventListener('click', function() {
-                    showDateEvents(date, events, eventType);
-                });
-
-                dateContent.appendChild(moreIndicator);
             }
+        } catch (error) {
+            console.error(`Error displaying event id ${event.id}:`, error);
         }
-    }
-
-    // 更新列表视图
-    updateListView(events, eventType);
-}
-
-// 更新列表视图
-function updateListView(events, eventType) {
-    const listViewBody = document.getElementById('list-view-body');
-    listViewBody.innerHTML = '';
-
-    // 按日期排序事件
-    events.sort((a, b) => {
-        const dateA = new Date(a.date + 'T' + a.time);
-        const dateB = new Date(b.date + 'T' + b.time);
-        return dateA - dateB;
-    });
-
-    // 添加事件到列表
-    events.forEach(event => {
-        const row = document.createElement('tr');
-
-        const dateCell = document.createElement('td');
-        const dateParts = event.date.split('-');
-        dateCell.textContent = `${dateParts[1]}月${dateParts[2]}日`;
-
-        const timeCell = document.createElement('td');
-        timeCell.textContent = event.time;
-
-        const customerCell = document.createElement('td');
-        customerCell.textContent = event.customerName;
-
-        const projectCell = document.createElement('td');
-        projectCell.textContent = event.projectName;
-
-        const phaseCell = document.createElement('td');
-        phaseCell.textContent = event.phase;
-
-        const statusCell = document.createElement('td');
-        const statusBadge = document.createElement('span');
-        statusBadge.className = 'badge';
-
-        if (eventType === 'outbound') {
-            if (event.status === 'pending') {
-                statusBadge.classList.add('bg-warning', 'text-dark');
-                statusBadge.textContent = '未出库';
-            } else if (event.status === 'confirmed') {
-                statusBadge.classList.add('bg-primary');
-                statusBadge.textContent = '已出库';
-            } else if (event.status === 'completed') {
-                statusBadge.classList.add('bg-success');
-                statusBadge.textContent = '已完成';
-            }
-        } else if (eventType === 'treatment') {
-            if (event.status === 'pending') {
-                statusBadge.classList.add('bg-warning', 'text-dark');
-                statusBadge.textContent = '未出库';
-            } else if (event.status === 'confirmed') {
-                statusBadge.classList.add('bg-primary');
-                statusBadge.textContent = '待治疗';
-            } else if (event.status === 'completed') {
-                statusBadge.classList.add('bg-success');
-                statusBadge.textContent = '已治疗';
-            }
-        }
-
-        statusCell.appendChild(statusBadge);
-
-        const actionCell = document.createElement('td');
-        const detailButton = document.createElement('button');
-        detailButton.className = 'btn btn-sm btn-outline-primary';
-        detailButton.textContent = '查看详情';
-
-        // 添加点击事件
-        detailButton.addEventListener('click', function() {
-            navigateToDetail(event.id, eventType);
-        });
-
-        actionCell.appendChild(detailButton);
-
-        row.appendChild(dateCell);
-        row.appendChild(timeCell);
-        row.appendChild(customerCell);
-        row.appendChild(projectCell);
-        row.appendChild(phaseCell);
-        row.appendChild(statusCell);
-        row.appendChild(actionCell);
-
-        listViewBody.appendChild(row);
     });
 }
 
 // 显示事件详情
-function showEventDetail(event, eventType) {
-    const modalTitle = document.getElementById('event-detail-modal-label');
-    const modalContent = document.getElementById('event-detail-content');
+function showEventDetail(event) { 
+    const modalTitle = document.getElementById('event-detail-modal-title');
+    const modalContent = document.getElementById('event-detail-modal-body');
     const viewDetailBtn = document.getElementById('view-detail-btn');
 
-    // 设置模态框标题
-    modalTitle.textContent = eventType === 'outbound' ? '出库详情' : '诊疗详情';
+    modalTitle.textContent = `日期: ${event.date}`; 
 
-    // 设置模态框内容
     let content = `
-        <div class="event-detail">
-            <p><strong>客户：</strong>${event.customerName}</p>
-            <p><strong>项目：</strong>${event.projectName}</p>
-            <p><strong>阶段：</strong>${event.phase}</p>
-            <p><strong>数量：</strong>${event.quantity}</p>
-            <p><strong>时间：</strong>${event.date} ${event.time}</p>
+        <div>
+            <p><strong>时间:</strong> ${event.time}</p>
+            <p><strong>客户:</strong> ${event.customerName}</p>
     `;
-
-    if (eventType === 'treatment') {
-        content += `<p><strong>负责护士：</strong>${event.nurse}</p>`;
+    if (event.projectName) {
+        content += `<p><strong>项目:</strong> ${event.projectName}</p>`;
     }
-
+    if (event.phase) {
+        content += `<p><strong>阶段:</strong> ${event.phase}</p>`;
+    }
+    if (event.needleCount !== undefined) {
+        content += `<p><strong>针数:</strong> ${event.needleCount}</p>`;
+    }
     content += `
-            <p><strong>状态：</strong>
-                <span class="badge ${getStatusBadgeClass(event.status)}">${getStatusText(event.status)}</span>
-            </p>
+            <p><strong>状态:</strong> <span class="badge ${getStatusBadgeClass(event.status)}">${getStatusText(event.status)}</span></p>
         </div>
     `;
 
     modalContent.innerHTML = content;
 
-    // 设置查看详情按钮点击事件
-    viewDetailBtn.onclick = function() {
-        navigateToDetail(event.id, eventType);
-    };
+    viewDetailBtn.onclick = () => navigateToDetail(event.id, calendarEventType);
 
-    // 显示模态框
     const modal = new bootstrap.Modal(document.getElementById('event-detail-modal'));
     modal.show();
-}
-
-// 显示日期事件列表
-function showDateEvents(date, events, eventType) {
-    const modalTitle = document.getElementById('event-detail-modal-label');
-    const modalContent = document.getElementById('event-detail-content');
-    const viewDetailBtn = document.getElementById('view-detail-btn');
-
-    // 设置模态框标题
-    const dateParts = date.split('-');
-    modalTitle.textContent = `${dateParts[1]}月${dateParts[2]}日 ${eventType === 'outbound' ? '出库' : '诊疗'}列表`;
-
-    // 设置模态框内容
-    let content = `
-        <div class="date-events">
-            <ul class="list-group">
-    `;
-
-    events.forEach(event => {
-        content += `
-            <li class="list-group-item" data-event-id="${event.id}">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>${event.time}</strong> - ${event.customerName} (${event.projectName})
-                    </div>
-                    <span class="badge ${getStatusBadgeClass(event.status)}">${getStatusText(event.status)}</span>
-                </div>
-            </li>
-        `;
-    });
-
-    content += `
-            </ul>
-        </div>
-    `;
-
-    modalContent.innerHTML = content;
-
-    // 隐藏查看详情按钮
-    viewDetailBtn.style.display = 'none';
-
-    // 为列表项添加点击事件
-    modalContent.querySelectorAll('.list-group-item').forEach(item => {
-        item.addEventListener('click', function() {
-            const eventId = this.dataset.eventId;
-            const event = events.find(e => e.id == eventId);
-            showEventDetail(event, eventType);
-        });
-    });
-
-    // 显示模态框
-    const modal = new bootstrap.Modal(document.getElementById('event-detail-modal'));
-    modal.show();
-}
-
-// 获取状态文本
-function getStatusText(status) {
-    if (status === 'pending') {
-        return '待出库';
-    } else if (status === 'confirmed') {
-        return '已确认';
-    } else if (status === 'completed') {
-        return '已完成';
-    }
-    return status;
-}
-
-// 获取状态徽章类
-function getStatusBadgeClass(status) {
-    if (status === 'pending') {
-        return 'bg-warning text-dark';
-    } else if (status === 'confirmed') {
-        return 'bg-primary';
-    } else if (status === 'completed') {
-        return 'bg-success';
-    }
-    return 'bg-secondary';
 }
 
 // 跳转到详情页面
 function navigateToDetail(id, eventType) {
-    if (eventType === 'outbound') {
-        window.location.href = `outbound-detail.html?id=${id}`;
-    } else if (eventType === 'treatment') {
-        window.location.href = `treatment-detail.html?id=${id}`;
+    console.log(`Navigating to detail for event ID: ${id}, type: ${eventType}`); // Log navigation
+    const detailPage = eventType === 'outbound' ? 'outbound-detail.html' : 'treatment-detail.html';
+    // 确保 ID 存在再跳转
+    if (id !== undefined && id !== null) {
+        window.location.href = `${detailPage}?id=${id}`;
+    } else {
+        console.error('Cannot navigate to detail: Event ID is missing.');
     }
 }
 
-// 扩展jQuery选择器以支持:contains
-if (typeof jQuery !== 'undefined') {
-    jQuery.expr[':'].contains = function(a, i, m) {
-        return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-    };
+// 获取指定日期的事件
+function getEventsForDate(date) {
+    const dateStr = date.toISOString().split('T')[0];
+    return events.filter(event => event.date === dateStr);
+}
+
+// 获取状态文本
+function getStatusText(status) {
+    switch (status) {
+        case 'pending': 
+        case '未出库':
+            return '未出库';
+        case 'confirmed': 
+        case '已出库':
+            return '已出库';
+        case 'completed': 
+            return '已完成'; 
+        case '待治疗':
+            return '待治疗';
+        case '已治疗':
+            return '已治疗';
+        default:
+            // 如果状态不是预期的，也返回原始状态，并打印警告
+            console.warn(`Unknown event status encountered: ${status}`);
+            return status;
+    }
+}
+
+// 获取状态徽章类
+function getStatusBadgeClass(status) {
+    switch (status) {
+        case 'pending': 
+        case '未出库':
+            return 'bg-secondary'; 
+        case 'confirmed': 
+        case '已出库':
+            return 'bg-success'; 
+        case 'completed': 
+            return 'bg-success'; 
+        case '待治疗':
+            return 'bg-warning text-dark'; 
+        case '已治疗':
+            return 'bg-info'; 
+        default:
+            return 'bg-light text-dark'; 
+    }
 }
